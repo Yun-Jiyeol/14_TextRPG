@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace _14_TextRPG
 {
@@ -16,7 +17,14 @@ namespace _14_TextRPG
 
             for (int i = 0; i < M.Length; i++) //몬스터 및 플레이어 상태보기
             {
-                Console.WriteLine($"- {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
+                if (M[i].Health > 0) // !M[i].isDead
+                {
+                    Console.WriteLine($"- {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
+                }
+                else
+                {
+                    Console.WriteLine($"DEAD - {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
+                }
             }
             Console.WriteLine();
             Console.WriteLine($"- {P.Name} : {P.Health} / {P.MaxHealth + P.ItemHealth}");
@@ -48,7 +56,17 @@ namespace _14_TextRPG
 
             for (int i = 0; i < M.Length; i++) //몬스터 및 플레이어 상태보기
             {
-                Console.WriteLine($"{i}. {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
+                for (int j = 0; j < M.Length; j++) //몬스터 및 플레이어 상태보기
+                {
+                    if (M[j].Health > 0) // !M[j].isDead
+                    {
+                        Console.WriteLine($"{j}. {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"DEAD {j}. - {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                    }
+                }
             }
             Console.WriteLine("0. 돌아간다.");
             Console.WriteLine();
@@ -70,12 +88,31 @@ namespace _14_TextRPG
                         Console.WriteLine($"{M[input].Name}은(는) 이미 죽어 있습니다.");
                         ChooseAttack(P,M); // 다시 선택창으로
                     }
-                    else
+                    else //공격 진행
                     {
                         //M[input].TakeDamage(P.Attack + P.ItemAttack);
+                        Thread.Sleep(500);
+
+                        if (M[input].Health == 0) //몬스터가 죽을 시
+                        {
+                            Console.WriteLine($"{M[input].Name}은 {P.Name}의 공격으로 인하여 죽었습니다.");
+
+                            bool isAllDead = true;
+                            foreach (Monster m in M) //모든 몬스터가 사망 시
+                            {
+                                if (m.Health > 0)
+                                {
+                                    isAllDead = false;
+                                }
+                            }
+                            if (isAllDead)
+                            {
+                                Victory(P,M);
+                            }
+                        }
                     }
 
-                    MonsterTurn(P, M);
+                    MonsterTurn(P, M); //몬스터의 턴으로
                     break;
             }
         }
@@ -87,7 +124,14 @@ namespace _14_TextRPG
 
                 for (int j = 0; j < M.Length; j++) //몬스터 및 플레이어 상태보기
                 {
-                    Console.WriteLine($"- {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                    if (M[j].Health > 0) // !M[j].isDead
+                    {
+                        Console.WriteLine($"- {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"DEAD - {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                    }
                 }
                 Console.WriteLine();
                 Console.WriteLine($"- {P.Name} : {P.Health} / {P.MaxHealth + P.ItemHealth}");
@@ -103,6 +147,11 @@ namespace _14_TextRPG
                     //P.TakeDamage(M[i].Attack);
                 }
             }
+        }
+        public void Victory(Player P, Monster[] M)
+        {
+            Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
+            gamemanager.Start();
         }
     }
 }
