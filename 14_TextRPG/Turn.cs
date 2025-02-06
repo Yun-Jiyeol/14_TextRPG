@@ -44,8 +44,7 @@ namespace _14_TextRPG
                     Console.WriteLine($"{P.Name}은(는) 마을로 도망갔습니다!");
                     Console.WriteLine("아무키나 입력하세요.");
                     Console.ReadKey();
-                    gamemanager.Start(); //마을로 이동
-                    break;
+                    break; //Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
 
                 case 1:
                     ChooseAttack(P, M);
@@ -113,12 +112,21 @@ namespace _14_TextRPG
                             {
                                 Victory(P,M);
                             }
+                            else
+                            {
+                                Console.WriteLine("아무키나 입력하세요.");
+                                Console.ReadKey();
+                                MonsterTurn(P, M); //몬스터의 턴으로
+                            }
+                        }
+                        else //죽지 않을 시
+                        {
+                            Console.WriteLine("아무키나 입력하세요.");
+                            Console.ReadKey();
+                            MonsterTurn(P, M); //몬스터의 턴으로
                         }
                     }
-                    Console.WriteLine("아무키나 입력하세요.");
-                    Console.ReadKey();
-                    MonsterTurn(P, M); //몬스터의 턴으로
-                    break;
+                break;
             }
         }
 
@@ -160,8 +168,7 @@ namespace _14_TextRPG
         {
             Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
             Console.WriteLine("아무키나 입력하세요.");
-            Console.ReadKey();
-            gamemanager.Start(); //마을로
+            Console.ReadKey();//Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
         }
     }
 }
