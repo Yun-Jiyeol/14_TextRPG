@@ -42,6 +42,8 @@ namespace _14_TextRPG
             {
                 case 0:
                     Console.WriteLine($"{P.Name}은(는) 마을로 도망갔습니다!");
+                    Console.WriteLine("아무키나 입력하세요.");
+                    Console.ReadKey();
                     gamemanager.Start(); //마을로 이동
                     break;
 
@@ -86,6 +88,8 @@ namespace _14_TextRPG
                     if (M[input].Health == 0) //M[i].IsDead //몬스터가 사망 상태라면
                     {
                         Console.WriteLine($"{M[input].Name}은(는) 이미 죽어 있습니다.");
+                        Console.WriteLine("아무키나 입력하세요.");
+                        Console.ReadKey();
                         ChooseAttack(P,M); // 다시 선택창으로
                     }
                     else //공격 진행
@@ -111,7 +115,8 @@ namespace _14_TextRPG
                             }
                         }
                     }
-
+                    Console.WriteLine("아무키나 입력하세요.");
+                    Console.ReadKey();
                     MonsterTurn(P, M); //몬스터의 턴으로
                     break;
             }
@@ -147,11 +152,16 @@ namespace _14_TextRPG
                     //P.TakeDamage(M[i].Attack);
                 }
             }
+            Console.WriteLine("아무키나 입력하세요.");
+            Console.ReadKey();
+            PlayerTurn(P,M); //다시 플레이어 턴으로
         }
         public void Victory(Player P, Monster[] M)
         {
             Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
-            gamemanager.Start();
+            Console.WriteLine("아무키나 입력하세요.");
+            Console.ReadKey();
+            gamemanager.Start(); //마을로
         }
     }
 }
