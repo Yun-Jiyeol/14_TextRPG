@@ -16,6 +16,7 @@ namespace _14_TextRPG
         /// </summary>
         public void ShowInven()
         {
+            Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("\n[아이템 목록]\n");
 
@@ -39,6 +40,7 @@ namespace _14_TextRPG
         /// </summary>
         void EquipManage()
         {
+            Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("\n[아이템 목록]\n");
 

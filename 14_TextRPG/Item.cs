@@ -108,6 +108,8 @@ namespace _14_TextRPG
             string itemType = "";
             int itemCount = 1;
 
+            Console.WriteLine("[아이템 목록");
+
             foreach(Item i in _arr)
             {
                 if (_num) number = itemCount.ToString();
