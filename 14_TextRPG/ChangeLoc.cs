@@ -8,7 +8,7 @@ namespace _14_TextRPG
 {
     public class ChangeLoc
     {
-        GameManager gm = new GameManager();
+        //GameManager gm = new GameManager();
 
         public void City()
         {
@@ -27,7 +27,7 @@ namespace _14_TextRPG
                 Console.WriteLine("0. 게임 종료");
                 Console.WriteLine();
 
-                int input = gm.Input(0,5);
+                int input = GameManager.Input(0,5);
                 switch (input)
                 {
                     case 0:

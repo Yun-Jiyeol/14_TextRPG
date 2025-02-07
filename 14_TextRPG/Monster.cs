@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-<<<<<<< HEAD
-    public class Monster : Icharacter
-=======
     public class Monster : Character
->>>>>>> main
     {
 
     }
