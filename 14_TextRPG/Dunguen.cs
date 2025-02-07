@@ -87,7 +87,6 @@ namespace _14_TextRPG
                         }
                         break;
                     case 3:
-                        Console.ResetColor();
                         if (P.Level >= 7)
                         {
                             Console.WriteLine($"{P.Name}은(는) HARD 던전에 입장합니다.");

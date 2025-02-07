@@ -13,7 +13,6 @@ namespace _14_TextRPG
 
         public void Start()
         {
-            P.Level = 10;
             while (true)
             {
                 Console.Clear(); 
