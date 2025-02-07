@@ -38,7 +38,6 @@ namespace _14_TextRPG
 
 
 
-
         public Quest(string questname, string questinfo, Item questreward, int amount)
         {
             questName = questname;
@@ -57,7 +56,7 @@ namespace _14_TextRPG
 
             QuestInfo(questList);
 
-            GameManager.Input(0, questNumber);
+            Input.Input(0, questNumber);
         }
 
 
