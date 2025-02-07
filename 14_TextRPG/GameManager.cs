@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-    internal class GameManager
+    public class GameManager
     {
-        public void Start() { }
+        ChangeLoc CL = new ChangeLoc(); //위치 설정할 클래스
+
         public int Input(int i) //0-i까지의 숫자를 입력 이외에는 "잘못된 입력입니다."
         {
             while (true)
@@ -26,6 +27,11 @@ namespace _14_TextRPG
                 }
                 Console.WriteLine("잘못된 입력입니다.");
             }
+        }
+
+        public void Start()
+        {
+            CL.City();
         }
     }
 }

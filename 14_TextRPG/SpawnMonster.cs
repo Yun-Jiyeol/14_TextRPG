@@ -11,9 +11,9 @@ namespace _14_TextRPG
 
     //해야할 것
     //몬스터 정보를 저장할수 있는 변수 필요(레벨 이름 체력 공격력)
-    
-    
-    /*internal class SpawnMonster
+
+
+    /*public class SpawnMonster
     {
         enum MonsterType
         {

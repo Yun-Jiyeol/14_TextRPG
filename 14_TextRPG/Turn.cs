@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace _14_TextRPG
 {
-    internal class Turn
+    public class Turn
     {
         GameManager gamemanager = new GameManager();
 

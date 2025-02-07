@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-    internal class Monster : Icharacter
+    public class Monster : Character
     {
 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-    internal class Inven
+    public class Inven
     {
         public List<Item> HoldItem = new List<Item>();
 
