@@ -146,6 +146,21 @@ namespace _14_TextRPG
             {
                 if (_num) number = itemCount.ToString();
 
+                switch (i.Itemtype)
+                {
+                    case ItemType.Weapon:
+                        itemType = "공격력";
+                        break;
+
+                    case ItemType.Shield:
+                        itemType = "방어력";
+                        break;
+
+                    case ItemType.Armor:
+                        itemType = "체력";
+                        break;
+                }
+
                 if (_inven)
                 {
                     if (_arr.Length == 0) break;
@@ -157,21 +172,6 @@ namespace _14_TextRPG
                     else
                     {
                         equipOrCost = "";
-                    }
-
-                    switch (i.Itemtype)
-                    {
-                        case ItemType.Weapon:
-                            itemType = "공격력";
-                            break;
-
-                        case ItemType.Shield:
-                            itemType = "방어력";
-                            break;
-
-                        case ItemType.Armor:
-                            itemType = "체력";
-                            break;
                     }
 
                     Console.WriteLine($"- {number} {equipOrCost}{i.Name}  |  {itemType} +{i.Value}  |  {i.Info}");
