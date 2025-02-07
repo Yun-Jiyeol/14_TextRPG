@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-    static class DesignText
+    static class DesignText //꾸미기용 클래스
     {
-        static public void MiddleDT(string input , int num , ConsoleColor color)
+        static public void MiddleDT(string input , int num , ConsoleColor color) //중앙 정렬
         {
             //num(띄어쓰기 량)
             int length = num / 2;
@@ -31,7 +31,7 @@ namespace _14_TextRPG
 
             Console.ResetColor();
         }
-        static public void LeftDT(string input, int num, ConsoleColor color)
+        static public void LeftDT(string input, int num, ConsoleColor color) //좌측 정렬
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("┃");
@@ -46,7 +46,7 @@ namespace _14_TextRPG
 
             Console.ResetColor();
         }
-        static public void RightDT(string input, int num, ConsoleColor color)
+        static public void RightDT(string input, int num, ConsoleColor color) //우측 정렬
         {
 
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -60,6 +60,16 @@ namespace _14_TextRPG
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("┃");
 
+            Console.ResetColor();
+        }
+        static public void IsMove() //플레이어 이동 시
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write("■");
+                Thread.Sleep(100);
+            }
             Console.ResetColor();
         }
     }
