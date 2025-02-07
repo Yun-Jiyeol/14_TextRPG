@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
+    
     public class Character
     {
         public string Name { get; set; } //캐릭터 이름

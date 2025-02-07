@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,30 @@ namespace _14_TextRPG
 {
     public class Monster : Character
     {
-        public Monster(Character character)
+        public Monster()
         {
-            if (character.Level >= 5) //캐릭터의 레벨이 5이하일 때
-            {
-                Name = "슬라임";
-                Health = 100;
-                MaxHealth = 100;
-                Attack = 10;
-            }
-            else if (character.Level >= 10)//캐릭터의 레벨이 10이하일 때
-            {
-                Name = "스톤 골렘";
-                Health = 300;
-                MaxHealth = 300;
-                Attack = 20;
-            }
-            else
-            {
-                ////캐릭터의 레벨이 6 이상, 9이하일 때
-                Name = "초록 버섯";
-                Health = 200;
-                MaxHealth = 200;
-                Attack = 15;
-            }
+
         }
+        public Monster(string name, int health, int maxHealth, int attack)
+        {
+            Name = name;
+            Health = health;
+            MaxHealth = maxHealth;
+            Attack = attack;
+
+            List<Monster> monsters = new List<Monster>();
+            monsters.Add(new Monster("슬라임", 100, 100, 10));
+            monsters.Add(new Monster("주황버섯", 100, 100, 10));
+            monsters.Add(new Monster("초록버섯", 100, 100, 10));
+            monsters.Add(new Monster("스톤 골렘", 100, 100, 10));
+            monsters.Add(new Monster("타우로마시스", 100, 100, 10));
+            monsters.Add(new Monster("주니어 발록", 100, 100, 10));
+
+
+        }
+        
             
+
+        
     }
 }
