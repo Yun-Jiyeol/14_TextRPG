@@ -9,6 +9,8 @@ namespace _14_TextRPG
 {
     public class Turn
     {
+        Random random = new Random();
+
         public void PlayerTurn(Player P, Monster[] M) //플레이어의 턴
         {
             Console.Clear();
@@ -33,16 +35,49 @@ namespace _14_TextRPG
             Console.WriteLine("1. 공격한다.");
             //Console.WriteLine("2. 스킬을 사용한다.");
             //Console.WriteLine("3. 아이템을 사용한다.");
+            Console.WriteLine("0. 도망간다.");
 
             Console.WriteLine($"{P.Name}의 공격 차례입니다. 할 행동을 선택하세요.");
 
-            int input = Input.input(1,1);
+            int input = Input.input(0,1);
             switch (input)
             {
                 case 0:
-                    Console.WriteLine($"{P.Name}은(는) 마을로 도망갔습니다!");
-                    Console.WriteLine("아무키나 입력하세요.");
-                    Console.ReadKey();
+                    Console.WriteLine("도망갈 시 몬스터의 공격을 받을 수 있습니다.");
+                    Console.WriteLine("그래도 도망 가겠습니까?");
+                    Console.WriteLine();
+                    Console.WriteLine("1. 계속 싸운다.");
+                    Console.WriteLine("0. 도망간다.");
+                    int Rinput = Input.input(0, 1);
+                    switch (Rinput)
+                    {
+                        case 0:
+                            for(int i = 0; i < M.Length; i++)
+                            {
+                                if (!M[i].isDead)
+                                {
+                                    int tryAttack = random.Next(0,2);
+
+                                    if(tryAttack == 0)
+                                    {
+                                        Console.WriteLine($"{M[i].Name}이(가) {P.Name}를 공격을 시도했으나 실패했습니다.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"{M[i].Name}이(가) {P.Name}를 공격을 했습니다!");
+                                        //P.TakeDamage(M[i].Attack);
+                                    }
+                                    Thread.Sleep(500);
+                                }
+                            }
+                            Console.WriteLine($"{P.Name}은(는) 마을로 도망갔습니다!");
+                            Console.WriteLine("아무키나 입력하세요.");
+                            Console.ReadKey();
+                            break;
+                        case 1:
+                            PlayerTurn(P,M);
+                            break;
+                    }
                     break; //Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
 
                 case 1:
@@ -94,7 +129,18 @@ namespace _14_TextRPG
                     }
                     else //공격 진행
                     {
-                        //M[input].TakeDamage(P.Attack + P.ItemAttack);
+                        //플레이어의 데미지의 90% ~ 110% 사이의 데미지(올림값)를 몬스터에게 준다
+                        //int attackDamage = random.Next((P.Attack + P.ItemAttack) * 9, (P.Attack + P.ItemAttack) * 11); 
+                        //if(attackDamage % 10 != 0)
+                        //{
+                        //    attackDamage = (attackDamage / 10) + 1;
+                        //}
+                        //else
+                        //{
+                        //    attackDamage = (attackDamage / 10);
+                        //}
+                        //M[input].TakeDamage(attackDamage);
+
                         Thread.Sleep(500);
 
                         if (M[input].Health == 0) //몬스터가 죽을 시
