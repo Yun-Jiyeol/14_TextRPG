@@ -8,6 +8,7 @@ namespace _14_TextRPG
 {
     public class GameManager
     {
+        Player player = new Player();
         public void Start()
         {
             while (true)
@@ -33,7 +34,7 @@ namespace _14_TextRPG
                         Environment.Exit(0);
                         break;
                     case 1:
-                        //Player.State();
+                        player.Status();
                         break;
                     case 2:
                         //Item
