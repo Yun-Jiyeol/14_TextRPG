@@ -13,7 +13,7 @@ namespace _14_TextRPG
     //몬스터 정보를 저장할수 있는 변수 필요(레벨 이름 체력 공격력)
     
     
-    internal class SpawnMonster
+    /*internal class SpawnMonster
     {
         enum MonsterType
         {
@@ -37,14 +37,14 @@ namespace _14_TextRPG
                 {
                     //monsters[i] 
 
-                    /*case (int)MonsterType.Slime:
+                    *//*case (int)MonsterType.Slime:
                     case (int)MonsterType.Skeleton:
                     case (int)MonsterType.Goblin:
 
                         //monster.name
                         //monster.hp
                         //monster.attack
-                        break;*/
+                        break;*//*
                 }
             }
 
@@ -52,5 +52,5 @@ namespace _14_TextRPG
             
 
         }
-    }
+    }*/
 }
