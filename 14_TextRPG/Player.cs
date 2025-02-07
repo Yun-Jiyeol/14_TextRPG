@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
+<<<<<<< HEAD
     public class Player : Icharacter
+=======
+    public class Player : Character
+>>>>>>> main
     {
         public float ItemHealth { get; set; } //아이템으로 오른 체력
         public int ItemAttack { get; set; } //아이템으로 오른 공격력

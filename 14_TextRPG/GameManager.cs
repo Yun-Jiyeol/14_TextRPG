@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-    internal class GameManager
+    public class GameManager
     {
+<<<<<<< HEAD
 
         public void Start() { }
 
         public int Input(int i) //0-i까지의 숫자를 입력 이외에는 "잘못된 입력입니다."
+=======
+        ChangeLoc CL = new ChangeLoc(); //위치 설정할 클래스
+
+        public int Input(int min , int max) //0-i까지의 숫자를 입력 이외에는 "잘못된 입력입니다."
+>>>>>>> main
         {
             while (true)
             {
@@ -21,13 +27,18 @@ namespace _14_TextRPG
 
                 if (int.TryParse(Pinput, out numinput)) //Pinput => int | 1. true | 2. out numinput = int.Parse(Pinput)
                 {
-                    if (numinput >= 0 && numinput <= i)
+                    if (numinput >= min && numinput <= max) //min <= x <= max 까지의 정수값 입력을 받는다
                     {
                         return numinput;
                     }
                 }
                 Console.WriteLine("잘못된 입력입니다.");
             }
+        }
+
+        public void Start()
+        {
+            CL.City();
         }
     }
 }
