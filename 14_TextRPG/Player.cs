@@ -26,5 +26,4 @@ namespace _14_TextRPG
 
         }
     }
-    
-    }
+}
