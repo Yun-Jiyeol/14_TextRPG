@@ -23,66 +23,67 @@ namespace _14_TextRPG
         // 퀘스트 번호
         public int questNumber  = 0;
         // 퀘스트 이름
-        public string questName;
+        public string questName { get; set; }
         // 퀘스트 정보
-        public string questInfo;
-        // 퀘스트 보상
-        public Item questReward;
+        public string questInfo { get; set; }
         // 몬스터 마리 수
-        public int questAmount;
+        public int questAmount { get; set; }
         // 퀘스트 카운팅
-        public int questAmountCount;
-        // 퀘스트를 넣을 리스트
-        List<Quest> questList;
+        // 퀘스트 보상
+        public int rewardGold { get; set; }
+        public Item rewardItem  { get; set; }
+        public int rewardExp    { get; set; }
+        public int questAmountCount { get; set; }
+        // 퀘스트를 받았는지 여부
+        public bool isAccept { get; set; } = false;
+        // 퀘스트 완료 했는지 여부
+        public bool isComplete { get; set; }
+        
 
 
 
 
-        public Quest(string questname, string questinfo, Item questreward, int amount)
+        public Quest(string questname, string questinfo, int amount, int rewardgold, int rewardexp, Item rewarditem)
         {
             questName = questname;
             questInfo = questinfo;
-            questReward = questreward;
+            rewardItem = rewarditem;
             questAmount = amount;
-            QuestList();
+            rewardGold = rewardgold;
         }
 
-        public void QuestWindow()
+        public Quest(string questname, string questinfo, int amount, int rewardgold, int rewardexp)
         {
-            Thread.Sleep(500);
-            Console.Clear();
-
-            Console.WriteLine("퀘스트 목록\n");
-
-            QuestInfo(questList);
-
-            Input.Input(0, questNumber);
+            questName = questname;
+            questInfo = questinfo;
+            questAmount = amount;
+            rewardGold = rewardgold;
+            rewardExp = rewardexp;
         }
 
-
-        // 퀘스트 생성 및 관리
-        public void QuestList()
+        public void Accept()
         {
-            questList = new List<Quest>()
+            isAccept = true;
+            Console.WriteLine();
+            Console.WriteLine($"[{questName}] 을(를) 수락하셨습니다! ");
+        }
+
+        public void Reject()
+        {
+            isAccept = false;
+            Console.WriteLine();
+            Console.WriteLine($"[{questName}] 을(를) 거절하셨습니다.");
+        }
+
+        public void CompleteQuest(Player player)
+        {
+            if (isComplete)
             {
-                new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나?" +
-                "마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! 모험가인 자네가 좀 처리해주게!", questReward, 5),
-
-                new Quest("마을을 위협하는 몬스터를 많이 처치", "이봐! 마을 근처에 몬스터들이 엄청 많아졌다고 생각하지 않나?" +
-                "마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! 모험가인 자네가 좀 처리해주게!", questReward, 10)
-            };
-        }
-
-        public void QuestInfo(List<Quest> que)
-        {
-            // 리스트 크기가 7 이상이면 7번 반복 작다면 리스트 크기만큼 반복
-            for (int i = 0; i < Math.Min(7, questList.Count); i++)
-            {
-                questNumber++;
-                que[i].questNumber = i + 1;
-                Console.WriteLine($"{que[i].questNumber}. {que[i].questName}");
+                Console.WriteLine($"{questName} 퀘스트 완료! ");
+                Console.WriteLine($"보상");
+                Console.WriteLine($"{rewardGold}");
+                Console.WriteLine($"{rewardExp}");
             }
-
         }
 
     }

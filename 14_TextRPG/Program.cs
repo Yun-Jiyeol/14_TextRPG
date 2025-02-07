@@ -8,8 +8,6 @@
             //GameManager gm = new GameManager();
             //gm.Start();
 
-            ChangeLoc CL = new ChangeLoc();
-            CL.City();
         }
     }
 }
