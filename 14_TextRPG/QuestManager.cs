@@ -8,12 +8,16 @@ namespace _14_TextRPG
 {
     public class QuestManager
     {
+        // 한 페이지에 퀘스트가 몇개 들어갈지 설정
         const int PAGE_SIZE = 7;
+        // 현재 퀘스트 창 페이지
         int currentPage = 1;
-        bool isPage;
+        // 퀘스트 리스트
         List<Quest> questList = new List<Quest>();
+        // 수락한 퀘스트 리스트
         List<Quest> acceptQuest = new List<Quest>();
 
+        // 퀘스트 생성
         public QuestManager()
         {
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나? \n " +
@@ -24,12 +28,11 @@ namespace _14_TextRPG
                 "모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
         }
 
+        // 퀘스트의 종류들을 다 볼수 있는 퀘스트 창
         public void OpenQuestMenu()
         {
             while (true)
             {
-
-
                 Thread.Sleep(500);
                 Console.Clear();
                 string check = "■";
@@ -56,6 +59,7 @@ namespace _14_TextRPG
                 string Pinput = Console.ReadLine();
                 int numinput;
 
+                
                 if (int.TryParse(Pinput, out numinput))
                 {
                     if (numinput == 0)
@@ -64,6 +68,7 @@ namespace _14_TextRPG
                         NextPage();
                     else if (numinput == 9)
                         OpenAcceptQuest();
+                    // 입력받은 값이 0보다 크고 PAGE_SIZE(7)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
                     else if (0 < numinput && numinput <= PAGE_SIZE && start + numinput - 1 <= questList.Count)
                     {
                         QuestInfo(questList[start + numinput - 2], false);
@@ -75,6 +80,7 @@ namespace _14_TextRPG
 
         }
 
+        // 다음 페이지가 있다면 다음페이지를 보여주는 메서드
         public void NextPage()
         {
             if (currentPage * PAGE_SIZE < questList.Count)
@@ -83,6 +89,7 @@ namespace _14_TextRPG
                 Console.WriteLine("마지막 페이지 입니다.");
         }
 
+        // 수락한 퀘스트 메뉴를 열어주는 메서드
         public void OpenAcceptQuest()
         {
             while (true)
@@ -120,6 +127,8 @@ namespace _14_TextRPG
 
 
         }
+
+        // 퀘스트의 정보를 보여주는 메서드(아직 미완)
         public void QuestInfo(Quest quest, bool isAcceptMenu)
         {
             while (true)
@@ -168,6 +177,7 @@ namespace _14_TextRPG
 
         }
 
+        // 퀘스트를 수락했을 떄 실행시켜줄 메서드
         public void AcceptQuest(Quest quest)
         {
             if (quest.isAccept)
@@ -189,6 +199,7 @@ namespace _14_TextRPG
             
         }
 
+        //퀘스트를 거절 했을 때 실행시켜줄 메서드
         public void RejectQuest(Quest quest)
         {
             if (quest.isAccept)
