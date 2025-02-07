@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
-    internal class Icharacter
+    public class Icharacter
     {
         public string Name { get;} //캐릭터 이름
         public string Class { get;} //캐릭터 직업
