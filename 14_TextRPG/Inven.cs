@@ -8,35 +8,59 @@ namespace _14_TextRPG
 {
     public class Inven
     {
-        public List<Item> HoldItem = new List<Item>();
+        ItemList itemList;
+        public List<Item> listHoldItem = new List<Item>();
 
+        /// <summary>
+        /// 인벤토리 아이템 확인
+        /// </summary>
         public void ShowInven()
         {
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("\n[아이템 목록]\n");
-            // 아이템 리스트의 아이템을 출력하는 함수 제작할 것
-            Console.WriteLine("1. 장착 관리\n0. 나가기\n");
-            // 게임매니저에서 Input 호출
-            // 임시로 값이 0인 int 변수 지정
-            // 게임매니저에서 호출 가능해지면 지울 것
-            int input = 0;
 
-            if (input >= 0 || input < 2)
+            itemList.ItemCatalog(listHoldItem.ToArray(), true, false);
+
+            Console.WriteLine("1. 장착 관리\n0. 나가기\n");
+            int input = Input.input(0, 1);
+
+            if (input == 0)
             {
-                if (input == 0)
-                {
-                    // 마을 메뉴로 나가는 함수 호출할 것
-                }
-                else
-                {
-                    EquipManage();
-                }
+                // 마을 메뉴로 나가는 함수 호출할 것
+            }
+            else
+            {
+                EquipManage();
             }
         }
 
+        /// <summary>
+        /// 아이템 장착 관리
+        /// </summary>
         void EquipManage()
         {
+            Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
+            Console.WriteLine("\n[아이템 목록]\n");
 
+            itemList.ItemCatalog(listHoldItem.ToArray(), true, true);
+
+            Console.WriteLine("\n0. 나가기\n");
+
+            int input = Input.input(0, listHoldItem.Count);
+
+            if(input == 0)
+            {
+                ShowInven();
+            }
+            else
+            {
+                // 아이템 장착 및 해제
+            }
+        }
+
+        public void GetItem(Item _item)
+        {
+            listHoldItem.Add(_item);
         }
     }
 }
