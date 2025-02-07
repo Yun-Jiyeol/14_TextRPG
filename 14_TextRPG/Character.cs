@@ -17,6 +17,7 @@ namespace _14_TextRPG
         public int Attack { get; set; } //캐릭터 공격력
         public int Defence { get; set; } //캐릭터 방어력
         public int Gold { get; set; } //캐릭터 소유 골드
+        public bool isDead { get; set; } = false; //캐릭터 사망 유무
         public void Status() //전투 때 보여지게끔 (몬스터)
         {
             Console.WriteLine($"Lv. {Level}");

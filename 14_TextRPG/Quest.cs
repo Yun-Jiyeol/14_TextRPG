@@ -57,7 +57,7 @@ namespace _14_TextRPG
 
             QuestInfo(questList);
 
-            gm.Input(questNumber);
+            gm.Input(0, questNumber);
         }
 
 

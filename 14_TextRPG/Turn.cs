@@ -33,11 +33,10 @@ namespace _14_TextRPG
             Console.WriteLine("1. 공격한다.");
             //Console.WriteLine("2. 스킬을 사용한다.");
             //Console.WriteLine("3. 아이템을 사용한다.");
-            Console.WriteLine("0. 도망간다.");
 
             Console.WriteLine($"{P.Name}의 공격 차례입니다. 할 행동을 선택하세요.");
 
-            int input = gamemanager.Input(1);
+            int input = gamemanager.Input(1,1);
             switch (input)
             {
                 case 0:
@@ -75,7 +74,7 @@ namespace _14_TextRPG
             Console.WriteLine($"{P.Name}은(는) 공격을 선택했습니다.");
             Console.WriteLine("누굴 공격하겠습니까?");
 
-            int input = gamemanager.Input(M.Length);
+            int input = gamemanager.Input(0,M.Length);
             switch (input)
             {
                 case 0:

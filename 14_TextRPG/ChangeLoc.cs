@@ -27,7 +27,7 @@ namespace _14_TextRPG
                 Console.WriteLine("0. 게임 종료");
                 Console.WriteLine();
 
-                int input = gm.Input(5);
+                int input = gm.Input(0,5);
                 switch (input)
                 {
                     case 0:
