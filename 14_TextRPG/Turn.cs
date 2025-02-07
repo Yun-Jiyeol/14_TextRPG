@@ -21,7 +21,9 @@ namespace _14_TextRPG
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine($"DEAD - {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
+                    Console.ResetColor();
                 }
             }
             Console.WriteLine();
@@ -62,7 +64,9 @@ namespace _14_TextRPG
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
                         Console.WriteLine($"DEAD {j}. - {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                        Console.ResetColor();
                     }
                 }
             }
@@ -140,7 +144,9 @@ namespace _14_TextRPG
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
                         Console.WriteLine($"DEAD - {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                        Console.ResetColor();
                     }
                 }
                 Console.WriteLine();
