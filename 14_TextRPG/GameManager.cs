@@ -9,7 +9,6 @@ namespace _14_TextRPG
     internal class GameManager
     {
         public void Start() { }
-        
         public int Input(int i) //0-i까지의 숫자를 입력 이외에는 "잘못된 입력입니다."
         {
             while (true)
