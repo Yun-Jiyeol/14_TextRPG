@@ -8,7 +8,7 @@ namespace _14_TextRPG
 {
     static class DesignText
     {
-        static public void DT(string input , int num , ConsoleColor color)
+        static public void MiddleDT(string input , int num , ConsoleColor color)
         {
             //num(띄어쓰기 량)
             int length = num / 2;
@@ -26,6 +26,37 @@ namespace _14_TextRPG
             {
                 Console.Write(" ");
             }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("┃");
+
+            Console.ResetColor();
+        }
+        static public void LeftDT(string input, int num, ConsoleColor color)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┃");
+            Console.ForegroundColor = color;
+            Console.Write(input);
+            for (int i = 0; i < num; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("┃");
+
+            Console.ResetColor();
+        }
+        static public void RightDT(string input, int num, ConsoleColor color)
+        {
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┃");
+            for (int i = 0; i < num; i++) //중앙 정령
+            {
+                Console.Write(" ");
+            }
+            Console.ForegroundColor = color;
+            Console.Write(input);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("┃");
 
