@@ -35,8 +35,6 @@ namespace _14_TextRPG
         // 퀘스트를 넣을 리스트
         List<Quest> questList;
 
-        GameManager gm = new GameManager();
-
 
 
         public Quest(string questname, string questinfo, Item questreward, int amount)
@@ -57,7 +55,7 @@ namespace _14_TextRPG
 
             QuestInfo(questList);
 
-            gm.Input(0, questNumber);
+            Input.input(0, questNumber);
         }
 
 
