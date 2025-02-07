@@ -35,7 +35,7 @@ namespace _14_TextRPG
                 { 
                 case 0:
                         gamemanager.Start();
-                            break;
+                        break;
 
                 }
             }
