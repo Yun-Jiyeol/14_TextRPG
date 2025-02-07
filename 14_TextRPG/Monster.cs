@@ -31,7 +31,11 @@ namespace _14_TextRPG
 
         }
         
-            
+        public string MonsDisplay()
+        {
+            string str = $"{Name}  HP {Health}";
+            return str;    
+        }
 
         
     }
