@@ -14,7 +14,7 @@ namespace _14_TextRPG
         /// <summary>
         /// 인벤토리 아이템 확인
         /// </summary>
-        public void ShowInven()
+        public void ShowInven(Player _player)
         {
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
@@ -25,20 +25,16 @@ namespace _14_TextRPG
             Console.WriteLine("1. 장착 관리\n0. 나가기\n");
             int input = Input.input(0, 1);
 
-            if (input == 0)
+            if (input != 0)
             {
-                // 마을 메뉴로 나가는 함수 호출할 것
-            }
-            else
-            {
-                EquipManage();
+                EquipManage(_player);
             }
         }
 
         /// <summary>
         /// 아이템 장착 관리
         /// </summary>
-        void EquipManage()
+        void EquipManage(Player _player)
         {
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
@@ -52,11 +48,11 @@ namespace _14_TextRPG
 
             if(input == 0)
             {
-                ShowInven();
+                ShowInven(_player);
             }
             else
             {
-                // 아이템 장착 및 해제
+                listHoldItem[input - 1].Use(_player);
             }
         }
 
