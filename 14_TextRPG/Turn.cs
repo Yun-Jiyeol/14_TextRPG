@@ -17,7 +17,7 @@ namespace _14_TextRPG
 
             for (int i = 0; i < M.Length; i++) //몬스터 및 플레이어 상태보기
             {
-                if (M[i].Health > 0) // !M[i].isDead
+                if (!M[i].isDead) // !M[i].isDead
                 {
                     Console.WriteLine($"- {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
                 }
@@ -120,7 +120,7 @@ namespace _14_TextRPG
                 default:
                     Console.WriteLine($"{P.Name}은(는) {M[input].Name}을 공격했습니다.");
 
-                    if (M[input].Health == 0) //M[i].IsDead //몬스터가 사망 상태라면
+                    if (M[input].isDead) //M[i].IsDead //몬스터가 사망 상태라면
                     {
                         Console.WriteLine($"{M[input].Name}은(는) 이미 죽어 있습니다.");
                         Console.WriteLine("아무키나 입력하세요.");
@@ -129,28 +129,30 @@ namespace _14_TextRPG
                     }
                     else //공격 진행
                     {
+                        Console.WriteLine($"{M[input].Name}은 공격을 진행합니다.");
+
                         //플레이어의 데미지의 90% ~ 110% 사이의 데미지(올림값)를 몬스터에게 준다
-                        //int attackDamage = random.Next((P.Attack + P.ItemAttack) * 9, (P.Attack + P.ItemAttack) * 11); 
-                        //if(attackDamage % 10 != 0)
+                        //int attackDamage = random.Next((P.Attack + P.ItemAttack) * 90, (P.Attack + P.ItemAttack) * 110); 
+                        //if(attackDamage % 100 != 0)
                         //{
-                        //    attackDamage = (attackDamage / 10) + 1;
+                        //    attackDamage = (attackDamage / 100) + 1;
                         //}
                         //else
                         //{
-                        //    attackDamage = (attackDamage / 10);
+                        //    attackDamage = (attackDamage / 100);
                         //}
                         //M[input].TakeDamage(attackDamage);
 
                         Thread.Sleep(500);
 
-                        if (M[input].Health == 0) //몬스터가 죽을 시
+                        if (M[input].isDead) //몬스터가 죽을 시
                         {
                             Console.WriteLine($"{M[input].Name}은 {P.Name}의 공격으로 인하여 죽었습니다.");
 
                             bool isAllDead = true;
                             foreach (Monster m in M) //모든 몬스터가 사망 시
                             {
-                                if (m.Health > 0)
+                                if (!m.isDead)
                                 {
                                     isAllDead = false;
                                 }
@@ -184,7 +186,7 @@ namespace _14_TextRPG
 
                 for (int j = 0; j < M.Length; j++) //몬스터 및 플레이어 상태보기
                 {
-                    if (M[j].Health > 0) // !M[j].isDead
+                    if (!M[j].isDead)
                     {
                         Console.WriteLine($"- {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
                     }
@@ -202,11 +204,12 @@ namespace _14_TextRPG
                 Console.WriteLine("몬스터의 턴입니다.");
                 Console.WriteLine();
 
-                if (M[i].Health != 0) //!M[i].IsDead
+                if (!M[i].isDead)
                 {
-                    Thread.Sleep(500);
                     Console.WriteLine($"{M[i].Name}의 공격!");
+                    Thread.Sleep(500);
                     //P.TakeDamage(M[i].Attack);
+                    //P.isDead == true 면 겜 종료
                 }
             }
             Console.WriteLine("아무키나 입력하세요.");
