@@ -57,7 +57,7 @@ namespace _14_TextRPG
                     case 1:
                         Console.WriteLine("플레이어은(는) 자신의 상태를 점검합니다."); //Console.Write($"{Player.Name}은(는) 자신의 상태를 점검합니다");
                         DesignText.IsMove();
-                        //Player.State();
+                        P.Status();
                         break;
                     case 2:
                         Console.WriteLine("플레이어은(는) 자신의 아이템을 확인합니다."); //Console.Write($"{Player.Name}은(는) 자신의 아이템을 확인합니다");

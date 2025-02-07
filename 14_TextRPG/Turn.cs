@@ -17,7 +17,7 @@ namespace _14_TextRPG
 
             for (int i = 0; i < M.Length; i++) //몬스터 및 플레이어 상태보기
             {
-                if (!M[i].isDead) // !M[i].isDead
+                if (!M[i].isDead)
                 {
                     Console.WriteLine($"- {M[i].Name} : {M[i].Health} / {M[i].MaxHealth}");
                 }
@@ -65,7 +65,7 @@ namespace _14_TextRPG
                                     else
                                     {
                                         Console.WriteLine($"{M[i].Name}이(가) {P.Name}를 공격을 했습니다!");
-                                        //P.TakeDamage(M[i].Attack);
+                                        P.TakeDamage(M[i].Attack);
                                     }
                                     Thread.Sleep(500);
                                 }
@@ -120,7 +120,7 @@ namespace _14_TextRPG
                 default:
                     Console.WriteLine($"{P.Name}은(는) {M[input].Name}을 공격했습니다.");
 
-                    if (M[input].isDead) //M[i].IsDead //몬스터가 사망 상태라면
+                    if (M[input].isDead) //몬스터가 사망 상태라면
                     {
                         Console.WriteLine($"{M[input].Name}은(는) 이미 죽어 있습니다.");
                         Console.WriteLine("아무키나 입력하세요.");
@@ -132,16 +132,16 @@ namespace _14_TextRPG
                         Console.WriteLine($"{M[input].Name}은 공격을 진행합니다.");
 
                         //플레이어의 데미지의 90% ~ 110% 사이의 데미지(올림값)를 몬스터에게 준다
-                        //int attackDamage = random.Next((P.Attack + P.ItemAttack) * 90, (P.Attack + P.ItemAttack) * 110); 
-                        //if(attackDamage % 100 != 0)
-                        //{
-                        //    attackDamage = (attackDamage / 100) + 1;
-                        //}
-                        //else
-                        //{
-                        //    attackDamage = (attackDamage / 100);
-                        //}
-                        //M[input].TakeDamage(attackDamage);
+                        int attackDamage = random.Next((P.Attack + P.ItemAttack) * 90, (P.Attack + P.ItemAttack) * 110);
+                        if (attackDamage % 100 != 0)
+                        {
+                            attackDamage = (attackDamage / 100) + 1;
+                        }
+                        else
+                        {
+                            attackDamage = (attackDamage / 100);
+                        }
+                        M[input].TakeDamage(attackDamage);
 
                         Thread.Sleep(500);
 

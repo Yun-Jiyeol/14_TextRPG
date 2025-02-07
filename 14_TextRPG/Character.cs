@@ -33,8 +33,11 @@ namespace _14_TextRPG
 
 
             int exit = Input.input(0, 0);
- 
-            
+        }
+        public void TakeDamage(int i) //피해를 받는다면
+        {
+            Console.WriteLine($"{Name}은 {i}만큼 대미지를 받았습니다.");
+            Health -= i;
         }
     }
 }
