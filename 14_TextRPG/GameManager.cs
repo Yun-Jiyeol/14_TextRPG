@@ -13,39 +13,39 @@ namespace _14_TextRPG
             while (true)
             {
                 Console.Clear(); 
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-                DesignText.DT("", 40);
-                DesignText.DT("", 40);
-                DesignText.DT("", 40);
-                DesignText.DT("여기는 당신의 마을입니다.", 15);
-                DesignText.DT("던전에 입장하기 전", 22);
-                DesignText.DT("마을에서 할 행동을 고르세요.", 12);
-                DesignText.DT("", 40);
-                DesignText.DT("", 40);
-                DesignText.DT("", 40);
-                Console.ForegroundColor = ConsoleColor.Blue;
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("여기는 당신의 마을입니다.", 15, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("던전에 입장하기 전 마을에서", 13, ConsoleColor.Gray);
+                DesignText.DT("할 행동을 고르세요.", 21, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
-                DesignText.DT("", 40);
-                DesignText.DT("", 40);
-                DesignText.DT("1. 상태보기", 29);
-                DesignText.DT("2. 인벤토리", 29);
-                DesignText.DT("3. 상점", 33);
-                DesignText.DT("4. 전투시작", 29);
-                DesignText.DT("5. 퀘스트", 31);
-                DesignText.DT("0. 게임 종료", 28);
-                DesignText.DT("", 40);
-                DesignText.DT("", 40);
-                Console.ForegroundColor = ConsoleColor.Blue;
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("1. 상태보기", 29, ConsoleColor.Gray);
+                DesignText.DT("2. 인벤토리", 29, ConsoleColor.Gray);
+                DesignText.DT("3. 상점", 33, ConsoleColor.Gray);
+                DesignText.DT("4. 전투시작", 29, ConsoleColor.Gray);
+                DesignText.DT("5. 퀘스트", 31, ConsoleColor.Gray);
+                DesignText.DT("0. 게임 종료", 28, ConsoleColor.Red);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                DesignText.DT("", 40, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
                 Console.ResetColor();
                 Console.WriteLine();
 
-                Console.ResetColor();
                 int input = Input.input(0, 5);
                 switch (input)
                 {
                     case 0:
+                        Console.WriteLine();
                         Console.WriteLine("게임을 종료합니다!");
                         Environment.Exit(0);
                         break;
