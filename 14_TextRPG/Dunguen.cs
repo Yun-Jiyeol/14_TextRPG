@@ -27,28 +27,28 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.LeftDT("  1. EASY 던전 입장", 21, ConsoleColor.Gray);
-                DesignText.LeftDT("  2. NORMAL 던전 입장", 19, ConsoleColor.Gray);
+                DesignText.LeftDT("  1. EASY 던전 입장", 12, ConsoleColor.Gray);
+                DesignText.LeftDT("  2. NORMAL 던전 입장", 13, ConsoleColor.Gray);
                 if(P.Level >= 3)
                 {
-                    DesignText.LeftDT("       -입장 가능합니다", 17, ConsoleColor.Green);
+                    DesignText.LeftDT("     -입장 가능합니다", 14, ConsoleColor.Green);
                 }
                 else
                 {
-                    DesignText.LeftDT("       - 3레벨 부터 입장 가능합니다", 5, ConsoleColor.DarkGray);
+                    DesignText.LeftDT("     - 3레벨 부터 입장 가능합니다", 14, ConsoleColor.DarkGray);
                 }
-                DesignText.LeftDT("  3. HARD 던전 입장", 21, ConsoleColor.Gray);
+                DesignText.LeftDT("  3. HARD 던전 입장", 15, ConsoleColor.Gray);
                 if (P.Level >= 7)
                 {
-                    DesignText.LeftDT("       -입장 가능합니다", 17, ConsoleColor.Green);
+                    DesignText.LeftDT("     -입장 가능합니다", 16, ConsoleColor.Green);
                 }
                 else
                 {
-                    DesignText.LeftDT("       - 7레벨 부터 입장 가능합니다", 5, ConsoleColor.DarkGray);
+                    DesignText.LeftDT("     - 7레벨 부터 입장 가능합니다", 16, ConsoleColor.DarkGray);
                 }
-                DesignText.LeftDT("  4. 인벤토리", 27, ConsoleColor.Gray);
-                DesignText.LeftDT("  5. 퀘스트 확인", 24, ConsoleColor.Gray);
-                DesignText.LeftDT("  0. 마을로 귀환", 24, ConsoleColor.Blue);
+                DesignText.LeftDT("  4. 인벤토리", 17, ConsoleColor.Gray);
+                DesignText.LeftDT("  5. 퀘스트 확인", 18, ConsoleColor.Gray);
+                DesignText.LeftDT("  0. 마을로 귀환", 19, ConsoleColor.Blue);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");

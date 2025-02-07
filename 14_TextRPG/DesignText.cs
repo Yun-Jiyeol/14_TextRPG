@@ -34,14 +34,13 @@ namespace _14_TextRPG
         static public void LeftDT(string input, int num, ConsoleColor color) //좌측 정렬
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(0, num);
             Console.Write("┃");
             Console.ForegroundColor = color;
+            Console.SetCursorPosition(1, num);
             Console.Write(input);
-            for (int i = 0; i < num; i++)
-            {
-                Console.Write(" ");
-            }
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(41, num);
             Console.WriteLine("┃");
 
             Console.ResetColor();
@@ -50,14 +49,13 @@ namespace _14_TextRPG
         {
 
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(0, num);
             Console.Write("┃");
-            for (int i = 0; i < num; i++) //중앙 정령
-            {
-                Console.Write(" ");
-            }
             Console.ForegroundColor = color;
-            Console.Write(input);
+            Console.SetCursorPosition(1, num);
+            Console.Write(input.PadLeft(44-input.Length));
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(41, num);
             Console.WriteLine("┃");
 
             Console.ResetColor();
