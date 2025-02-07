@@ -9,8 +9,6 @@ namespace _14_TextRPG
 {
     public class Turn
     {
-        GameManager gamemanager = new GameManager();
-
         public void PlayerTurn(Player P, Monster[] M) //플레이어의 턴
         {
             Console.Clear();

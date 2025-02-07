@@ -12,24 +12,48 @@ namespace _14_TextRPG
         {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("1. 상태보기");
-                Console.WriteLine();
-                Console.WriteLine("2. 인벤토리");
-                Console.WriteLine();
-                Console.WriteLine("3. 상점");
-                Console.WriteLine();
-                Console.WriteLine("4. 전투시작");
-                Console.WriteLine();
-                Console.WriteLine("5. 퀘스트");
-                Console.WriteLine();
-                Console.WriteLine("0. 게임 종료");
+                Console.Clear(); 
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+                Console.Write("┃        ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("1. 상태보기");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("         ┃");
+                Console.Write("┃        ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("2. 인벤토리");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("         ┃");
+                Console.Write("┃        ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("3. 상점");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("             ┃");
+                Console.Write("┃        ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("4. 전투시작");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("         ┃");
+                Console.Write("┃        ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("5. 퀘스트");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("           ┃");
+                Console.Write("┃        ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("0. 게임 종료");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("        ┃");
+                Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
                 Console.WriteLine();
 
+                Console.ResetColor();
                 int input = Input.input(0, 5);
                 switch (input)
                 {
                     case 0:
+                        Console.WriteLine("게임을 종료합니다!");
                         Environment.Exit(0);
                         break;
                     case 1:

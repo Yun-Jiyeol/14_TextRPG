@@ -9,7 +9,7 @@ namespace _14_TextRPG
     public class Character
     {
         GameManager gamemanager;
-        public string Name { get;} //캐릭터 이름
+        public string Name { get; set; } //캐릭터 이름
         public string Class { get; set; } //캐릭터 직업
         public int Level { get; set; } //캐릭터 레벨
         public float Health { get; set; } //캐릭터 현제 체력
