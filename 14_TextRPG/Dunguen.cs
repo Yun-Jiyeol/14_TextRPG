@@ -8,13 +8,21 @@ namespace _14_TextRPG
 {
     internal class Dunguen
     {
-        public void GoDunguen(Player P)
+        Battle battle = new Battle();
+        Turn turn = new Turn();
+        public void GoDunguen(Player P, Inven inven, QuestManager quest)
         {
-            while (true)
+            bool isgoHome = false;
+
+            while (!isgoHome)
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+                Console.Write("┏━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┓");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("여기는 던전 입구입니다.", 17, ConsoleColor.Gray);
@@ -25,7 +33,11 @@ namespace _14_TextRPG
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
+                Console.Write("┣━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┫");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.LeftDT("  1. EASY 던전 입장", 12, ConsoleColor.Gray);
                 DesignText.LeftDT("  2. NORMAL 던전 입장", 13, ConsoleColor.Gray);
@@ -51,7 +63,11 @@ namespace _14_TextRPG
                 DesignText.LeftDT("  0. 마을로 귀환", 19, ConsoleColor.Blue);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+                Console.Write("┗━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┛");
                 Console.ResetColor();
 
                 Console.WriteLine();
@@ -59,18 +75,19 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine();
 
-                if (input == 0) //마을 귀환 break은 switch에서 안되서 외부에서 if문으로
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
-                    DesignText.IsMove();
-                    break;
-                }
                 switch (input)
                 {
+                    case 0:
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
+                        isgoHome = true;
+                        DesignText.IsMove();
+                        break;
                     case 1:
                         Console.WriteLine($"{P.Name}은(는) EASY 던전에 입장합니다.");
+                        isgoHome = true;
                         DesignText.IsMove();
+                        turn.PlayerTurn(P, battle.SpawnMons());
                         //Battle.Easy
                         break;
                     case 2:

@@ -11,11 +11,11 @@ namespace _14_TextRPG
     {
         Random random = new Random();
 
-        public void PlayerTurn(Player P, Monster[] M) //플레이어의 턴
+        public void PlayerTurn(Player P, List<Monster> M) //플레이어의 턴
         {
             Console.Clear();
 
-            for (int i = 0; i < M.Length; i++) //몬스터 및 플레이어 상태보기
+            for (int i = 0; i < M.Count; i++) //몬스터 및 플레이어 상태보기
             {
                 if (!M[i].isDead)
                 {
@@ -52,7 +52,7 @@ namespace _14_TextRPG
                     switch (Rinput)
                     {
                         case 0:
-                            for(int i = 0; i < M.Length; i++)
+                            for(int i = 0; i < M.Count; i++)
                             {
                                 if (!M[i].isDead)
                                 {
@@ -85,51 +85,49 @@ namespace _14_TextRPG
                     break;
             }
         }
-        public void ChooseAttack(Player P, Monster[] M) //플레이어의 턴
+        public void ChooseAttack(Player P, List<Monster> M) //플레이어의 턴
         {
             Console.Clear();
 
-            for (int i = 0; i < M.Length; i++) //몬스터 및 플레이어 상태보기
+            for (int j = 0; j < M.Count; j++) //몬스터 및 플레이어 상태보기
             {
-                for (int j = 0; j < M.Length; j++) //몬스터 및 플레이어 상태보기
+                if (M[j].Health > 0) // !M[j].isDead
                 {
-                    if (M[j].Health > 0) // !M[j].isDead
-                    {
-                        Console.WriteLine($"{j}. {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine($"DEAD {j}. - {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
-                        Console.ResetColor();
-                    }
+                    Console.WriteLine($"{j+1}. {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine($"DEAD {j+1}. - {M[j].Name} : {M[j].Health} / {M[j].MaxHealth}");
+                    Console.ResetColor();
                 }
             }
+
             Console.WriteLine("0. 돌아간다.");
             Console.WriteLine();
 
             Console.WriteLine($"{P.Name}은(는) 공격을 선택했습니다.");
             Console.WriteLine("누굴 공격하겠습니까?");
 
-            int input = Input.input(0,M.Length);
+            int input = Input.input(0,M.Count);
             switch (input)
             {
                 case 0:
                     PlayerTurn(P, M);
                     break;
                 default:
-                    Console.WriteLine($"{P.Name}은(는) {M[input].Name}을 공격했습니다.");
+                    Console.WriteLine($"{P.Name}은(는) {M[input-1].Name}을 공격했습니다.");
 
-                    if (M[input].isDead) //몬스터가 사망 상태라면
+                    if (M[input - 1].isDead) //몬스터가 사망 상태라면
                     {
-                        Console.WriteLine($"{M[input].Name}은(는) 이미 죽어 있습니다.");
+                        Console.WriteLine($"{M[input - 1].Name}은(는) 이미 죽어 있습니다.");
                         Console.WriteLine("아무키나 입력하세요.");
                         Console.ReadKey();
                         ChooseAttack(P,M); // 다시 선택창으로
                     }
                     else //공격 진행
                     {
-                        Console.WriteLine($"{M[input].Name}은 공격을 진행합니다.");
+                        Console.WriteLine($"{M[input - 1].Name}은 공격을 진행합니다.");
 
                         //플레이어의 데미지의 90% ~ 110% 사이의 데미지(올림값)를 몬스터에게 준다
                         int attackDamage = random.Next((P.Attack + P.ItemAttack) * 90, (P.Attack + P.ItemAttack) * 110);
@@ -141,13 +139,13 @@ namespace _14_TextRPG
                         {
                             attackDamage = (attackDamage / 100);
                         }
-                        M[input].TakeDamage(attackDamage);
+                        M[input - 1].TakeDamage(attackDamage);
 
                         Thread.Sleep(500);
 
-                        if (M[input].isDead) //몬스터가 죽을 시
+                        if (M[input - 1].isDead) //몬스터가 죽을 시
                         {
-                            Console.WriteLine($"{M[input].Name}은 {P.Name}의 공격으로 인하여 죽었습니다.");
+                            Console.WriteLine($"{M[input - 1].Name}은 {P.Name}의 공격으로 인하여 죽었습니다.");
 
                             bool isAllDead = true;
                             foreach (Monster m in M) //모든 몬스터가 사망 시
@@ -179,12 +177,12 @@ namespace _14_TextRPG
             }
         }
 
-        public void MonsterTurn(Player P, Monster[] M) //몬스터의 턴
+        public void MonsterTurn(Player P, List<Monster> M) //몬스터의 턴
         {
-            for (int i = 0; i < M.Length; i++){
+            for (int i = 0; i < M.Count; i++){
                 Console.Clear();
 
-                for (int j = 0; j < M.Length; j++) //몬스터 및 플레이어 상태보기
+                for (int j = 0; j < M.Count; j++) //몬스터 및 플레이어 상태보기
                 {
                     if (!M[j].isDead)
                     {
@@ -208,7 +206,7 @@ namespace _14_TextRPG
                 {
                     Console.WriteLine($"{M[i].Name}의 공격!");
                     Thread.Sleep(500);
-                    //P.TakeDamage(M[i].Attack);
+                    P.TakeDamage(M[i].Attack);
                     //P.isDead == true 면 겜 종료
                 }
             }
@@ -216,7 +214,7 @@ namespace _14_TextRPG
             Console.ReadKey();
             PlayerTurn(P,M); //다시 플레이어 턴으로
         }
-        public void Victory(Player P, Monster[] M)
+        public void Victory(Player P, List<Monster> M)
         {
             Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
             Console.WriteLine("아무키나 입력하세요.");

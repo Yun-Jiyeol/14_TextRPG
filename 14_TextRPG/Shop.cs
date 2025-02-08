@@ -18,15 +18,15 @@ namespace _14_TextRPG
         {
             List<Item> listShopItem = new List<Item>();
 
-            foreach(Item i in itemList.arrItem)
-            {
-                if(i.SaleItem)
-                {
-                    listShopItem.Add(i);
-                }
-            }
+            //foreach(Item i in itemList.arrItem) //로컬 1이 null이라는데요?
+            //{
+            //    if(i.SaleItem)
+            //    {
+            //        listShopItem.Add(i);
+            //    }
+            //}
 
-            arrShopItem = listShopItem.ToArray();
+            //arrShopItem = listShopItem.ToArray();
         }
 
         public void ShowShop(Player _player, Inven _inven)

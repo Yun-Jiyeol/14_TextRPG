@@ -14,7 +14,7 @@ namespace _14_TextRPG
             int length = num / 2;
             int left = num % 2; //짝수인지
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("┃");
             for(int i = 0; i < length; i++) //중앙 정령
             {
@@ -26,20 +26,20 @@ namespace _14_TextRPG
             {
                 Console.Write(" ");
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("┃");
 
             Console.ResetColor();
         }
         static public void LeftDT(string input, int num, ConsoleColor color) //좌측 정렬
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(0, num);
             Console.Write("┃");
             Console.ForegroundColor = color;
             Console.SetCursorPosition(1, num);
             Console.Write(input);
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(41, num);
             Console.WriteLine("┃");
 
@@ -48,13 +48,13 @@ namespace _14_TextRPG
         static public void RightDT(string input, int num, ConsoleColor color) //우측 정렬
         {
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(0, num);
             Console.Write("┃");
             Console.ForegroundColor = color;
             Console.SetCursorPosition(1, num);
             Console.Write(input.PadLeft(44-input.Length));
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(41, num);
             Console.WriteLine("┃");
 
