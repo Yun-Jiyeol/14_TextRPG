@@ -51,11 +51,19 @@ namespace _14_TextRPG
             {
                 DesignText.LeftDT($"  방어력: {Defence}", i + 5, ConsoleColor.Gray);
             }
-            DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.Yellow);
+            if (Gold >= 0)
+            {
+                DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.Yellow);
+            }
         }
         public void TakeDamage(int i) //피해를 받는다면
         {
             Health -= i;
+            if (Health < 0)
+            {
+                Health = 0;
+                isDead = true;
+            }
         }
     }
 }

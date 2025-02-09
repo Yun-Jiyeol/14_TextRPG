@@ -22,9 +22,10 @@ namespace _14_TextRPG
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-            DesignText.LeftDT("  1. 공격한다.", 17, ConsoleColor.Gray);
-            //Console.WriteLine("2. 스킬을 사용한다.");
-            //Console.WriteLine("3. 아이템을 사용한다.");
+            DesignText.LeftDT("  1. 공격한다.", 16, ConsoleColor.Gray);
+            DesignText.LeftDT("  2. 상태확인.", 17, ConsoleColor.Gray);
+            //Console.WriteLine("3. 스킬을 사용한다.");
+            //Console.WriteLine("4. 아이템을 사용한다."); - 상태에서 가도 될듯?
             DesignText.LeftDT("  0. 도망간다.", 18, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -37,7 +38,7 @@ namespace _14_TextRPG
 
             Console.WriteLine();
 
-            int input = Input.input(0,1);
+            int input = Input.input(0,2);
             switch (input)
             {
                 case 0:
@@ -116,8 +117,87 @@ namespace _14_TextRPG
                 case 1:
                     ChooseAttack(P, M);
                     break;
+
+                case 2: //상태 확인
+                    CheckState(P, M);
+                    PlayerTurn(P,M);
+                    break;
             }
         }
+
+        public void CheckState(Player P, List<Monster> M)
+        {
+            int num = 0;
+            int maxnum = M.Count; //확인할 스탯의 최대치
+            bool ischecking = true;
+
+            while (ischecking)
+            {
+                ShowNow(P, M); //기본 틀 생성
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("┗━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┛");
+                Console.ResetColor();
+
+                switch (num)
+                {
+                    case 0:
+                        DesignText.LeftDT($" - {P.Name}", 7, ConsoleColor.Yellow);
+                        DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Yellow);
+                        P.Status(11); //플레이어 정보 소환
+                        break;
+                    default: //num번째 몬스터 보기
+                        if (!M[num-1].isDead)
+                        {
+                            DesignText.RightDT($"{M[num-1].Name} : {M[num-1].Health} / {M[num - 1].MaxHealth}", num + 1, ConsoleColor.Yellow);
+                        }
+                        else
+                        {
+                            DesignText.RightDT($"{M[num - 1].Name} : {M[num - 1].Health} / {M[num - 1].MaxHealth}", num+1, ConsoleColor.DarkYellow);
+                        }
+                        M[num-1].Status(11); //몬스터 정보 소환
+                        break;
+                }
+                DesignText.LeftDT("   1. 이전      0.나가기      2.다음", 19, ConsoleColor.Gray);
+
+                Console.SetCursorPosition(0,22);
+                int input = Input.input(0, 2);
+                switch (input)
+                {
+                    case 0:
+                        ischecking = false; //나가기
+                        break;
+                    case 1: //이전
+                        num--;
+                        if(num < 0)
+                        {
+                            num = maxnum;
+                        }
+                        break;
+                    case 2: //이후
+                        num++;
+                        if(num > maxnum)
+                        {
+                            num = 0;
+                        }
+                        break;
+                }
+            }
+        }
+
+
         public void ChooseAttack(Player P, List<Monster> M) //플레이어의 턴
         {
             ShowNow(P, M); //기본 틀 생성
@@ -290,6 +370,7 @@ namespace _14_TextRPG
         }
         public void Victory(Player P, List<Monster> M)
         {
+            Console.SetCursorPosition(0,22);
             Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
             Console.WriteLine("아무키나 입력하세요.");
             Console.ReadKey();//Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
@@ -313,7 +394,7 @@ namespace _14_TextRPG
                 }
                 else
                 {
-                    DesignText.RightDT($"DEAD - {M[i].Name}", 2 + i, ConsoleColor.DarkGray);
+                    DesignText.RightDT($"{M[i].Name} : {M[i].Health} / {M[i].MaxHealth}", 2 + i, ConsoleColor.DarkGray);
                 }
             }
             for (int i = M.Count; i < 4; i++) //몬스터 및 플레이어 상태보기

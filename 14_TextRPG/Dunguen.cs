@@ -87,14 +87,15 @@ namespace _14_TextRPG
                         Console.WriteLine($"{P.Name}은(는) EASY 던전에 입장합니다.");
                         isgoHome = true;
                         DesignText.IsMove(5);
-                        turn.PlayerTurn(P, battle.SpawnMons());
-                        //Battle.Easy
+                        turn.PlayerTurn(P, battle.SpawnMons(0,6));
                         break;
                     case 2:
                         if (P.Level >= 3)
                         {
                             Console.WriteLine($"{P.Name}은(는) NORMAL 던전에 입장합니다.");
+                            isgoHome = true;
                             DesignText.IsMove(5);
+                            turn.PlayerTurn(P, battle.SpawnMons(6, 12));
                             //Battle.NORMAL
                         }
                         else
@@ -107,7 +108,9 @@ namespace _14_TextRPG
                         if (P.Level >= 7)
                         {
                             Console.WriteLine($"{P.Name}은(는) HARD 던전에 입장합니다.");
+                            isgoHome = true;
                             DesignText.IsMove(5);
+                            turn.PlayerTurn(P, battle.SpawnMons(12, 18));
                             //Battle.Hard
                         }
                         else
