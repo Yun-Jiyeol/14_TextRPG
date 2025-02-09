@@ -19,6 +19,7 @@ namespace _14_TextRPG
             Health = health;
             MaxHealth = maxHealth;
             Attack = attack;
+            Gold = -1;
 
         }
 

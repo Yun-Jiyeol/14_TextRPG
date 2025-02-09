@@ -39,8 +39,8 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┫");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.LeftDT("  1. EASY 던전 입장", 12, ConsoleColor.Gray);
-                DesignText.LeftDT("  2. NORMAL 던전 입장", 13, ConsoleColor.Gray);
+                DesignText.LeftDT($"  1. EASY 던전 {P.repeat[0]}층 입장", 12, ConsoleColor.Gray);
+                DesignText.LeftDT($"  2. NORMAL 던전 {P.repeat[1]}층 입장", 13, ConsoleColor.Gray);
                 if(P.Level >= 3)
                 {
                     DesignText.LeftDT("     -입장 가능합니다", 14, ConsoleColor.Green);
@@ -49,7 +49,7 @@ namespace _14_TextRPG
                 {
                     DesignText.LeftDT("     - 3레벨 부터 입장 가능합니다", 14, ConsoleColor.DarkGray);
                 }
-                DesignText.LeftDT("  3. HARD 던전 입장", 15, ConsoleColor.Gray);
+                DesignText.LeftDT($"  3. HARD 던전 {P.repeat[2]}층 입장", 15, ConsoleColor.Gray);
                 if (P.Level >= 7)
                 {
                     DesignText.LeftDT("     -입장 가능합니다", 16, ConsoleColor.Green);
@@ -74,6 +74,9 @@ namespace _14_TextRPG
                 int input = Input.input(0, 5);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine();
+                
+                List < Monster > monsters = new List < Monster >(); //소환할 몬스터를 저장하는 함수
+                bool isalldead = true; //몬스터를 다 잡고 나왔는지 확인할 함수(층수용)
 
                 switch (input)
                 {
@@ -86,17 +89,42 @@ namespace _14_TextRPG
                     case 1:
                         Console.WriteLine($"{P.Name}은(는) EASY 던전에 입장합니다.");
                         isgoHome = true;
-                        DesignText.IsMove(5);
-                        turn.PlayerTurn(P, battle.SpawnMons(0,6));
+                        DesignText.IsMove(10);
+                        monsters = battle.SpawnMons(0, 6); //랜덤 몬스터 소환
+                        turn.PlayerTurn(P, monsters); //전투 시작
+                        isalldead = true;
+                        foreach (Monster monster in monsters)
+                        {
+                            if (!monster.isDead) //모든 몬스터가 죽지 않았다면
+                            {
+                                isalldead = false;
+                            }
+                        }
+                        if (isalldead) //모든 몬스터를 잡았다면 층수 올리기
+                        {
+                            P.repeat[0]++;
+                        }
                         break;
                     case 2:
                         if (P.Level >= 3)
                         {
                             Console.WriteLine($"{P.Name}은(는) NORMAL 던전에 입장합니다.");
                             isgoHome = true;
-                            DesignText.IsMove(5);
-                            turn.PlayerTurn(P, battle.SpawnMons(6, 12));
-                            //Battle.NORMAL
+                            DesignText.IsMove(10);
+                            monsters = battle.SpawnMons(6, 12); //랜덤 몬스터 소환
+                            turn.PlayerTurn(P, monsters); //전투 시작
+                            isalldead = true;
+                            foreach (Monster monster in monsters)
+                            {
+                                if (!monster.isDead) //모든 몬스터가 죽지 않았다면
+                                {
+                                    isalldead = false;
+                                }
+                            }
+                            if (isalldead) //모든 몬스터를 잡았다면 층수 올리기
+                            {
+                                P.repeat[1]++;
+                            }
                         }
                         else
                         {
@@ -109,9 +137,21 @@ namespace _14_TextRPG
                         {
                             Console.WriteLine($"{P.Name}은(는) HARD 던전에 입장합니다.");
                             isgoHome = true;
-                            DesignText.IsMove(5);
-                            turn.PlayerTurn(P, battle.SpawnMons(12, 18));
-                            //Battle.Hard
+                            DesignText.IsMove(10);
+                            monsters = battle.SpawnMons(12, 18); //랜덤 몬스터 소환
+                            turn.PlayerTurn(P, monsters); //전투 시작
+                            isalldead = true;
+                            foreach (Monster monster in monsters)
+                            {
+                                if (!monster.isDead) //모든 몬스터가 죽지 않았다면
+                                {
+                                    isalldead = false;
+                                }
+                            }
+                            if (isalldead) //모든 몬스터를 잡았다면 층수 올리기
+                            {
+                                P.repeat[2]++;
+                            }
                         }
                         else
                         {

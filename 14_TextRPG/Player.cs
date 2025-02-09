@@ -8,6 +8,8 @@ namespace _14_TextRPG
 {
     public class Player : Character
     {
+        public int[] repeat = {1,1,1 };
+
         //public int Ex { get; set; } //플레이어 현제 경험치
         // public int MaxEx { get; set; } //플레이어 렙업에 필요한 경험치
         public Player()
