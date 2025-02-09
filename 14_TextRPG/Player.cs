@@ -17,7 +17,7 @@ namespace _14_TextRPG
             Level = 01;
             Health = 100;
             MaxHealth = 100;
-            Attack = 10;
+            Attack = 100;
             Defence = 5;
             Gold = 1500;
         }

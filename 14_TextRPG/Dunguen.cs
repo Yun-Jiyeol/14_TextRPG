@@ -81,12 +81,12 @@ namespace _14_TextRPG
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
                         isgoHome = true;
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         break;
                     case 1:
                         Console.WriteLine($"{P.Name}은(는) EASY 던전에 입장합니다.");
                         isgoHome = true;
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         turn.PlayerTurn(P, battle.SpawnMons());
                         //Battle.Easy
                         break;
@@ -94,36 +94,36 @@ namespace _14_TextRPG
                         if (P.Level >= 3)
                         {
                             Console.WriteLine($"{P.Name}은(는) NORMAL 던전에 입장합니다.");
-                            DesignText.IsMove();
+                            DesignText.IsMove(5);
                             //Battle.NORMAL
                         }
                         else
                         {
                             Console.WriteLine($"{P.Name}은(는) 실력 부족으로 거절 당했습니다.");
-                            DesignText.IsMove();
+                            DesignText.IsMove(5);
                         }
                         break;
                     case 3:
                         if (P.Level >= 7)
                         {
                             Console.WriteLine($"{P.Name}은(는) HARD 던전에 입장합니다.");
-                            DesignText.IsMove();
+                            DesignText.IsMove(5);
                             //Battle.Hard
                         }
                         else
                         {
                             Console.WriteLine($"{P.Name}은(는) 실력 부족으로 거절 당했습니다.");
-                            DesignText.IsMove();
+                            DesignText.IsMove(5);
                         }
                         break;
                     case 4:
                         Console.WriteLine($"{P.Name}은(는) 자신의 아이템을 확인합니다.");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         //Item
                         break;
                     case 5:
                         Console.WriteLine($"{P.Name}은(는) 받은 의뢰서 뭉치를 찾아봅니다");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         //Quest
                         break;
                 }

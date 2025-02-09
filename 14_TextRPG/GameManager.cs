@@ -91,28 +91,28 @@ namespace _14_TextRPG
                         break;
                     case 1:
                         Console.WriteLine($"{P.Name}은(는) 자신의 상태를 점검합니다.");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         CheckPlayerState();
                         break;
                     case 2:
                         Console.WriteLine($"{P.Name}은(는) 자신의 아이템을 확인합니다.");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         inven.ShowInven(P); //확인 불가 직접 확인해주세요
                         break;
                     case 3:
                         Console.WriteLine($"{P.Name}은(는) 상점은 찾아 들어가봅니다");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         //shop.ShowShop(P,inven); //애러 발생 추후 확인 부탁
                         break;
                     case 4:
                         Console.WriteLine($"{P.Name}은(는) 던전을 찾아 들어가봅니다");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         dunguen.GoDunguen(P, inven, quest); //던전으로 이동
                         //Battle
                         break;
                     case 5:
                         Console.WriteLine($"{P.Name}은(는) 의뢰서 뭉치를 찾아봅니다");
-                        DesignText.IsMove();
+                        DesignText.IsMove(5);
                         quest.OpenQuestMenu();
                         //threadsleep으로 렉걸리는 느낌이라 삭제 부탁드립니다. -> 나중에 꾸밀 때 뜯어 갔다는 느낌으로 사용해도 될거 같네요
                         //퀘스트 확인 창이 총 2개 있는데 퀘스트 수락하면 거절 버튼만 생성하도록 제작 부탁드립니다.
@@ -162,7 +162,7 @@ namespace _14_TextRPG
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
             Console.WriteLine($"{P.Name}은(는) 돌아갑니다.");
-            DesignText.IsMove();
+            DesignText.IsMove(5);
         }
     }
 }

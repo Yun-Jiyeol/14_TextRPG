@@ -53,17 +53,17 @@ namespace _14_TextRPG
             Console.Write("┃");
             Console.ForegroundColor = color;
             Console.SetCursorPosition(1, num);
-            Console.Write(input.PadLeft(44-input.Length));
+            Console.Write(input.PadLeft(50-input.Length));
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(41, num);
             Console.WriteLine("┃");
 
             Console.ResetColor();
         }
-        static public void IsMove() //플레이어 이동 시
+        static public void IsMove(int num) //플레이어 이동 시
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < num; i++)
             {
                 Console.Write("■");
                 Thread.Sleep(100);
