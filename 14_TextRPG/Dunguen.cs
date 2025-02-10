@@ -241,8 +241,48 @@ namespace _14_TextRPG
                         }
                         break;
                     case 2:
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("┏━");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("━┓");
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        P.Status(2); //플레이어의 스텟 표기
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("┣━");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("━┫");
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.LeftDT("  0. 돌아가기", 13, ConsoleColor.Blue);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("┗━");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("━┛");
+                        Console.ResetColor();
+
+                        Console.WriteLine();
+                        int pinput = Input.input(0, 0);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine();
+                        Console.WriteLine($"{P.Name}은(는) 돌아갑니다.");
+                        DesignText.IsMove(5);
                         break;
                     case 3:
+                        //Quest
                         break;
                 }
             }
