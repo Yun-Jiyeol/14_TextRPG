@@ -38,6 +38,10 @@ namespace _14_TextRPG
 
         public bool GetEx(int _ex)
         {
+            Random random = new Random();
+            int getgold = random.Next(_ex,2*_ex); //랜덤 양의 골드 획득
+            Gold += getgold;
+
             Ex += _ex; 
             if(MaxEx <= Ex)
             {
