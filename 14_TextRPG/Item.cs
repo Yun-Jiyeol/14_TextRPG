@@ -140,8 +140,8 @@ namespace _14_TextRPG
             new Item("청동 도끼", ItemType.Weapon, "사용감이 조금 있는 도끼입니다.", 5, 1500, true),
             new Item("스파르타의 창", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는 소문이 있는 갑옷입니다.", 15, 2500, true),
             new Item("작은 방패", ItemType.Shield, "작고 둥글어서 귀여운 방패입니다.", 4, 1000, true),
-            new Item("단단한 방패", ItemType.Weapon, "단단한 방패입니다.", 9, 2000, true),
-            new Item("스파르타의 방패", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true),
+            new Item("단단한 방패", ItemType.Shield, "단단한 방패입니다.", 9, 2000, true),
+            new Item("스파르타의 방패", ItemType.Shield, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true),
             new Item("슬라임의 점액", ItemType.MonsterDropItem, "슬라임의 점액. 어디에 쓰이는 건지 알 필요가 있을까?", 0, 100, false),
             new Item("해진 가죽갑옷", ItemType.Armor, "해진 가죽갑옷이다 .", 5, 200, false)
             };
