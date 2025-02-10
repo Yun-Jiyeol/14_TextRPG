@@ -23,6 +23,7 @@ namespace _14_TextRPG
         public bool isDead { get; set; } = false; //캐릭터 사망 유무
         public int Ex { get; set; } //플레이어 현제 경험치
         public int MaxEx { get; set; } //플레이어 렙업에 필요한 경험치
+        public bool isEquip { get; set; } = false; //캐릭터 장비 장착 여부
         public void Status(int i) //전투 때 보여지게끔 (몬스터)
         {
             DesignText.LeftDT($" [{Name}의 정보]", i, ConsoleColor.Gray);

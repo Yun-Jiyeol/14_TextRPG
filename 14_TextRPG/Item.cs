@@ -11,9 +11,9 @@ namespace _14_TextRPG
     /// </summary>
     public enum ItemType
     {
-        Weapon = 10,
-        Shield = 20,
-        Armor = 30
+        Weapon,
+        Shield,
+        Armor
     }
 
     public class Item
@@ -36,10 +36,10 @@ namespace _14_TextRPG
         /// <param name="_itemInfo">아이템 설명</param>
         /// <param name="_value">아이템 능력치</param>
         /// <param name="_cost">아이템 가격</param>
-        public Item(string _name, int _itemType, string _itemInfo, int _value, int _cost, bool _sale)
+        public Item(string _name, ItemType _itemType, string _itemInfo, int _value, int _cost, bool _sale)
         {
             Name = _name;
-            Itemtype = (ItemType)_itemType;
+            Itemtype = _itemType;
             Info = _itemInfo;
             Value = _value;
             Cost = _cost;
@@ -121,15 +121,15 @@ namespace _14_TextRPG
         {
             arrItem = new Item[]
             {
-            new Item("수련자의 갑옷", 30, "수련에 도움을 주는 갑옷입니다.", 20, 1000, true),
-            new Item("무쇠갑옷", 30, "무쇠로 만들어져 튼튼한 갑옷입니다.", 30, 2000, true),
-            new Item("스파르타의 갑옷", 30,"전설의 스파르타 전사 르탄이 사용했다는 갑옷입니다.", 50, 3500, true),
-            new Item("낡은 검", 10, "사용감이 제법 있는 낡은 검입니다.", 2, 600, true),
-            new Item("청동 도끼", 10, "사용감이 조금 있는 도끼입니다.", 5, 1500, true),
-            new Item("스파르타의 창", 10, "전설의 스파르타 전사 르탄이 사용했다는 소문이 있는 갑옷입니다.", 15, 2500, true),
-            new Item("작은 방패", 20, "작고 둥글어서 귀여운 방패입니다.", 4, 1000, true),
-            new Item("단단한 방패", 20, "단단한 방패입니다.", 9, 2000, true),
-            new Item("스파르타의 방패", 20, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true)
+            new Item("수련자의 갑옷", ItemType.Armor, "수련에 도움을 주는 갑옷입니다.", 20, 1000, true),
+            new Item("무쇠갑옷", ItemType.Armor, "무쇠로 만들어져 튼튼한 갑옷입니다.", 30, 2000, true),
+            new Item("스파르타의 갑옷", ItemType.Armor,"전설의 스파르타 전사 르탄이 사용했다는 갑옷입니다.", 50, 3500, true),
+            new Item("낡은 검", ItemType.Weapon, "사용감이 제법 있는 낡은 검입니다.", 2, 600, true),
+            new Item("청동 도끼", ItemType.Weapon, "사용감이 조금 있는 도끼입니다.", 5, 1500, true),
+            new Item("스파르타의 창", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는 소문이 있는 갑옷입니다.", 15, 2500, true),
+            new Item("작은 방패", ItemType.Shield, "작고 둥글어서 귀여운 방패입니다.", 4, 1000, true),
+            new Item("단단한 방패", ItemType.Weapon, "단단한 방패입니다.", 9, 2000, true),
+            new Item("스파르타의 방패", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true)
             };
         }
 
