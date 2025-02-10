@@ -19,6 +19,8 @@ namespace _14_TextRPG
             Level = 01;
             Health = 100;
             MaxHealth = 100;
+            Mana = 30;
+            MaxMana = 30;
             Attack = 10;
             Defence = 5;
             Gold = 1500;
@@ -30,9 +32,9 @@ namespace _14_TextRPG
         public void GetHeal(int heal)
         {
             Health += heal;
-            if(Health > MaxHealth)
+            if(Health > MaxHealth + ItemHealth)
             {
-                Health = MaxHealth;
+                Health = MaxHealth + ItemHealth;
             }
         }
 
