@@ -252,6 +252,7 @@ namespace _14_TextRPG
                         Thread.Sleep(500);
                         DesignText.LeftDT($"  {M[input - 1].Name}은(는) 이미 죽어 있습니다.", 15, ConsoleColor.Gray);
                         DesignText.LeftDT("  다른 몬스터를 선택하세요.", 16, ConsoleColor.Gray);
+                        Console.SetCursorPosition(0,22);
                         DesignText.IsMove(10);
                         ChooseAttack(P,M); // 다시 선택창으로
                     }
@@ -287,16 +288,24 @@ namespace _14_TextRPG
                         Console.WriteLine("━┛");
                         Console.ResetColor();
 
-                        DesignText.LeftDT($"  {M[input - 1].Name}을(를) 공격합니다.", 15, ConsoleColor.Gray);
-
-                        DesignText.LeftDT($"  {attackDamage - (M[input - 1].Defence / 2)}만큼 공격을 당했습니다.", 16, ConsoleColor.Gray);
+                        DesignText.LeftDT($"  {attackDamage - (M[input - 1].Defence / 2)}만큼 공격을 했습니다.", 14, ConsoleColor.Gray);
 
                         Thread.Sleep(1500);
 
                         if (M[input - 1].isDead) //몬스터가 죽을 시
                         {
-                            DesignText.LeftDT($"  {M[input - 1].Name}은(는) 죽었습니다.", 17, ConsoleColor.Gray);
+                            DesignText.LeftDT($"  {M[input - 1].Name}은(는) 죽었습니다.", 16, ConsoleColor.Gray);
                             
+                            if (P.GetEx(M[input - 1].Ex)) //랩업 시
+                            {
+                                DesignText.LeftDT($"  레밸{P.Level}이 되었습니다!", 17, ConsoleColor.Gray);
+                                DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}     ", 8, ConsoleColor.Gray);
+                            }
+                            else
+                            {
+                                DesignText.LeftDT($"  {M[input - 1].Ex}의 경험치를 얻었습니다.", 17, ConsoleColor.Gray);
+                            }
+
                             bool isAllDead = true;
                             foreach (Monster m in M) //모든 몬스터가 사망 시
                             {
@@ -357,7 +366,7 @@ namespace _14_TextRPG
                 {
                     DesignText.LeftDT($"  {M[i].Name}이 {M[i].Attack - (P.Defence / 2)}의 피해를 줌", 14+num, ConsoleColor.Gray);
                     P.TakeDamage(M[i].Attack);
-                    DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Gray);
+                    DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}     ", 8, ConsoleColor.Gray);
                     Thread.Sleep(1500);
                     num++;
                     //P.isDead == true 면 겜 종료

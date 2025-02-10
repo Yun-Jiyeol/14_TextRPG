@@ -21,12 +21,20 @@ namespace _14_TextRPG
         public int ItemDefence { get; set; } //아이템으로 오른 방어력
         public int Gold { get; set; } //캐릭터 소유 골드
         public bool isDead { get; set; } = false; //캐릭터 사망 유무
-        
+        public int Ex { get; set; } //플레이어 현제 경험치
+        public int MaxEx { get; set; } //플레이어 렙업에 필요한 경험치
         public void Status(int i) //전투 때 보여지게끔 (몬스터)
         {
             DesignText.LeftDT($" [{Name}의 정보]", i, ConsoleColor.Gray);
             DesignText.LeftDT($"  LV.{Level} . {Class}", i+1, ConsoleColor.Gray);
-            DesignText.LeftDT($"  이름: {Name}", i + 2, ConsoleColor.Gray);
+            if (MaxEx > 0)
+            {
+                DesignText.LeftDT($"  경험치 : {Ex} / {MaxEx}", i + 2, ConsoleColor.Gray);
+            }
+            else
+            {
+                DesignText.LeftDT($"  주는 경험치 : {Ex}", i + 2, ConsoleColor.Gray);
+            }
             if (ItemHealth != 0) //장비 체력이 있을 시
             {
                 DesignText.LeftDT($"  체력: {Health + ItemHealth} / {MaxHealth} + ({ItemHealth})", i + 3, ConsoleColor.DarkRed);
@@ -69,7 +77,7 @@ namespace _14_TextRPG
 
             Health -= i; //i만큼 데미지
 
-            if (Health < 0) //사망 시
+            if (Health <= 0) //사망 시
             {
                 Health = 0;
                 isDead = true;
