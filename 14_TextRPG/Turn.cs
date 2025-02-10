@@ -97,7 +97,14 @@ namespace _14_TextRPG
                                     else
                                     {
                                         DesignText.LeftDT($"  {M[i].Name}이(가) {P.Name}를", 11 + i * 2, ConsoleColor.Gray);
-                                        DesignText.LeftDT($"  공격을 했습니다!", 12 + i * 2, ConsoleColor.Gray);
+                                        if(M[i].Attack - (P.Defence / 2) > 0)
+                                        {
+                                            DesignText.LeftDT($"  {M[i].Attack - (P.Defence / 2)}만큼 공격을 했습니다!", 12 + i * 2, ConsoleColor.Gray);
+                                        }
+                                        else
+                                        {
+                                            DesignText.LeftDT("  0만큼 공격을 했습니다!", 12 + i * 2, ConsoleColor.Gray);
+                                        }
                                         P.TakeDamage(M[i].Attack);
                                         DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Gray);
                                     }
@@ -364,7 +371,14 @@ namespace _14_TextRPG
             {
                 if (!M[i].isDead)
                 {
-                    DesignText.LeftDT($"  {M[i].Name}이 {M[i].Attack - (P.Defence / 2)}의 피해를 줌", 14+num, ConsoleColor.Gray);
+                    if (M[i].Attack - (P.Defence / 2) > 0)
+                    {
+                        DesignText.LeftDT($"  {M[i].Attack - (P.Defence / 2)}만큼 공격을 했습니다!", 14 + num, ConsoleColor.Gray);
+                    }
+                    else
+                    {
+                        DesignText.LeftDT("  0만큼 공격을 했습니다!", 14 + num, ConsoleColor.Gray);
+                    }
                     P.TakeDamage(M[i].Attack);
                     if (P.isDead)
                     {
