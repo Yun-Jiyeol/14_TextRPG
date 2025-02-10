@@ -53,7 +53,7 @@ namespace _14_TextRPG
             Console.Write("┃");
             Console.ForegroundColor = color;
             Console.SetCursorPosition(1, num);
-            Console.Write(input.PadLeft(50-input.Length));
+            Console.Write(input.PadLeft(34));
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(41, num);
             Console.WriteLine("┃");
