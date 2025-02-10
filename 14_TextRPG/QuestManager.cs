@@ -17,6 +17,8 @@ namespace _14_TextRPG
         // 수락한 퀘스트 리스트
         List<Quest> acceptQuest = new List<Quest>();
 
+        ItemList itemList = new ItemList();
+
         // 퀘스트 생성
         public QuestManager()
         {           
@@ -238,10 +240,18 @@ namespace _14_TextRPG
                 }
             }
         }
+        
 
-        public void EquipItem(Player player)
+        //특정 아이템을 장착 했을 시
+        public void EquipItem(bool isEquip, List<Item> itemList)
         {
-
+            if (isEquip)
+            {
+                foreach (Quest quest in acceptQuest)
+                {
+                    
+                }
+            }
         }
 
     }
