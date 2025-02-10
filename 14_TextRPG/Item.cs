@@ -13,7 +13,8 @@ namespace _14_TextRPG
     {
         Weapon,
         Shield,
-        Armor
+        Armor,
+        MonsterDropItem
     }
 
     public class Item
@@ -129,7 +130,9 @@ namespace _14_TextRPG
             new Item("스파르타의 창", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는 소문이 있는 갑옷입니다.", 15, 2500, true),
             new Item("작은 방패", ItemType.Shield, "작고 둥글어서 귀여운 방패입니다.", 4, 1000, true),
             new Item("단단한 방패", ItemType.Weapon, "단단한 방패입니다.", 9, 2000, true),
-            new Item("스파르타의 방패", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true)
+            new Item("스파르타의 방패", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true),
+            new Item("슬라임의 점액", ItemType.MonsterDropItem, "슬라임의 점액. 어디에 쓰이는 건지 알 필요가 있을까?", 0, 100, false),
+            new Item("해진 가죽갑옷", ItemType.Armor, "해진 가죽갑옷이다 .", 5, 200, false)
             };
         }
 
@@ -149,15 +152,19 @@ namespace _14_TextRPG
                 switch (i.Itemtype)
                 {
                     case ItemType.Weapon:
-                        itemType = "공격력";
+                        itemType = "공격력 +";
                         break;
 
                     case ItemType.Shield:
-                        itemType = "방어력";
+                        itemType = "방어력 +";
                         break;
 
                     case ItemType.Armor:
-                        itemType = "체력";
+                        itemType = "체력 +";
+                        break;
+
+                    case ItemType.MonsterDropItem:
+                        itemType = "";
                         break;
                 }
 
@@ -174,7 +181,7 @@ namespace _14_TextRPG
                         equipOrCost = "";
                     }
 
-                    Console.WriteLine($"- {number} {equipOrCost}{i.Name}  |  {itemType} +{i.Value}  |  {i.Info}");
+                    Console.WriteLine($"- {number} {equipOrCost}{i.Name}  |  {itemType} {i.Value}  |  {i.Info}");
                 }
                 else
                 {
@@ -187,7 +194,7 @@ namespace _14_TextRPG
                         equipOrCost = $"{i.Cost} G";
                     }
 
-                    Console.WriteLine($"- {number} {i.Name}  |  {itemType} +{i.Value}  |  {i.Info}  |  {equipOrCost}");
+                    Console.WriteLine($"- {number} {i.Name}  |  {itemType} {i.Value}  |  {i.Info}  |  {equipOrCost}");
                 }
 
                 itemCount++;
