@@ -26,6 +26,9 @@ namespace _14_TextRPG
             
             MaxEx = 0;
             Gold = -1;
+            Avoid = 0;
+            Critical = 10;
+            CriDamage = 1.3f;
         }
 
         public string MonsDisplay()

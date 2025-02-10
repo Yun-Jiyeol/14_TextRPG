@@ -19,9 +19,12 @@ namespace _14_TextRPG
             Level = 01;
             Health = 100;
             MaxHealth = 100;
-            Attack = 300;
+            Attack = 10;
             Defence = 5;
             Gold = 1500;
+            Critical = 15;
+            Avoid = 10;
+            CriDamage = 1.5f;
         }
 
         public void GetHeal(int heal)

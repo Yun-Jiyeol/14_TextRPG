@@ -82,32 +82,34 @@ namespace _14_TextRPG
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine("━┛");
                             Console.ResetColor();
+                            int num = 0; //띄어쓰기용 함수
                             for (int i = 0; i < M.Count; i++)
                             {
-
                                 if (!M[i].isDead)
                                 {
                                     int tryAttack = random.Next(0,2);
 
                                     if(tryAttack == 0)
                                     {
-                                        DesignText.LeftDT($"  {M[i].Name}이(가) {P.Name}를 공격을", 11 + i*2, ConsoleColor.Gray);
-                                        DesignText.LeftDT($"  시도했으나 실패했습니다.", 12 + i * 2, ConsoleColor.Gray);
+                                        DesignText.LeftDT($"  {M[i].Name}이(가) {P.Name}를 공격을", 11 + num*2, ConsoleColor.Gray);
+                                        DesignText.LeftDT($"  시도했으나 실패했습니다.", 12 + num * 2, ConsoleColor.Gray);
                                     }
                                     else
                                     {
-                                        DesignText.LeftDT($"  {M[i].Name}이(가) {P.Name}를", 11 + i * 2, ConsoleColor.Gray);
-                                        if(M[i].Attack - (P.Defence / 2) > 0)
+                                        DesignText.LeftDT($"  {M[i].Name}이(가) {P.Name}를", 11 + num * 2, ConsoleColor.Gray);
+                                        
+                                        int damage = P.TakeDamage(M[i],M[i].Attack); //얼마나 공격했는지
+                                        if (damage == -1)
                                         {
-                                            DesignText.LeftDT($"  {M[i].Attack - (P.Defence / 2)}만큼 공격을 했습니다!", 12 + i * 2, ConsoleColor.Gray);
+                                            DesignText.LeftDT("  공격했으나 회피했다.", 12 + num * 2, ConsoleColor.Gray);
                                         }
                                         else
                                         {
-                                            DesignText.LeftDT("  0만큼 공격을 했습니다!", 12 + i * 2, ConsoleColor.Gray);
+                                            DesignText.LeftDT($"  {damage}만큼 공격을 했습니다!", 12 + num * 2, ConsoleColor.Gray);
                                         }
-                                        P.TakeDamage(M[i].Attack);
                                         DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Gray);
                                     }
+                                    num++;
                                     Thread.Sleep(1000);
                                 }
                             }
@@ -275,7 +277,7 @@ namespace _14_TextRPG
                         {
                             attackDamage = (attackDamage / 100);
                         }
-                        M[input - 1].TakeDamage(attackDamage);
+                        int Damage = M[input - 1].TakeDamage(P,attackDamage);
 
                         ShowNow(P, M); //기본 틀 생성
                         DesignText.MiddleDT("", 40, ConsoleColor.Gray);
@@ -295,7 +297,14 @@ namespace _14_TextRPG
                         Console.WriteLine("━┛");
                         Console.ResetColor();
 
-                        DesignText.LeftDT($"  {attackDamage - (M[input - 1].Defence / 2)}만큼 공격을 했습니다.", 14, ConsoleColor.Gray);
+                        if(Damage == -1) //회피시
+                        {
+                            DesignText.LeftDT($"  {M[input-1].Name}은 회피했습니다.", 14, ConsoleColor.Gray);
+                        }
+                        else
+                        {
+                            DesignText.LeftDT($"  {Damage}만큼 공격을 했습니다.", 14, ConsoleColor.Gray);
+                        }
 
                         Thread.Sleep(1500);
 
@@ -367,15 +376,15 @@ namespace _14_TextRPG
             {
                 if (!M[i].isDead)
                 {
-                    if (M[i].Attack - (P.Defence / 2) > 0)
+                    int damage = P.TakeDamage(M[i], M[i].Attack); //얼마나 공격했는지
+                    if (damage == -1)
                     {
-                        DesignText.LeftDT($"  {M[i].Attack - (P.Defence / 2)}만큼 공격을 했습니다!", 14 + num, ConsoleColor.Gray);
+                        DesignText.LeftDT("  공격했으나 회피했다.", 14 + num, ConsoleColor.Gray);
                     }
                     else
                     {
-                        DesignText.LeftDT("  0만큼 공격을 했습니다!", 14 + num, ConsoleColor.Gray);
+                        DesignText.LeftDT($"  {damage}만큼 공격을 했습니다!", 14 + num, ConsoleColor.Gray);
                     }
-                    P.TakeDamage(M[i].Attack);
                     if (P.isDead)
                     {
                         DesignText.LeftDT($" - {P.Name}", 7, ConsoleColor.DarkGray);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,7 +88,7 @@ namespace _14_TextRPG
                         Console.WriteLine($"{P.Name}은(는) EASY 던전에 입장합니다.");
                         isgoHome = true;
                         DesignText.IsMove(10);
-                        EasyDuguen(P);
+                        EasyDuguen(P,inven,quest);
                         break;
                     case 2:
                         if (P.Level >= 3)
@@ -132,7 +133,7 @@ namespace _14_TextRPG
                 }
             }
         }
-        public void EasyDuguen(Player P)
+        public void EasyDuguen(Player P, Inven inven, QuestManager quest)
         {
             int floor = 1;
             int maxfloor = 3;
@@ -178,7 +179,7 @@ namespace _14_TextRPG
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray); //사용시 줄 삭제
                 DesignText.LeftDT("  5. 퀘스트 확인", 16, ConsoleColor.Gray);
-                DesignText.LeftDT("  0. 마을로 귀환", 17, ConsoleColor.Red);
+                DesignText.LeftDT("  0. 마을로 귀환", 17, ConsoleColor.Blue);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -318,8 +319,13 @@ namespace _14_TextRPG
                             DesignText.IsMove(10);
                         }
                         break;
+                    case 4:
+                        //inventory
+                        break;
                     case 5:
-                        //Quest
+                        Console.WriteLine($"{P.Name}은(는) 받은 의뢰서 뭉치를 찾아봅니다");
+                        DesignText.IsMove(5);
+                        quest.OpenAcceptQuest();
                         break;
                 }
             }
