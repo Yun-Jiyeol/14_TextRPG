@@ -81,6 +81,13 @@ namespace _14_TextRPG
             {
                 PlayerUse = false;
 
+                int playerEquipEffect = _player.ItemDefence + _player.ItemAttack + (int)_player.ItemHealth;
+
+                if(playerEquipEffect <= 0)
+                {
+                    _player.isEquip = false;
+                }
+
                 switch (Itemtype)
                 {
                     case ItemType.Weapon:
@@ -97,6 +104,8 @@ namespace _14_TextRPG
             else
             {
                 PlayerUse = true;
+
+                if (!_player.isEquip) _player.isEquip = true;
 
                 switch (Itemtype)
                 {

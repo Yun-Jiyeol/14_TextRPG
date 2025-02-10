@@ -31,7 +31,7 @@ namespace _14_TextRPG
                 case 2:
                     mons.Add(new Monster("(E) 옐로슬라임", "슬라임", 1, 3, 12, 12, 4, 3));
                     mons.Add(new Monster("(E) 그린슬라임", "슬라임", 1, 3, 8, 8, 6, 1));
-                    mons.Add(new Monster("(E) 초록버섯", "버섯", 1, 5, 20, 18, 10, 1));
+                    mons.Add(new Monster("(E) 초록버섯", "버섯", 1, 5, 20, 20, 10, 1));
                     break;
                 case 3:
                     mons.Add(new Monster("(E) 스톤 골렘", "골렘", 2, 8, 80, 80, 12, 8));

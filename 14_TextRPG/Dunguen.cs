@@ -204,6 +204,7 @@ namespace _14_TextRPG
                         DesignText.IsMove(5);
                         break;
                     case 1:
+                        int beforeGold = P.Gold;
                         List<Monster> monsters = new List<Monster>(); //소환할 몬스터를 저장하는 함수
                         bool isalldead = true; //몬스터를 다 잡고 나왔는지 확인할 함수(층수용)
                         if(floor == maxfloor)
@@ -229,6 +230,8 @@ namespace _14_TextRPG
                             if(floor == maxfloor)
                             {
                                 Console.SetCursorPosition(0,22);
+                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
                                 Console.ResetColor();
@@ -239,6 +242,8 @@ namespace _14_TextRPG
                             else
                             {
                                 Console.SetCursorPosition(0, 22);
+                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 다음 전투를 준비합니다.");
                                 Console.ResetColor();
