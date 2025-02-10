@@ -50,7 +50,8 @@ namespace _14_TextRPG
             }
             else
             {
-                listHoldItem[input - 1].Use(_player); //마을로 돌아갈듯?
+                listHoldItem[input - 1].Use(_player); //마을로 돌아갈듯? : 해결
+                EquipManage(_player);
             }
         }
 

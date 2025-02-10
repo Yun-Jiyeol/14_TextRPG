@@ -18,7 +18,7 @@ namespace _14_TextRPG
         {
             List<Item> listShopItem = new List<Item>();
 
-            foreach (Item i in itemList.arrItem) //로컬 1이 null이라는데요?
+            foreach (Item i in itemList.arrItem)
             {
                 if (i.SaleItem)
                 {
@@ -68,6 +68,7 @@ namespace _14_TextRPG
             else
             {
                 arrShopItem[input - 1].Buy(_player, _inven);
+                Sale(_player, _inven);
             }
         }
     }
