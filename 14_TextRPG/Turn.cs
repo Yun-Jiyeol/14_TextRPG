@@ -11,7 +11,7 @@ namespace _14_TextRPG
     {
         Random random = new Random();
 
-        public void PlayerTurn(Player P, List<Monster> M) //플레이어의 턴
+        public void PlayerTurn(Player P, List<Monster> M, QuestManager quest) //플레이어의 턴
         {
             ShowNow(P,M);
 
@@ -118,18 +118,18 @@ namespace _14_TextRPG
                             DesignText.IsMove(10);
                             break;
                         case 1:
-                            PlayerTurn(P,M);
+                            PlayerTurn(P,M,quest);
                             break;
                     }
                     break; //Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
 
                 case 1:
-                    ChooseAttack(P, M);
+                    ChooseAttack(P, M,quest);
                     break;
 
                 case 2: //상태 확인
                     CheckState(P, M);
-                    PlayerTurn(P,M);
+                    PlayerTurn(P,M, quest);
                     break;
             }
         }
@@ -207,7 +207,7 @@ namespace _14_TextRPG
         }
 
 
-        public void ChooseAttack(Player P, List<Monster> M) //플레이어의 턴
+        public void ChooseAttack(Player P, List<Monster> M, QuestManager quest) //플레이어의 턴
         {
             ShowNow(P, M); //기본 틀 생성
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
@@ -236,7 +236,7 @@ namespace _14_TextRPG
             switch (input)
             {
                 case 0:
-                    PlayerTurn(P, M);
+                    PlayerTurn(P, M, quest);
                     break;
                 default:
                     ShowNow(P, M); //기본 틀 생성
@@ -263,7 +263,7 @@ namespace _14_TextRPG
                         DesignText.LeftDT("  다른 몬스터를 선택하세요.", 16, ConsoleColor.Gray);
                         Console.SetCursorPosition(0,22);
                         DesignText.IsMove(10);
-                        ChooseAttack(P,M); // 다시 선택창으로
+                        ChooseAttack(P,M, quest); // 다시 선택창으로
                     }
                     else //공격 진행
                     {
@@ -322,6 +322,8 @@ namespace _14_TextRPG
                                 DesignText.LeftDT($"  {M[input - 1].Ex}의 경험치를 얻었습니다.", 17, ConsoleColor.Gray);
                             }
 
+                            quest.KillMonster();
+
                             bool isAllDead = true;
                             foreach (Monster m in M) //모든 몬스터가 사망 시
                             {
@@ -335,7 +337,7 @@ namespace _14_TextRPG
                                 DesignText.LeftDT("  몬스터들의 공격이 시작합니다.", 18, ConsoleColor.Gray);
                                 Console.SetCursorPosition(0, 22);
                                 DesignText.IsMove(10);
-                                MonsterTurn(P, M); //몬스터의 턴으로
+                                MonsterTurn(P, M, quest); //몬스터의 턴으로
                             }
                         }
                         else //죽지 않을 시
@@ -343,14 +345,14 @@ namespace _14_TextRPG
                             DesignText.LeftDT("  몬스터들의 공격이 시작합니다.", 18, ConsoleColor.Gray);
                             Console.SetCursorPosition(0, 22);
                             DesignText.IsMove(10);
-                            MonsterTurn(P, M); //몬스터의 턴으로
+                            MonsterTurn(P, M, quest); //몬스터의 턴으로
                         }
                     }
                 break;
             }
         }
 
-        public void MonsterTurn(Player P, List<Monster> M) //몬스터의 턴
+        public void MonsterTurn(Player P, List<Monster> M, QuestManager quest) //몬스터의 턴
         {
             int num = 0;
 
@@ -405,7 +407,7 @@ namespace _14_TextRPG
             Console.SetCursorPosition(0, 22);
             Console.WriteLine("플레이어의 차례입니다!");
             DesignText.IsMove(10);
-            PlayerTurn(P,M); //다시 플레이어 턴으로
+            PlayerTurn(P,M, quest); //다시 플레이어 턴으로
         }
         public void ShowNow(Player P, List<Monster> M)  //화면 위쪽을 만들어줄 함수
         {

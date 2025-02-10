@@ -28,8 +28,8 @@ namespace _14_TextRPG
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("여기는 던전 입구입니다.", 17, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.MiddleDT("어느 던전에 입장 할 것인지", 12, ConsoleColor.Gray);
-                DesignText.MiddleDT("선택 하세요.", 29, ConsoleColor.Gray);
+                DesignText.MiddleDT("어느 던전에 입장 할 것인지", 14, ConsoleColor.Gray);
+                DesignText.MiddleDT("선택 하세요.", 28, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
@@ -215,7 +215,7 @@ namespace _14_TextRPG
                             monsters = battle.SpawnMons(0, 5); //랜덤 몬스터 소환
                         }
 
-                        turn.PlayerTurn(P, monsters); //전투 시작
+                        turn.PlayerTurn(P, monsters, quest); //전투 시작
                         isalldead = true;
                         foreach (Monster monster in monsters)
                         {

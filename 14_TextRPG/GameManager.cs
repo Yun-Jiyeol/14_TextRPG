@@ -13,7 +13,6 @@ namespace _14_TextRPG
         Inven inven = new Inven();
         Shop shop = new Shop();
 
-
         public void Start()
         {
             QuestManager quest = new QuestManager(P);
