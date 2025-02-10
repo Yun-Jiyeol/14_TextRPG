@@ -17,15 +17,17 @@ namespace _14_TextRPG
         // 수락한 퀘스트 리스트
         List<Quest> acceptQuest = new List<Quest>();
 
+        // 퀘스트 보상을 주기 위함
         ItemList itemList = new ItemList();
         Item ratherArmor;
+        Inven itemIvn;
 
         
 
         Player player;
 
         // 퀘스트 생성
-        public QuestManager(Player play)
+        public QuestManager(Player play, Inven ivn)
         {           
             foreach (Item IL in itemList.arrItem)
             {
@@ -34,6 +36,7 @@ namespace _14_TextRPG
                     ratherArmor = IL;
                 }
             }
+            itemIvn = ivn;
 
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나? \n " +
                 "마을 주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! \n" +
@@ -165,8 +168,6 @@ namespace _14_TextRPG
         {
             while (true)
             {
-
-
                 Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine($"{quest.questNumber}. {quest.questName}");
@@ -180,9 +181,10 @@ namespace _14_TextRPG
                     Console.WriteLine($"몬스터 {quest.questKills} 처치하기 ({quest.currentKills} / {quest.questKills})");
                     Console.WriteLine();
                 }
-                if (quest.rewardItem == null)
+                if (quest.isItemReward)
                 {
-                    Console.WriteLine($"{quest.rewardItem}");
+                    Console.WriteLine($"{quest.rewardItem.Name}");
+                    Console.WriteLine();
                 }
 
                 if (quest.isAccept && quest.isComplete)
@@ -204,7 +206,10 @@ namespace _14_TextRPG
                 {
                     if (quest.isAccept && quest.isComplete)
                     {
-                        CompleteQuest(player, quest);
+                        if (quest.isItemReward)
+                            CompleteQuest(player, quest, itemIvn);
+                        else
+                            CompleteQuest(player, quest);
                         return;
                     }
                     else if (!quest.isAccept)
@@ -271,6 +276,15 @@ namespace _14_TextRPG
             }
         }
 
+        public void CompleteQuest(Player player, Quest quest, Inven inv)
+        {
+            if (quest.isAccept && quest.isComplete)
+            {
+                quest.Complete(player, inv);
+                acceptQuest.Remove(quest);
+            }
+        }
+
         //몬스터를 죽일 떄 호출시켜줄 메서드
         public void KillMonster()
         {
@@ -290,19 +304,7 @@ namespace _14_TextRPG
                 }
             }
         }
-        
-
-        //특정 아이템을 장착 했을 시
-        public void EquipItem(bool isEquip, List<Item> itemList)
-        {
-            if (isEquip)
-            {
-                foreach (Quest quest in acceptQuest)
-                {
-                    
-                }
-            }
-        }
+       
 
     }
 }

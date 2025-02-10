@@ -15,7 +15,7 @@ namespace _14_TextRPG
 
         public void Start()
         {
-            QuestManager quest = new QuestManager(P);
+            QuestManager quest = new QuestManager(P, inven);
             // 게임 시작 시 플레이어 명 입력
             //while (true)
             //{
