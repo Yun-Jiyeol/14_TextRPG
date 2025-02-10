@@ -83,13 +83,13 @@ namespace _14_TextRPG
                 switch (Itemtype)
                 {
                     case ItemType.Weapon:
-                        _player.ItemAttack += Value;
+                        _player.ItemAttack -= Value;
                         break;
                     case ItemType.Shield:
-                        _player.ItemDefence += Value;
+                        _player.ItemDefence -= Value;
                         break;
                     case ItemType.Armor:
-                        _player.ItemHealth += Value;
+                        _player.ItemHealth -= Value;
                         break;
                 }
             }
@@ -100,13 +100,13 @@ namespace _14_TextRPG
                 switch (Itemtype)
                 {
                     case ItemType.Weapon:
-                        _player.ItemAttack -= Value;
+                        _player.ItemAttack += Value;
                         break;
                     case ItemType.Shield:
-                        _player.ItemDefence -= Value;
+                        _player.ItemDefence += Value;
                         break;
                     case ItemType.Armor:
-                        _player.ItemHealth -= Value;
+                        _player.ItemHealth += Value;
                         break;
                 }
             }
