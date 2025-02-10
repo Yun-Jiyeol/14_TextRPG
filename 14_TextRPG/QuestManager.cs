@@ -18,12 +18,23 @@ namespace _14_TextRPG
         List<Quest> acceptQuest = new List<Quest>();
 
         ItemList itemList = new ItemList();
+        Item ratherArmor;
+
+        
 
         Player player;
 
         // 퀘스트 생성
         public QuestManager(Player play)
         {           
+            foreach (Item IL in itemList.arrItem)
+            {
+                if (IL.Name == "해진 가죽갑옷")
+                {
+                    ratherArmor = IL;
+                }
+            }
+
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나? \n " +
                 "마을 주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! \n" +
                 "모험가인 자네가 좀 처리해주게나.", 5, 500, 3));
@@ -32,11 +43,9 @@ namespace _14_TextRPG
                 "모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
             questList.Add(new Quest("장비를 장착해보자!", "'이봐! 어이 거기 당신! 당신 말이야 \n" +
                 "이곳을 돌아다니기에 너무 장비가 부실하지않나?\n" +
-                "아이템을 한번 장착해 보라구'", false, 500, 1));
+                "장비를 장착하면 내가 갑옷을 하나 주겠네!'", false, 500, 1, ratherArmor));
 
             player = play;
-            questList[0].currentKills = 5;
-            questList[0].isComplete = true;
         }
 
         // 퀘스트의 종류들을 다 볼수 있는 퀘스트 창
@@ -170,6 +179,10 @@ namespace _14_TextRPG
                 {
                     Console.WriteLine($"몬스터 {quest.questKills} 처치하기 ({quest.currentKills} / {quest.questKills})");
                     Console.WriteLine();
+                }
+                if (quest.rewardItem == null)
+                {
+                    Console.WriteLine($"{quest.rewardItem}");
                 }
 
                 if (quest.isAccept && quest.isComplete)

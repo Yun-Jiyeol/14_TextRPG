@@ -67,14 +67,14 @@ namespace _14_TextRPG
         }
 
         //장비 착용 퀘스트
-        public Quest(string questname, string questinfo, bool isequip, int rewardgold, int rewardexp)
+        public Quest(string questname, string questinfo, bool isequip, int rewardgold, int rewardexp, Item rewarditem)
         {
             questName = questname;
             questInfo = questinfo;
             isEquip = isequip;
             rewardGold = rewardgold;
             rewardExp = rewardexp;
-            questItem = null;
+            rewardItem = rewarditem;
         }
 
 
