@@ -366,6 +366,17 @@ namespace _14_TextRPG
                 {
                     DesignText.LeftDT($"  {M[i].Name}이 {M[i].Attack - (P.Defence / 2)}의 피해를 줌", 14+num, ConsoleColor.Gray);
                     P.TakeDamage(M[i].Attack);
+                    if (P.isDead)
+                    {
+                        DesignText.LeftDT($" - {P.Name}", 7, ConsoleColor.DarkGray);
+                        DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}     ", 8, ConsoleColor.DarkRed);
+                        Console.SetCursorPosition(0,22);
+                        Console.WriteLine($"{P.Name}이 사망하였습니다.");
+                        Console.WriteLine("게임을 종료합니다.");
+                        Console.WriteLine("아무 키나 입력하세요....");
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                    }
                     DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}     ", 8, ConsoleColor.Gray);
                     Thread.Sleep(1500);
                     num++;
