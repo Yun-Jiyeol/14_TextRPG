@@ -12,11 +12,11 @@ namespace _14_TextRPG
         Player P = new Player();
         Inven inven = new Inven();
         Shop shop = new Shop();
-        QuestManager quest = new QuestManager();
 
 
         public void Start()
         {
+            QuestManager quest = new QuestManager(P);
             // 게임 시작 시 플레이어 명 입력
             //while (true)
             //{

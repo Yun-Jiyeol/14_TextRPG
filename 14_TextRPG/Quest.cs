@@ -98,6 +98,10 @@ namespace _14_TextRPG
                 Console.WriteLine($"보상");
                 Console.WriteLine($"{rewardGold}");
                 Console.WriteLine($"{rewardExp}");
+
+                //보상 지급
+                player.Gold += rewardGold;
+                player.Ex += rewardExp;
             }
         }
 
