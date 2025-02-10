@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,9 @@ namespace _14_TextRPG
 {
     public class Player : Character
     {
+        public PowerShot powerShot = new PowerShot();
+        public Bigswing bigswing = new Bigswing();
+
         public int[] repeat = {1,1,1 };
 
         public Player()

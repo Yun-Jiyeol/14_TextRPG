@@ -21,10 +21,9 @@ namespace _14_TextRPG
             DesignText.LeftDT("  할 행동을 선택하세요.", 13, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-            DesignText.LeftDT("  1. 공격한다.", 16, ConsoleColor.Gray);
-            DesignText.LeftDT("  2. 상태확인.", 17, ConsoleColor.Gray);
-            //Console.WriteLine("3. 스킬을 사용한다.");
+            DesignText.LeftDT("  1. 공격한다.", 15, ConsoleColor.Gray);
+            DesignText.LeftDT("  2. 상태확인.", 16, ConsoleColor.Gray);
+            DesignText.LeftDT("  3. 스킬창", 17, ConsoleColor.Gray);
             //Console.WriteLine("4. 아이템을 사용한다."); - 상태에서 가도 될듯?
             DesignText.LeftDT("  0. 도망간다.", 18, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
@@ -38,7 +37,7 @@ namespace _14_TextRPG
 
             Console.WriteLine();
 
-            int input = Input.input(0,2);
+            int input = Input.input(0,3);
             switch (input)
             {
                 case 0:
@@ -131,6 +130,10 @@ namespace _14_TextRPG
                     CheckState(P, M);
                     PlayerTurn(P,M, quest);
                     break;
+
+                case 3: //상태 확인
+                    ChooseSkill(P, M, quest);
+                    break;
             }
         }
 
@@ -205,8 +208,113 @@ namespace _14_TextRPG
                 }
             }
         }
+        public void ChooseSkill(Player P, List<Monster> M, QuestManager quest)
+        {
+            ShowNow(P, M); //기본 틀 생성
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.LeftDT($"  1. {P.bigswing.Name} ({P.bigswing.UseMana})", 12, ConsoleColor.Gray);
+            if(P.Mana >= P.bigswing.UseMana) //마나가 충분한가?
+            {
+                DesignText.LeftDT($"    - {P.bigswing.Explain}", 13, ConsoleColor.Gray);
+            }
+            else
+            {
+                DesignText.LeftDT("    - 마나가 부족합니다.", 13, ConsoleColor.DarkGray);
+            }
+            DesignText.LeftDT($"  2. {P.powerShot.Name} ({P.powerShot.UseMana})", 14, ConsoleColor.Gray);
+            if (P.Mana >= P.powerShot.UseMana)
+            {
+                DesignText.LeftDT($"    - {P.powerShot.Explain}", 15, ConsoleColor.Gray);
+            }
+            else
+            {
+                DesignText.LeftDT("    - 마나가 부족합니다.", 15, ConsoleColor.DarkGray);
+            }
+            DesignText.LeftDT("  0. 돌아간다.", 16, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┗━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┛");
+            Console.ResetColor();
 
+            Console.WriteLine();
 
+            int input = Input.input(0, 2);
+            switch (input)
+            {
+                case 0:
+                    PlayerTurn(P,M,quest);
+                    break;
+                case 1:
+                    DesignText.IsMove(5);
+                    ShowNow(P, M); //기본 틀 생성
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("┗━");
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("━┛");
+                    Console.ResetColor();
+                    DesignText.LeftDT($"  {P.Name}은(는) 크게 배었습니다", 12, ConsoleColor.Gray);
+                    bool isAllDead = true;
+                    for (int i = 0; i < M.Count; i++)
+                    {
+                        if (M[i].isDead) //몬스터가 사망 상태라면
+                        {
+                            DesignText.LeftDT($"  {M[i].Name}은(는) 이미 죽어 있습니다.", 13 + i, ConsoleColor.Gray);
+                        }
+                        else
+                        {
+                            int attackDamage = random.Next((P.Attack + P.ItemAttack) * 90, (P.Attack + P.ItemAttack) * 110);
+                            attackDamage = (attackDamage /100) * P.bigswing.Damage; //스킬 계수
+                            if (attackDamage % 100 != 0)
+                            {
+                                attackDamage = (attackDamage / 100) + 1;
+                            }
+                            else
+                            {
+                                attackDamage = (attackDamage / 100);
+                            }
+                            int Damage = M[i].TakeDamage(P, attackDamage);
+
+                            if (Damage == -1) //회피시
+                            {
+                                DesignText.LeftDT($"  {M[i].Name}은 회피했습니다.", 13 + i, ConsoleColor.Gray);
+                            }
+                            else
+                            {
+                                DesignText.LeftDT($"  {M[i].Name}에게 {Damage}만큼 공격", 13 + i, ConsoleColor.Gray);
+                            }
+                            if (M[input - 1].isDead) //몬스터가 죽을 시
+                            {
+                                P.GetEx(M[input - 1].Ex);
+                                quest.KillMonster();
+                            }
+                        }
+                        Thread.Sleep(500);
+                    }
+                    DesignText.LeftDT("  몬스터들의 공격이 시작합니다.", 18, ConsoleColor.Gray);
+                    Console.SetCursorPosition(0, 22);
+                    DesignText.IsMove(10);
+                    MonsterTurn(P, M, quest); //몬스터의 턴으로
+
+                    break;
+                case 2:
+                    break;
+            }
+        }
         public void ChooseAttack(Player P, List<Monster> M, QuestManager quest) //플레이어의 턴
         {
             ShowNow(P, M); //기본 틀 생성
