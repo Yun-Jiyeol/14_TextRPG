@@ -137,6 +137,7 @@ namespace _14_TextRPG
             int floor = 1;
             int maxfloor = 3;
             bool isdunguen = true;
+            int numobrest = 1;
 
             while (isdunguen)
             {
@@ -165,11 +166,18 @@ namespace _14_TextRPG
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
                 DesignText.LeftDT("  2. 상태확인", 13, ConsoleColor.Gray);
-                //DesignText.LeftDT("  3. 스킬확인", 14, ConsoleColor.Gray);
+                if(floor == 1 || numobrest == 0)
+                {
+                    DesignText.LeftDT($"  3. 휴식 - {numobrest}회 남음", 14, ConsoleColor.DarkGray);
+                }
+                else
+                {
+                    DesignText.LeftDT($"  3. 휴식 - {numobrest}회 남음", 14, ConsoleColor.Gray);
+                }
                 //DesignText.LeftDT("  4. 인벤토리", 15, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray); //사용시 줄 삭제
-                DesignText.LeftDT("  3. 퀘스트 확인", 16, ConsoleColor.Gray);
+                DesignText.LeftDT("  5. 퀘스트 확인", 16, ConsoleColor.Gray);
                 DesignText.LeftDT("  0. 마을로 귀환", 17, ConsoleColor.Red);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
@@ -222,6 +230,7 @@ namespace _14_TextRPG
                                 Console.SetCursorPosition(0,22);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
+                                Console.ResetColor();
                                 P.repeat[0]++;
                                 isdunguen = false;
                                 DesignText.IsMove(10);
@@ -231,6 +240,7 @@ namespace _14_TextRPG
                                 Console.SetCursorPosition(0, 22);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 다음 전투를 준비합니다.");
+                                Console.ResetColor();
                                 floor++;
                                 DesignText.IsMove(10);
                             }
@@ -282,6 +292,33 @@ namespace _14_TextRPG
                         DesignText.IsMove(5);
                         break;
                     case 3:
+                        if (floor == 1)
+                        {
+                            Console.SetCursorPosition(0, 22);
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("전투 전에 휴식할 수 없습니다.");
+                            Console.ResetColor();
+                            DesignText.IsMove(5);
+                        }else if(numobrest == 0)
+                        {
+                            Console.SetCursorPosition(0, 22);
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("이미 모든 회복 기회를 사용했습니다.");
+                            Console.ResetColor();
+                            DesignText.IsMove(5);
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(0, 22);
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("휴식을 통해 체력의 절반을 회복했습니다.");
+                            P.GetHeal((int)P.MaxHealth / 2);
+                            numobrest--;
+                            Console.ResetColor();
+                            DesignText.IsMove(10);
+                        }
+                        break;
+                    case 5:
                         //Quest
                         break;
                 }
