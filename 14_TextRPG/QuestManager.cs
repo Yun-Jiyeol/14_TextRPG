@@ -19,8 +19,10 @@ namespace _14_TextRPG
 
         ItemList itemList = new ItemList();
 
+        Player player;
+
         // 퀘스트 생성
-        public QuestManager()
+        public QuestManager(Player play)
         {           
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나? \n " +
                 "마을 주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! \n" +
@@ -31,6 +33,8 @@ namespace _14_TextRPG
             questList.Add(new Quest("장비를 장착해보자!", "'이봐! 어이 거기 당신! 당신 말이야 \n" +
                 "이곳을 돌아다니기에 너무 장비가 부실하지않나?\n" +
                 "아이템을 한번 장착해 보라구'", false, 500, 1));
+
+            player = play;
         }
 
         // 퀘스트의 종류들을 다 볼수 있는 퀘스트 창
@@ -152,33 +156,39 @@ namespace _14_TextRPG
                     Console.WriteLine();
                 }
 
-                if (!quest.isAccept)
+                if (!quest.isAccept && quest.isComplete)
+                {
+                    Console.WriteLine("1. 퀘스트 완료");
+                }
+                else if (!quest.isAccept)
                     Console.WriteLine("1. 퀘스트 수락");
-
-                if (quest.isAccept)
-                    Console.WriteLine("2. 퀘스트 거절");
+                else if (quest.isAccept)
+                    Console.WriteLine("1. 퀘스트 거절");
 
                 Console.WriteLine("0. 닫기");
                 Console.WriteLine();
 
-                int input = Input.input(0, 2);
+                int input = Input.input(0, 1);
 
                 if (input == 0) return;
                 else if (input == 1)
                 {
-                    if (!quest.isAccept)
+                    if (!quest.isAccept && quest.isComplete)
+                    {
+                        Console.WriteLine("1. 퀘스트 완료");
+                    }
+                    else if (!quest.isAccept)
                     {
                         AcceptQuest(quest);
                         return;
                     }
+                    else if(quest.isAccept)
+                    {
+                        RejectQuest(quest);
+                        return;
+                    }
                     else
                         Console.WriteLine("잘못된 입력입니다.");
-                }
-                else if (input == 2)
-                {
-                    if (quest.isAccept)
-                        RejectQuest(quest);
-                    return;
                 }
                 else
                     Console.WriteLine("잘못된 입력입니다.");
