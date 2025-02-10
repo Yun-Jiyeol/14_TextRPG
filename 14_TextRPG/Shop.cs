@@ -9,7 +9,7 @@ namespace _14_TextRPG
     public class Shop
     {
         public Item[] arrShopItem; // 상점에서 판매하는 아이템 배열
-        ItemList itemList;
+        ItemList itemList = new ItemList();
 
         /// <summary>
         /// 전체 아이템 중 상점에서 판매하는 아이템을 배열로 만든다
@@ -18,15 +18,15 @@ namespace _14_TextRPG
         {
             List<Item> listShopItem = new List<Item>();
 
-            //foreach(Item i in itemList.arrItem) //로컬 1이 null이라는데요?
-            //{
-            //    if(i.SaleItem)
-            //    {
-            //        listShopItem.Add(i);
-            //    }
-            //}
+            foreach (Item i in itemList.arrItem) //로컬 1이 null이라는데요?
+            {
+                if (i.SaleItem)
+                {
+                    listShopItem.Add(i);
+                }
+            }
 
-            //arrShopItem = listShopItem.ToArray();
+            arrShopItem = listShopItem.ToArray();
         }
 
         public void ShowShop(Player _player, Inven _inven)

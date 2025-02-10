@@ -18,7 +18,6 @@ namespace _14_TextRPG
         {
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
-            Console.WriteLine("\n[아이템 목록]\n");
 
             itemList.ItemCatalog(listHoldItem.ToArray(), true, false);
 
@@ -38,7 +37,6 @@ namespace _14_TextRPG
         {
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
-            Console.WriteLine("\n[아이템 목록]\n");
 
             itemList.ItemCatalog(listHoldItem.ToArray(), true, true);
 
