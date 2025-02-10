@@ -109,7 +109,7 @@ namespace _14_TextRPG
                     }
                 }
                 else
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("잘못 된 입력입니다.");
             }
 
         }
@@ -218,10 +218,10 @@ namespace _14_TextRPG
                         return;
                     }
                     else
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("잘못 된 입력입니다.");
                 }
                 else
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("잘못 된 입력입니다.");
 
 
             }

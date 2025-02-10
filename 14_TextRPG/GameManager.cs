@@ -13,7 +13,6 @@ namespace _14_TextRPG
         Inven inven = new Inven();
         Shop shop = new Shop();
 
-
         public void Start()
         {
             QuestManager quest = new QuestManager(P);
@@ -61,10 +60,10 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┫");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.LeftDT("  1. 상태보기", 12, ConsoleColor.Gray);
-                DesignText.LeftDT("  2. 인벤토리", 13, ConsoleColor.Gray);
+                DesignText.LeftDT("  1. 상태 보기", 12, ConsoleColor.Gray);
+                DesignText.LeftDT("  2. 인벤 토리", 13, ConsoleColor.Gray);
                 DesignText.LeftDT("  3. 상점", 14, ConsoleColor.Gray);
-                DesignText.LeftDT("  4. 전투시작", 15, ConsoleColor.Gray);
+                DesignText.LeftDT("  4. 전투 시작", 15, ConsoleColor.Gray);
                 DesignText.LeftDT("  5. 퀘스트", 16, ConsoleColor.Gray);
                 DesignText.LeftDT("  0. 게임 종료", 17, ConsoleColor.Red);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
