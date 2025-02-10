@@ -83,13 +83,13 @@ namespace _14_TextRPG
                 switch (Itemtype)
                 {
                     case ItemType.Weapon:
-                        _player.ItemAttack += Value;
+                        _player.ItemAttack -= Value;
                         break;
                     case ItemType.Shield:
-                        _player.ItemDefence += Value;
+                        _player.ItemDefence -= Value;
                         break;
                     case ItemType.Armor:
-                        _player.ItemHealth += Value;
+                        _player.ItemHealth -= Value;
                         break;
                 }
             }
@@ -100,13 +100,13 @@ namespace _14_TextRPG
                 switch (Itemtype)
                 {
                     case ItemType.Weapon:
-                        _player.ItemAttack -= Value;
+                        _player.ItemAttack += Value;
                         break;
                     case ItemType.Shield:
-                        _player.ItemDefence -= Value;
+                        _player.ItemDefence += Value;
                         break;
                     case ItemType.Armor:
-                        _player.ItemHealth -= Value;
+                        _player.ItemHealth += Value;
                         break;
                 }
             }
@@ -140,7 +140,7 @@ namespace _14_TextRPG
             string itemType = "";
             int itemCount = 1;
 
-            Console.WriteLine("[아이템 목록]");
+            Console.WriteLine("\n[아이템 목록]");
 
             foreach (Item i in _arr)
             {

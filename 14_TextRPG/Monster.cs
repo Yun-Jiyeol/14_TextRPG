@@ -13,14 +13,19 @@ namespace _14_TextRPG
         {
 
         }
-        public Monster(string name, int health, int maxHealth, int attack)
+        public Monster(string name, string job,  int level, int ex , int health, int maxHealth, int attack, int defence)
         {
             Name = name;
+            Class = job;
+            Level = level;
+            Ex = ex; //주는 경험지 양
             Health = health;
             MaxHealth = maxHealth;
             Attack = attack;
+            Defence = defence;
+            
+            MaxEx = 0;
             Gold = -1;
-
         }
 
         public string MonsDisplay()

@@ -102,7 +102,7 @@ namespace _14_TextRPG
                     case 3:
                         Console.WriteLine($"{P.Name}은(는) 상점은 찾아 들어가봅니다");
                         DesignText.IsMove(5);
-                        //shop.ShowShop(P,inven); //애러 발생 추후 확인 부탁
+                        shop.ShowShop(P,inven); //애러 발생 추후 확인 부탁
                         break;
                     case 4:
                         Console.WriteLine($"{P.Name}은(는) 던전을 찾아 들어가봅니다");
