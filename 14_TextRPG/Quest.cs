@@ -121,10 +121,12 @@ namespace _14_TextRPG
         {
             if (isComplete)
             {
+                Console.WriteLine();
                 Console.WriteLine($"{questName} 퀘스트 완료! ");
                 Console.WriteLine($"보상");
                 Console.WriteLine($"{rewardGold}");
                 Console.WriteLine($"{rewardExp}");
+                Console.WriteLine($"{rewardItem.Name}");
                 Thread.Sleep(500);
 
                 //보상 지급

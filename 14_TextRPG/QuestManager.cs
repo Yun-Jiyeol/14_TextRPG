@@ -151,7 +151,15 @@ namespace _14_TextRPG
                 {
                     for (int i = 0; i < acceptQuest.Count; i++)
                     {
+                        // quest가 장착 관련 퀘스트라면 PlayerEquip을 실행
+                        if (acceptQuest[i].isQuestEquip)
+                        {
+                            PlayerEquip(player);
+                        }
+                        if (acceptQuest[i].isComplete)
+                            Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"{i + 1}. {acceptQuest[i].questName}");
+                        Console.ResetColor();
                     }
                 }
                 Console.WriteLine("\n0. 뒤로가기");
