@@ -18,7 +18,6 @@ namespace _14_TextRPG
         {
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
-            Console.WriteLine("\n[아이템 목록]\n");
 
             itemList.ItemCatalog(listHoldItem.ToArray(), true, false);
 
@@ -38,7 +37,6 @@ namespace _14_TextRPG
         {
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
-            Console.WriteLine("\n[아이템 목록]\n");
 
             itemList.ItemCatalog(listHoldItem.ToArray(), true, true);
 
@@ -52,7 +50,8 @@ namespace _14_TextRPG
             }
             else
             {
-                listHoldItem[input - 1].Use(_player); //마을로 돌아갈듯?
+                listHoldItem[input - 1].Use(_player); //마을로 돌아갈듯? : 해결
+                EquipManage(_player);
             }
         }
 
