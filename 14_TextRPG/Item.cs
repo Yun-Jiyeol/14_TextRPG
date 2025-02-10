@@ -64,7 +64,7 @@ namespace _14_TextRPG
                 }
                 else
                 {
-                    Console.WriteLine("Gold 가 부족합니다.");
+                    Console.WriteLine("Gold가 부족합니다.");
                     Console.ReadKey();
                 }
             }
@@ -187,7 +187,7 @@ namespace _14_TextRPG
                 {
                     if (i.PlayerHave)
                     {
-                        equipOrCost = "구매완료";
+                        equipOrCost = "구매 완료";
                     }
                     else
                     {

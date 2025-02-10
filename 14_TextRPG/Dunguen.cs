@@ -27,8 +27,8 @@ namespace _14_TextRPG
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("여기는 던전 입구입니다.", 17, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.MiddleDT("어느 던전에 입장을 할 것인지", 12, ConsoleColor.Gray);
-                DesignText.MiddleDT("선택하세요.", 29, ConsoleColor.Gray);
+                DesignText.MiddleDT("어느 던전에 입장 할 것인지", 12, ConsoleColor.Gray);
+                DesignText.MiddleDT("선택 하세요.", 29, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
