@@ -58,8 +58,18 @@ namespace _14_TextRPG
         }
         public void TakeDamage(int i) //피해를 받는다면
         {
-            Health -= i;
-            if (Health < 0)
+            if(i > (Defence / 2))
+            {
+                i = i - (Defence / 2);
+            }
+            else
+            {
+                i = 0;
+            }
+
+            Health -= i; //i만큼 데미지
+
+            if (Health < 0) //사망 시
             {
                 Health = 0;
                 isDead = true;

@@ -289,7 +289,7 @@ namespace _14_TextRPG
 
                         DesignText.LeftDT($"  {M[input - 1].Name}을(를) 공격합니다.", 15, ConsoleColor.Gray);
 
-                        DesignText.LeftDT($"  {attackDamage}만큼 공격을 당했습니다.", 16, ConsoleColor.Gray);
+                        DesignText.LeftDT($"  {attackDamage - (M[input - 1].Defence / 2)}만큼 공격을 당했습니다.", 16, ConsoleColor.Gray);
 
                         Thread.Sleep(1500);
 
@@ -355,7 +355,7 @@ namespace _14_TextRPG
             {
                 if (!M[i].isDead)
                 {
-                    DesignText.LeftDT($"  {M[i].Name}이 {M[i].Attack}의 피해를 줌", 14+num, ConsoleColor.Gray);
+                    DesignText.LeftDT($"  {M[i].Name}이 {M[i].Attack - (P.Defence / 2)}의 피해를 줌", 14+num, ConsoleColor.Gray);
                     P.TakeDamage(M[i].Attack);
                     DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Gray);
                     Thread.Sleep(1500);
@@ -372,8 +372,10 @@ namespace _14_TextRPG
         {
             Console.SetCursorPosition(0,22);
             Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
-            Console.WriteLine("아무키나 입력하세요.");
+            Console.Write("아무키나 입력하세요.");
             Console.ReadKey();//Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
+            Console.WriteLine();
+            DesignText.IsMove(5);
         }
         public void ShowNow(Player P, List<Monster> M)  //화면 위쪽을 만들어줄 함수
         {
