@@ -167,7 +167,7 @@ namespace _14_TextRPG
                     case 5:
                         Console.WriteLine($"{P.Name}은(는) 받은 의뢰서 뭉치를 찾아봅니다");
                         DesignText.IsMove(5);
-                        //Quest
+                        quest.OpenAcceptQuest();
                         break;
                 }
             }

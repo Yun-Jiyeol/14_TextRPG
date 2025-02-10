@@ -19,13 +19,16 @@ namespace _14_TextRPG
 
         // 퀘스트 생성
         public QuestManager()
-        {
+        {           
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나? \n " +
                 "마을 주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! \n" +
                 "모험가인 자네가 좀 처리해주게나.", 5, 500, 3));
             questList.Add(new Quest("마을을 위협하는 많은 몬스터 처치", "이봐! 마을 근처에 몬스터들이 엄청 많아졌다고 생각하지 않나? \n " +
                 "마을 주민들의 안전을 위해서라도 저것들 수를 많이 줄여야 한다고! \n" +
                 "모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("장비를 장착해보자!", "'이봐! 어이 거기 당신! 당신 말이야 \n" +
+                "이곳을 돌아다니기에 너무 장비가 부실하지않나?\n" +
+                "아이템을 한번 장착해 보라구'", false, 500, 1));
         }
 
         // 퀘스트의 종류들을 다 볼수 있는 퀘스트 창
@@ -71,7 +74,7 @@ namespace _14_TextRPG
                     // 입력받은 값이 0보다 크고 PAGE_SIZE(7)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
                     else if (0 < numinput && numinput <= PAGE_SIZE && start + numinput - 1 <= questList.Count)
                     {
-                        QuestInfo(questList[start + numinput - 2], false);
+                        QuestInfo(questList[start + numinput - 2]);
                     }
                 }
                 else
@@ -94,8 +97,6 @@ namespace _14_TextRPG
         {
             while (true)
             {
-
-
                 Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine();
@@ -119,9 +120,9 @@ namespace _14_TextRPG
                 if (input == 0)
                     return;
                 else if (input == 1)
-                    QuestInfo(acceptQuest[0], true);
+                    QuestInfo(acceptQuest[0]);
                 else if (input == 2)
-                    QuestInfo(acceptQuest[1], true);
+                    QuestInfo(acceptQuest[1]);
 
             }
 
@@ -129,7 +130,7 @@ namespace _14_TextRPG
         }
 
         // 퀘스트의 정보를 보여주는 메서드(아직 미완)
-        public void QuestInfo(Quest quest, bool isAcceptMenu)
+        public void QuestInfo(Quest quest)
         {
             while (true)
             {
@@ -143,8 +144,13 @@ namespace _14_TextRPG
                 Console.WriteLine();
                 Console.WriteLine($"보상 : {quest.rewardGold} G, {quest.rewardExp} 경험치");
                 Console.WriteLine();
+                if (quest.questKills > 0)
+                {
+                    Console.WriteLine($"몬스터 {quest.questKills} 처치하기");
+                    Console.WriteLine();
+                }
 
-                if (!isAcceptMenu || !quest.isAccept)
+                if (!quest.isAccept)
                     Console.WriteLine("1. 퀘스트 수락");
 
                 if (quest.isAccept)
@@ -158,8 +164,11 @@ namespace _14_TextRPG
                 if (input == 0) return;
                 else if (input == 1)
                 {
-                    if (!isAcceptMenu)
+                    if (!quest.isAccept)
+                    {
                         AcceptQuest(quest);
+                        return;
+                    }
                     else
                         Console.WriteLine("잘못된 입력입니다.");
                 }
@@ -206,9 +215,34 @@ namespace _14_TextRPG
             {
                 acceptQuest.Remove(quest);
                 quest.Reject();
-
             }
 
         }
+
+        //몬스터를 죽일 떄 호출시켜줄 메서드
+        public void KillMonster()
+        {
+            if (acceptQuest.Count >= 0)
+            {
+                foreach (Quest quest in acceptQuest)
+                {
+                    if (quest.questKills > 0 && !quest.isComplete)
+                    {
+                        quest.currentKills++;
+
+                        if (quest.currentKills >= quest.questKills)
+                        {
+                            quest.isComplete = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void EquipItem(Player player)
+        {
+
+        }
+
     }
 }

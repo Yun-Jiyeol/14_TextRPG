@@ -26,40 +26,55 @@ namespace _14_TextRPG
         public string questName { get; set; }
         // 퀘스트 정보
         public string questInfo { get; set; }
-        // 몬스터 마리 수
-        public int questAmount { get; set; }
+
         // 퀘스트 카운팅
         // 퀘스트 보상
         public int rewardGold { get; set; }
         public Item rewardItem  { get; set; }
         public int rewardExp    { get; set; }
-        public int questAmountCount { get; set; }
+
+        // 몬스터를 잡아야 할 마리 수
+        public int questKills { get; set; }
+        // 현재 킬 수
+        public int currentKills {  get; set; }
+        //장비 착용 목표 아이템
+        public string questItem {  get; set; }
+        //장비 착용을 했는지
+        public bool isEquip {  get; set; }
+
+
         // 퀘스트를 받았는지 여부
         public bool isAccept { get; set; } = false;
         // 퀘스트 완료 했는지 여부
-        public bool isComplete { get; set; }
+        public bool isComplete { get; set; } = false;
+
         
 
 
-
-
-        public Quest(string questname, string questinfo, int amount, int rewardgold, int rewardexp, Item rewarditem)
-        {
-            questName = questname;
-            questInfo = questinfo;
-            rewardItem = rewarditem;
-            questAmount = amount;
-            rewardGold = rewardgold;
-        }
-
+        
+        // 몬스터 처치 퀘스트
         public Quest(string questname, string questinfo, int amount, int rewardgold, int rewardexp)
         {
             questName = questname;
             questInfo = questinfo;
-            questAmount = amount;
+            questKills = amount;
             rewardGold = rewardgold;
             rewardExp = rewardexp;
+            currentKills = 0;
+            questItem = null;
         }
+
+        //장비 착용 퀘스트
+        public Quest(string questname, string questinfo, bool isequip, int rewardgold, int rewardexp)
+        {
+            questName = questname;
+            questInfo = questinfo;
+            isEquip = isequip;
+            rewardGold = rewardgold;
+            rewardExp = rewardexp;
+            questItem = null;
+        }
+
 
         public void Accept()
         {
