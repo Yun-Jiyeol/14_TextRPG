@@ -98,6 +98,7 @@ namespace _14_TextRPG
                         break;
                     case ItemType.Armor:
                         _player.ItemHealth -= Value;
+                        _player.Health -= Value;
                         break;
                 }
             }
@@ -117,6 +118,7 @@ namespace _14_TextRPG
                         break;
                     case ItemType.Armor:
                         _player.ItemHealth += Value;
+                        _player.Health += Value;
                         break;
                 }
             }
