@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _14_TextRPG
 {
@@ -24,6 +25,9 @@ namespace _14_TextRPG
         public int Ex { get; set; } //플레이어 현제 경험치
         public int MaxEx { get; set; } //플레이어 렙업에 필요한 경험치
         public bool isEquip { get; set; } = false; //캐릭터 장비 장착 여부
+        public int Avoid { get; set; } //회피확률
+        public int Critical { get; set; } //치명타 확률
+        public float CriDamage { get; set; } //치명타 확률
         public void Status(int i) //전투 때 보여지게끔 (몬스터)
         {
             DesignText.LeftDT($" [{Name}의 정보]", i, ConsoleColor.Gray);
@@ -65,24 +69,37 @@ namespace _14_TextRPG
                 DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.Yellow);
             }
         }
-        public void TakeDamage(int i) //피해를 받는다면
+        public int TakeDamage(Character character, int i) //피해를 받는다면
         {
-            if(i > (Defence / 2))
-            {
-                i = i - (Defence / 2);
-            }
-            else
-            {
-                i = 0;
-            }
+            Random random = new Random();
 
-            Health -= i; //i만큼 데미지
-
-            if (Health <= 0) //사망 시
+            if(Avoid < random.Next(1, 101)) //회피를 못할 시
             {
-                Health = 0;
-                isDead = true;
+                float damage = i;
+                if (character.Critical >= random.Next(1, 101)) //치명타 시
+                {
+                    damage *= character.CriDamage;
+                }
+
+                if (damage > (Defence / 2)) //방어력보다 적을 시
+                {
+                    damage = damage - (Defence / 2);
+                }
+                else
+                {
+                    damage = 0;
+                }
+
+                Health -= (int)damage; //damage만큼 데미지
+
+                if (Health <= 0) //사망 시
+                {
+                    Health = 0;
+                    isDead = true;
+                }
+                return (int)damage;
             }
+            return -1;
         }
     }
 }
