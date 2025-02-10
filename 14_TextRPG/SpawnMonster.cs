@@ -1,56 +1,166 @@
-﻿using System;
+﻿using _14_TextRPG;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace _14_TextRPG
+public List<Monster> SpawnMons(int min, int max)
 {
-    //랜덤 몬스터 스폰
-    //1~4마리 랜덤 등장
+    List<Monster> mons = new List<Monster>();
 
-    //해야할 것
-    //몬스터 정보를 저장할수 있는 변수 필요(레벨 이름 체력 공격력)
+    Random random = new Random();
 
+    int index = random.Next(min, max); //최소 최대 받아서 for문으로 몬스터 종류 조정해도 될듯
 
-    /*public class SpawnMonster
-    {
-        enum MonsterType
-        {
-            Slime,      //0
-            Skeleton,   //1
-            Goblin,     //2
+    switch (index)
+    {   //이지
+        case 0: //순서대로      이름,직업,레밸,주는경험치,체력,최대체력,공격력,방어력
+            mons.Add(new Monster("(E) 레드 슬라임", "슬라임", 1, 3, 10, 10, 8, 1));
+            mons.Add(new Monster("(E) 옐로 슬라임", "슬라임", 1, 3, 12, 12, 6, 2));
+            mons.Add(new Monster("(E) 블루 슬라임", "슬라임", 1, 3, 12, 12, 6, 2));
+            mons.Add(new Monster("(E) 그린 슬라임", "슬라임", 1, 3, 10, 10, 8, 1));
+            break;
+        case 1:
+            mons.Add(new Monster("(E) 레드 버섯", "버섯", 2, 5, 20, 20, 10, 1));
+            mons.Add(new Monster("(E) 블루 버섯", "버섯", 2, 5, 22, 22, 10, 2));
+            break;
+        case 2:
+            mons.Add(new Monster("(E) 스네이크", "스네이크", 2, 4, 12, 12, 4, 3));
+            mons.Add(new Monster("(E) 좀비", "언데드", 1, 3, 11, 11, 7, 2));
+            mons.Add(new Monster("(E) 그린 버섯", "버섯", 2, 5, 20, 20, 10, 1));
+            break;
+        case 3:
+            mons.Add(new Monster("(E) 스톤 골렘", "골렘", 2, 8, 80, 80, 12, 8));
+            break;
+        case 4:
+            mons.Add(new Monster("(E) 스켈레톤", "언데드", 2, 5, 26, 26, 8, 4));
+            mons.Add(new Monster("(E) 스켈레톤", "언데드", 2, 5, 26, 26, 8, 4));
+            mons.Add(new Monster("(E) 좀비"    , "언데드", 2, 3, 20, 20, 8, 4));
+            break;
+        case 5:
+            mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 25, 25, 8, 5));
+            mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 25, 25, 8, 5));
+            mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 25, 25, 8, 5));
+            mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 25, 25, 8, 5));
+            break;
+        //노말
+        case 6:
+            mons.Add(new Monster("(N) 고블린", "고블린", 5, 8, 30, 30, 12, 5));
+            mons.Add(new Monster("(N) 둔감한 고블린", "고블린", 5, 8, 30, 30, 8, 9));
+            mons.Add(new Monster("(N) 고블린", "고블린", 5, 8, 30, 30, 12, 5));
+            mons.Add(new Monster("(N) 난폭한 고블린", "고블린", 5, 8, 30, 30, 12, 5));
+            break;
+        case 7:
+            mons.Add(new Monster("(N) 오크", "오크", 7, 10, 50, 50, 15, 10));
+            mons.Add(new Monster("(N) 고블린", "고블린", 5, 8, 30, 30, 12, 5));
+            mons.Add(new Monster("(N) 고블린", "고블린", 5, 8, 30, 30, 12, 5));
+            break;
+        case 8:
+            mons.Add(new Monster("(N) 엘리트 오크", "오크", 10, 15, 90, 90, 10, 15));
+            break;
+        case 9:
+            mons.Add(new Monster("(N) 늑대인간", "늑대 인간", 8, 9, 40, 40, 15, 9));
+            mons.Add(new Monster("(N) 늑대인간", "늑대 인간", 8, 9, 40, 40, 15, 9));
+            break;
+        case 10:
+            mons.Add(new Monster("(N) 스톤 골렘", "골렘", 7, 10, 100, 100, 10, 10));
+            break;
+        case 11:
+            mons.Add(new Monster("(N) 블루 슬라임", "슬라임", 1, 3, 12, 12, 6, 2));
+            mons.Add(new Monster("(N) 대왕 거미"  , "발록"  , 9, 8, 60, 60, 10, 1));
+            break;
+        //하드
+        case 12:
+            mons.Add(new Monster("(H) 네크로맨서", "강령술사", 1, 5, 100, 100, 10, 1));
+            break;
+        case 13:
+            mons.Add(new Monster("(H) 리치", "언데드", 1, 5, 100, 100, 10, 1));
+            break;
+        case 14:
+            mons.Add(new Monster("(H) ", "", 1, 5, 100, 100, 10, 1));
+            break;
+        case 15:
+            mons.Add(new Monster("(H) ", "", 1, 5, 100, 100, 10, 1));
+            break;
+        case 16:
+            mons.Add(new Monster("(H) ", "", 1, 5, 100, 100, 10, 1));
+            break;
+        case 17:
+            mons.Add(new Monster("(H) 타락 기사", "타락 기사", 1, 5, 100, 100, 10, 1));
+            break;
+        //보스
+        case 18:
+            mons.Add(new Monster("(B) 벡스 Z 먼데시르타", "보스", 1, 5, 100, 100, 10, 1));
+            break;
 
-        }
-        public void SpawnMons(Monster monster)
-        {
-            Random random = new Random();
-            int monsNum = random.Next(1, 4);//몬스터 마리수 지정
-            int[] monsters = new int[3];//몬스터 저장 배열
-            //int에서 다른 것으로 교체
-
-
-            for (int i = 0; i <= monsNum;  i++)//몬스터 수 만큼 실행
-            {
-                int randNum = random.Next(0, 3);
-                switch (randNum)
-                {
-                    //monsters[i] 
-
-                    *//*case (int)MonsterType.Slime:
-                    case (int)MonsterType.Skeleton:
-                    case (int)MonsterType.Goblin:
-
-                        //monster.name
-                        //monster.hp
-                        //monster.attack
-                        break;*//*
-                }
-            }
-
-
-            
-
-        }
-    }*/
+    }
+    return mons;
 }
+
+/*case 0: //순서대로 이름,직업,레밸,주는경험치,체력,최대체력,공격력,방어력
+    mons.Add(new Monster("(E) 레드 슬라임", "슬라임", 1, 3, 8, 8, 6, 1));
+    mons.Add(new Monster("(E) 옐로 슬라임", "슬라임", 1, 3, 12, 12, 4, 3));
+    mons.Add(new Monster("(E) 블루 슬라임", "슬라임", 1, 3, 12, 12, 4, 3));
+    mons.Add(new Monster("(E) 그린 슬라임", "슬라임", 1, 3, 8, 8, 6, 1));
+    break;
+case 1:
+    mons.Add(new Monster("(E) 초록버섯", "버섯", 1, 5, 20, 20, 10, 1));
+    mons.Add(new Monster("(E) 파란버섯", "버섯", 1, 5, 22, 22, 10, 2));
+    break;
+case 2:
+    mons.Add(new Monster("(E) 옐로슬라임", "슬라임", 1, 3, 12, 12, 4, 3));
+    mons.Add(new Monster("(E) 그린슬라임", "슬라임", 1, 3, 8, 8, 6, 1));
+    mons.Add(new Monster("(E) 초록버섯", "버섯", 1, 5, 20, 20, 10, 1));
+    break;
+case 3:
+    mons.Add(new Monster("(E) 스톤 골렘", "골렘", 2, 8, 80, 80, 12, 8));
+    break;
+case 4:
+    mons.Add(new Monster("(E) 타우로마시스", "타우로마시스", 2, 8, 40, 40, 18, 4));
+    break;
+case 5:
+    mons.Add(new Monster("(E) 주니어 발록", "발록", 3, 10, 60, 60, 16, 6));
+    break;
+case 6:
+    mons.Add(new Monster("(N) 슬라임", "슬라임", 1, 5, 100, 100, 10, 1));
+    break;
+case 7:
+    mons.Add(new Monster("(N) 주황 버섯", "버섯", 1, 5, 100, 100, 10, 1));
+    break;
+case 8:
+    mons.Add(new Monster("(N) 초록 버섯", "버섯", 1, 5, 100, 100, 10, 1));
+    break;
+case 9:
+    mons.Add(new Monster("(N) 스톤 골렘", "골렘", 1, 5, 100, 100, 10, 1));
+    break;
+case 10:
+    mons.Add(new Monster("(N) 타우로마시스", "타우로마시스", 1, 5, 100, 100, 10, 1));
+    break;
+case 11:
+    mons.Add(new Monster("(N) 주니어 발록", "발록", 1, 5, 100, 100, 10, 1));
+    break;
+case 12:
+    mons.Add(new Monster("(H) 슬라임", "슬라임", 1, 5, 100, 100, 10, 1));
+    break;
+case 13:
+    mons.Add(new Monster("(H) 주황 버섯", "버섯", 1, 5, 100, 100, 10, 1));
+    break;
+case 14:
+    mons.Add(new Monster("(H) 초록 버섯", "버섯", 1, 5, 100, 100, 10, 1));
+    break;
+case 15:
+    mons.Add(new Monster("(H) 스톤 골렘", "골렘", 1, 5, 100, 100, 10, 1));
+    break;
+case 16:
+    mons.Add(new Monster("(H) 타우로마시스", "타우로마시스", 1, 5, 100, 100, 10, 1));
+    break;
+case 17:
+    mons.Add(new Monster("(H) 주니어 발록", "발록", 1, 5, 100, 100, 10, 1));
+    break;*/
