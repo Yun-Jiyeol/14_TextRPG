@@ -98,7 +98,7 @@ namespace _14_TextRPG
                                     {
                                         DesignText.LeftDT($"  {M[i].Name}이(가) {P.Name}를", 11 + num * 2, ConsoleColor.Gray);
                                         
-                                        int damage = P.TakeDamage(M[i],M[i].Attack); //얼마나 공격했는지
+                                        int damage = P.TakeDamage(M[i],M[i].Attack + M[i].ItemAttack); //얼마나 공격했는지
                                         if (damage == -1)
                                         {
                                             DesignText.LeftDT("  공격했으나 회피했다.", 12 + num * 2, ConsoleColor.Gray);
@@ -378,7 +378,7 @@ namespace _14_TextRPG
             {
                 if (!M[i].isDead)
                 {
-                    int damage = P.TakeDamage(M[i], M[i].Attack); //얼마나 공격했는지
+                    int damage = P.TakeDamage(M[i], M[i].Attack + M[i].ItemAttack); //얼마나 공격했는지
                     if (damage == -1)
                     {
                         DesignText.LeftDT("  공격했으나 회피했다.", 14 + num, ConsoleColor.Gray);
