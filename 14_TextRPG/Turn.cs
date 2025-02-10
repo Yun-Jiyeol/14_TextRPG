@@ -321,11 +321,7 @@ namespace _14_TextRPG
                                     isAllDead = false;
                                 }
                             }
-                            if (isAllDead)
-                            {
-                                Victory(P,M);
-                            }
-                            else
+                            if (!isAllDead) //모든 몬스터가 죽지 않을 시
                             {
                                 DesignText.LeftDT("  몬스터들의 공격이 시작합니다.", 18, ConsoleColor.Gray);
                                 Console.SetCursorPosition(0, 22);
@@ -401,15 +397,6 @@ namespace _14_TextRPG
             Console.WriteLine("플레이어의 차례입니다!");
             DesignText.IsMove(10);
             PlayerTurn(P,M); //다시 플레이어 턴으로
-        }
-        public void Victory(Player P, List<Monster> M)
-        {
-            Console.SetCursorPosition(0,22);
-            Console.WriteLine($"{P.Name}은 모든 몬스터를 잡고 마을로 돌아갔습니다.");
-            Console.Write("아무키나 입력하세요.");
-            Console.ReadKey();//Battle로 복귀 후 바로 GameManager.Start()로 복귀하도록
-            Console.WriteLine();
-            DesignText.IsMove(5);
         }
         public void ShowNow(Player P, List<Monster> M)  //화면 위쪽을 만들어줄 함수
         {
