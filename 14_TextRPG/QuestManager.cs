@@ -35,6 +35,8 @@ namespace _14_TextRPG
                 "아이템을 한번 장착해 보라구'", false, 500, 1));
 
             player = play;
+            questList[0].currentKills = 5;
+            questList[0].isComplete = true;
         }
 
         // 퀘스트의 종류들을 다 볼수 있는 퀘스트 창
@@ -57,7 +59,15 @@ namespace _14_TextRPG
                     // 퀘스트를 수락 했다면 박스가 칠해지게
                     string questCheck = questList[i - 1].isAccept ? check : unCheck;
                     questList[i - 1].questNumber = i;
+
+                    if (questList[i - 1].isReward)
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    else if (questList[i - 1].isComplete && questList[i - 1].isAccept)
+                        Console.ForegroundColor = ConsoleColor.Green;
+
                     Console.WriteLine($"{i % PAGE_SIZE}. {questList[i - 1].questName} | {questCheck}");
+
+                    Console.ResetColor();
                 }
                 Console.WriteLine("\n");
                 Console.WriteLine("8. 다음 페이지");
@@ -80,7 +90,13 @@ namespace _14_TextRPG
                     // 입력받은 값이 0보다 크고 PAGE_SIZE(7)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
                     else if (0 < numinput && numinput <= PAGE_SIZE && start + numinput - 1 <= questList.Count)
                     {
-                        QuestInfo(questList[start + numinput - 2]);
+                        if (questList[start + numinput - 2].isReward)
+                        {
+                            Console.WriteLine("이미 받은 보상입니다.");
+                        }
+                        else
+                            QuestInfo(questList[start + numinput - 2]);
+                            
                     }
                 }
                 else
@@ -152,11 +168,11 @@ namespace _14_TextRPG
                 Console.WriteLine();
                 if (quest.questKills > 0)
                 {
-                    Console.WriteLine($"몬스터 {quest.questKills} 처치하기");
+                    Console.WriteLine($"몬스터 {quest.questKills} 처치하기 ({quest.currentKills} / {quest.questKills})");
                     Console.WriteLine();
                 }
 
-                if (!quest.isAccept && quest.isComplete)
+                if (quest.isAccept && quest.isComplete)
                 {
                     Console.WriteLine("1. 퀘스트 완료");
                 }
@@ -173,9 +189,10 @@ namespace _14_TextRPG
                 if (input == 0) return;
                 else if (input == 1)
                 {
-                    if (!quest.isAccept && quest.isComplete)
+                    if (quest.isAccept && quest.isComplete)
                     {
-                        Console.WriteLine("1. 퀘스트 완료");
+                        CompleteQuest(player, quest);
+                        return;
                     }
                     else if (!quest.isAccept)
                     {
@@ -229,6 +246,16 @@ namespace _14_TextRPG
                 quest.Reject();
             }
 
+        }
+
+        //퀘스트를 완료 했을 때 실행시켜줄 메서드
+        public void CompleteQuest(Player player, Quest quest)
+        {
+            if (quest.isAccept && quest.isComplete)
+            {
+                quest.Complete(player);
+                acceptQuest.Remove(quest);
+            }
         }
 
         //몬스터를 죽일 떄 호출시켜줄 메서드

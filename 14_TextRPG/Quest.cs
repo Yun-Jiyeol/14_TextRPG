@@ -47,6 +47,8 @@ namespace _14_TextRPG
         public bool isAccept { get; set; } = false;
         // 퀘스트 완료 했는지 여부
         public bool isComplete { get; set; } = false;
+        // 퀘스트 보상을 다 받았는지 여부
+        public bool isReward { get; set; } = false;
 
         
 
@@ -90,7 +92,7 @@ namespace _14_TextRPG
             Console.WriteLine($"[{questName}] 을(를) 거절하셨습니다.");
         }
 
-        public void CompleteQuest(Player player)
+        public void Complete(Player player)
         {
             if (isComplete)
             {
@@ -98,10 +100,14 @@ namespace _14_TextRPG
                 Console.WriteLine($"보상");
                 Console.WriteLine($"{rewardGold}");
                 Console.WriteLine($"{rewardExp}");
+                Thread.Sleep(500);
 
                 //보상 지급
                 player.Gold += rewardGold;
                 player.Ex += rewardExp;
+
+                //
+                isReward = true;
             }
         }
 
