@@ -216,11 +216,11 @@ namespace _14_TextRPG
                         bool isalldead = true; //몬스터를 다 잡고 나왔는지 확인할 함수(층수용)
                         if(floor == maxfloor)
                         {
-                            monsters = battle.SpawnMons(5, 6); //보스 몬스터 소환
+                            monsters = battle.SpawnMons(17, 18); //보스 몬스터 소환
                         }
                         else
                         {
-                            monsters = battle.SpawnMons(0, 5); //랜덤 몬스터 소환
+                            monsters = battle.SpawnMons(0, 6); //랜덤 몬스터 소환
                         }
 
                         turn.PlayerTurn(P, monsters, quest); //전투 시작
@@ -437,11 +437,11 @@ namespace _14_TextRPG
                         bool isalldead = true; //몬스터를 다 잡고 나왔는지 확인할 함수(층수용)
                         if (floor == maxfloor)
                         {
-                            monsters = battle.SpawnMons(11, 12); //보스 몬스터 소환
+                            monsters = battle.SpawnMons(18, 19); //보스 몬스터 소환
                         }
                         else
                         {
-                            monsters = battle.SpawnMons(6, 11); //랜덤 몬스터 소환
+                            monsters = battle.SpawnMons(6, 12); //랜덤 몬스터 소환
                         }
 
                         turn.PlayerTurn(P, monsters, quest); //전투 시작
@@ -659,7 +659,7 @@ namespace _14_TextRPG
                         bool isalldead = true; //몬스터를 다 잡고 나왔는지 확인할 함수(층수용)
                         if (floor == maxfloor)
                         {
-                            monsters = battle.SpawnMons(17, 18); //보스 몬스터 소환
+                            monsters = battle.SpawnMons(19, 20); //보스 몬스터 소환
                         }
                         else
                         {

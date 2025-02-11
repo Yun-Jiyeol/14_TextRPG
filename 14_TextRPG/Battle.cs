@@ -42,10 +42,10 @@ namespace _14_TextRPG
                     mons.Add(new Monster("(E) 좀비", "언데드", 2, 3, 20, 20, 8, 4));
                     break;
                 case 5:
-                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 8, 5));
-                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 8, 5));
-                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 8, 5));
-                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 8, 5));
+                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 5, 5));
+                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 5, 5));
+                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 5, 5));
+                    mons.Add(new Monster("(E) 새끼 거미", "거미", 3, 5, 19, 19, 5, 5));
                     break;
                 //노말
                 case 6:
@@ -100,10 +100,10 @@ namespace _14_TextRPG
                     mons.Add(new Monster("(B) 대왕 슬라임", "슬라임", 7, 5, 60, 60, 10, 3));
                     break;
                 case 18:    //노말
-                    mons.Add(new Monster("(B) 네크로맨서", "강령술사", 12, 5, 80, 80, 10, 4));
+                    mons.Add(new Monster("(B) 네크로맨서", "강령술사", 12, 5, 80, 80, 15, 10));
                     break;
                 case 19:    //하드
-                    mons.Add(new Monster("(B) 벡스 Z 먼데시르타", "보스", 17, 5, 120, 120, 25, 10));
+                    mons.Add(new Monster("(B) 벡스 Z 먼데시르타", "보스", 17, 5, 120, 120, 40, 20));
                     break;
 
             }
