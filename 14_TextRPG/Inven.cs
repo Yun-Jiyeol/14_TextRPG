@@ -19,9 +19,7 @@ namespace _14_TextRPG
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
 
-            itemList.ItemCatalog(listHoldItem.ToArray(), true, false);
-
-            Console.WriteLine("\n1. 장착 관리\n0. 나가기\n");
+            itemList.ItemCatalog(listHoldItem.ToArray(), 0, false, "1. 장착 관리\n0. 나가기");
             int input = Input.input(0, 1);
 
             if (input != 0)
@@ -38,10 +36,7 @@ namespace _14_TextRPG
             Console.Clear();
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
 
-            itemList.ItemCatalog(listHoldItem.ToArray(), true, true);
-
-            Console.WriteLine("\n0. 나가기\n");
-
+            itemList.ItemCatalog(listHoldItem.ToArray(), 0, true, "0. 나가기");
             int input = Input.input(0, listHoldItem.Count);
 
             if(input == 0)
