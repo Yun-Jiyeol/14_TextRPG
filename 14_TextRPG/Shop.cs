@@ -33,9 +33,39 @@ namespace _14_TextRPG
         public void ShowShop(Player _player, Inven _inven)
         {
             Console.Clear();
-            Console.WriteLine("상점\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{_player.Gold} G");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┏━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┓");
+            DesignText.LeftDT("  [ 상 점 ]", 1, ConsoleColor.Red);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            //itemList.ItemCatalog(_inven.listHoldItem.ToArray(), 2, true, "0. 나가기");
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.LeftDT("   7. 이전      0.나가기      8.다음", 9, ConsoleColor.Cyan);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┣━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┫");
+            DesignText.LeftDT($"  [보유 골드] - {_player.Gold} G", 11, ConsoleColor.DarkYellow);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.LeftDT("  1. 아이템 구매", 16, ConsoleColor.Gray);
+            DesignText.LeftDT("  2. 아이템 판매", 17, ConsoleColor.Gray);
+            DesignText.LeftDT("  0. 나가기", 18, ConsoleColor.Blue);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┗━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┛");
+            Console.ResetColor();
 
             itemList.ItemCatalog(arrShopItem, 1, false, "1. 아이템 구매\n2. 아이템 판매\n0. 나가기");
             int input = Input.input(0, 2);
