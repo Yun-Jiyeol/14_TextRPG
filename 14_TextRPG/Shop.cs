@@ -26,6 +26,7 @@ namespace _14_TextRPG
                 }
             }
 
+            listShopItem = listShopItem.OrderBy(item => item.Itemtype).ToList();
             arrShopItem = listShopItem.ToArray();
         }
 
@@ -67,7 +68,7 @@ namespace _14_TextRPG
             }
             else
             {
-                arrShopItem[input - 1].Buy(_player, _inven);
+                arrShopItem[input - 1].BuyItem(_player, _inven);
                 Sale(_player, _inven);
             }
         }

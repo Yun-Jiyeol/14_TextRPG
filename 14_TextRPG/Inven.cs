@@ -21,7 +21,7 @@ namespace _14_TextRPG
 
             itemList.ItemCatalog(listHoldItem.ToArray(), true, false);
 
-            Console.WriteLine("1. 장착 관리\n0. 나가기\n");
+            Console.WriteLine("\n1. 장착 관리\n0. 나가기\n");
             int input = Input.input(0, 1);
 
             if (input != 0)
@@ -50,7 +50,7 @@ namespace _14_TextRPG
             }
             else
             {
-                listHoldItem[input - 1].Use(_player); //마을로 돌아갈듯? : 해결
+                listHoldItem[input - 1].ItemEquip(_player); //마을로 돌아갈듯? : 해결
                 EquipManage(_player);
             }
         }
@@ -58,6 +58,7 @@ namespace _14_TextRPG
         public void GetItem(Item _item)
         {
             listHoldItem.Add(_item);
+            listHoldItem = listHoldItem.OrderBy(item => item.Itemtype).ToList();
         }
     }
 }

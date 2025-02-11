@@ -13,8 +13,7 @@ namespace _14_TextRPG
     {
         Weapon,
         Shield,
-        Armor,
-        MonsterDropItem
+        Armor
     }
 
     public class Item
@@ -49,7 +48,14 @@ namespace _14_TextRPG
             SaleItem = _sale;
         }
 
-        public void Buy(Player _player, Inven _inven)
+        /// <summary>
+        /// 상점에서 아이템을 구매했을 때 호출
+        /// 플레이어가 소지한 Gold가 아이템의 가격보다 많은지 비교하고
+        /// 결과 출력
+        /// </summary>
+        /// <param name="_player"></param>
+        /// <param name="_inven"></param>
+        public void BuyItem(Player _player, Inven _inven)
         {
             if ((!PlayerHave))
             {
@@ -75,7 +81,11 @@ namespace _14_TextRPG
             }
         }
 
-        public void Use(Player _player)
+        /// <summary>
+        /// 아이템 착용시 호출
+        /// </summary>
+        /// <param name="_player"></param>
+        public void ItemEquip(Player _player)
         {
             if (PlayerUse)
             {
@@ -142,11 +152,16 @@ namespace _14_TextRPG
             new Item("작은 방패", ItemType.Shield, "작고 둥글어서 귀여운 방패입니다.", 4, 1000, true),
             new Item("단단한 방패", ItemType.Shield, "단단한 방패입니다.", 9, 2000, true),
             new Item("스파르타의 방패", ItemType.Shield, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true),
-            new Item("슬라임의 점액", ItemType.MonsterDropItem, "슬라임의 점액. 어디에 쓰이는 건지 알 필요가 있을까?", 0, 100, false),
             new Item("해진 가죽갑옷", ItemType.Armor, "해진 가죽갑옷이다 .", 5, 200, false)
             };
         }
 
+        /// <summary>
+        /// 전달받은 아이템 목록을 출력하는 함수
+        /// </summary>
+        /// <param name="_arr">출력해야 할 아이템 목록</param>
+        /// <param name="_inven">출력해야 할 목록이 인벤토리의 아이템인지 여부</param>
+        /// <param name="_num">번호가 필요한지 여부</param>
         public void ItemCatalog(Item[] _arr, bool _inven, bool _num)
         {
             string number = "";
@@ -155,7 +170,6 @@ namespace _14_TextRPG
             int itemCount = 1;
 
             Console.WriteLine("\n[아이템 목록]");
-
             foreach (Item i in _arr)
             {
                 if (_num) number = itemCount.ToString();
@@ -172,10 +186,6 @@ namespace _14_TextRPG
 
                     case ItemType.Armor:
                         itemType = "체력 +";
-                        break;
-
-                    case ItemType.MonsterDropItem:
-                        itemType = "";
                         break;
                 }
 
