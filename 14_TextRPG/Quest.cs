@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
+    public enum TowerDifficult
+    {
+        Easy = 144,
+        Normar,
+        Hard
+    }
+
     public class Quest
     {
         // 퀘스트... 목록 보여주기
@@ -27,7 +36,7 @@ namespace _14_TextRPG
         // 퀘스트 정보
         public string questInfo { get; set; }
 
-        // 퀘스트 카운팅
+        // 퀘스트 카운팅 (몬스터 잡았을 때)
         // 퀘스트 보상
         public int rewardGold { get; set; }
         public Item rewardItem  { get; set; }
@@ -43,6 +52,12 @@ namespace _14_TextRPG
         public bool isEquip { get; set; } = false;
         // 장비 착용 관련 퀘스트
         public bool isQuestEquip { get; set; } = false;
+
+        // 타워 층수
+        public int questTower { get; set; }
+        public int currentTower { get; set; }
+        public TowerDifficult TD { get; set; }
+        public bool isQuestTower {  get; set; } = false;
 
 
         // 퀘스트를 받았는지 여부
@@ -66,7 +81,6 @@ namespace _14_TextRPG
             rewardGold = rewardgold;
             rewardExp = rewardexp;
             currentKills = 0;
-            questItem = null;
         }
 
         //장비 착용 퀘스트
@@ -82,6 +96,32 @@ namespace _14_TextRPG
             isQuestEquip = true;
         }
 
+        // 플레이어 타워 층수 퀘스트
+        public Quest(string questname, string questinfo, Player play , int questtower , int rewardgold, int rewardexp, TowerDifficult Td)
+        {
+            questName = questname;
+            questInfo = questinfo;
+            switch (TD)
+            {
+                case TowerDifficult.Easy:
+                    currentTower = play.repeat[0];
+                    break;
+
+                case TowerDifficult.Normar:
+                    currentTower = play.repeat[1];
+                    break;
+
+                case TowerDifficult.Hard:
+                    currentTower = play.repeat[2];
+                    break;
+            }
+            questTower = questtower + 1;
+            TD = Td;
+            rewardGold = rewardgold;
+            rewardExp = rewardexp;
+            isQuestTower = true;
+        }
+
 
         public void Accept()
         {
@@ -92,7 +132,7 @@ namespace _14_TextRPG
 
         public void Reject()
         {
-            isAccept = false;
+            isAccept = false; 
             Console.WriteLine();
             Console.WriteLine($"[{questName}] 을(를) 거절하셨습니다.");
             currentKills = 0;
