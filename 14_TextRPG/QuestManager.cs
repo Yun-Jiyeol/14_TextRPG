@@ -103,7 +103,6 @@ namespace _14_TextRPG
                 }
                 Console.WriteLine("\n");
                 Console.WriteLine("8. 다음 페이지");
-                Console.WriteLine("9. 진행 중 퀘스트");
                 Console.WriteLine("0. 뒤로가기");
                 Console.Write("\n입력 : ");
 
@@ -117,8 +116,6 @@ namespace _14_TextRPG
                         return;
                     else if (numinput == 8)
                         NextPage();
-                    else if (numinput == 9)
-                        OpenAcceptQuest();
                     // 입력받은 값이 0보다 크고 PAGE_SIZE(7)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
                     else if (0 < numinput && numinput <= PAGE_SIZE && start + numinput - 1 <= questList.Count)
                     {
