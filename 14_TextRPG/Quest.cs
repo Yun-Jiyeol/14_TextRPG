@@ -40,7 +40,9 @@ namespace _14_TextRPG
         //장비 착용 목표 아이템
         public string questItem {  get; set; }
         //장비 착용을 했는지
-        public bool isEquip {  get; set; }
+        public bool isEquip { get; set; } = false;
+        // 장비 착용 관련 퀘스트
+        public bool isQuestEquip { get; set; } = false;
 
 
         // 퀘스트를 받았는지 여부
@@ -77,6 +79,7 @@ namespace _14_TextRPG
             rewardExp = rewardexp;
             rewardItem = rewarditem;
             isItemReward = true;
+            isQuestEquip = true;
         }
 
 
@@ -118,10 +121,12 @@ namespace _14_TextRPG
         {
             if (isComplete)
             {
+                Console.WriteLine();
                 Console.WriteLine($"{questName} 퀘스트 완료! ");
                 Console.WriteLine($"보상");
                 Console.WriteLine($"{rewardGold}");
                 Console.WriteLine($"{rewardExp}");
+                Console.WriteLine($"{rewardItem.Name}");
                 Thread.Sleep(500);
 
                 //보상 지급

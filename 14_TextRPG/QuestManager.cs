@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,7 @@ namespace _14_TextRPG
                 }
             }
             itemIvn = ivn;
+            player = play;
 
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "이봐! 마을 근처에 몬스터들이 너무 많아졌다고 생각하지 않나? \n " +
                 "마을 주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고! \n" +
@@ -48,7 +50,6 @@ namespace _14_TextRPG
                 "이곳을 돌아다니기에 너무 장비가 부실하지않나?\n" +
                 "장비를 장착하면 내가 갑옷을 하나 주겠네!'", false, 500, 1, ratherArmor));
 
-            player = play;
         }
 
         // 퀘스트의 종류들을 다 볼수 있는 퀘스트 창
@@ -58,6 +59,7 @@ namespace _14_TextRPG
             {
                 Thread.Sleep(500);
                 Console.Clear();
+
                 string check = "■";
                 string unCheck = "□";
 
@@ -68,6 +70,12 @@ namespace _14_TextRPG
                 int end = Math.Min(start + PAGE_SIZE, questList.Count);
                 for (int i = start; i < end + 1; i++)
                 {
+                    // quest가 장착 관련 퀘스트라면 PlayerEquip을 실행
+                    if (questList[i - 1].isQuestEquip)
+                    {
+                        PlayerEquip(player);
+                    }
+
                     // 퀘스트를 수락 했다면 박스가 칠해지게
                     string questCheck = questList[i - 1].isAccept ? check : unCheck;
                     questList[i - 1].questNumber = i;
@@ -143,7 +151,15 @@ namespace _14_TextRPG
                 {
                     for (int i = 0; i < acceptQuest.Count; i++)
                     {
+                        // quest가 장착 관련 퀘스트라면 PlayerEquip을 실행
+                        if (acceptQuest[i].isQuestEquip)
+                        {
+                            PlayerEquip(player);
+                        }
+                        if (acceptQuest[i].isComplete)
+                            Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"{i + 1}. {acceptQuest[i].questName}");
+                        Console.ResetColor();
                     }
                 }
                 Console.WriteLine("\n0. 뒤로가기");
@@ -170,6 +186,7 @@ namespace _14_TextRPG
             {
                 Thread.Sleep(500);
                 Console.Clear();
+
                 Console.WriteLine($"{quest.questNumber}. {quest.questName}");
                 Console.WriteLine();
                 Console.WriteLine($"{quest.questInfo}");
@@ -300,6 +317,20 @@ namespace _14_TextRPG
                         {
                             quest.isComplete = true;
                         }
+                    }
+                }
+            }
+        }
+
+        public void PlayerEquip(Player play)
+        {
+            if (acceptQuest.Count >= 0)
+            {
+                foreach (Quest quest in acceptQuest)
+                {
+                    if (quest.isQuestEquip && !quest.isEquip && play.isEquip)
+                    {
+                        quest.isComplete = true;
                     }
                 }
             }

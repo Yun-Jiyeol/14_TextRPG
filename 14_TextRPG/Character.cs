@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace _14_TextRPG
         public int Level { get; set; } //캐릭터 레벨
         public float Health { get; set; } //캐릭터 현제 체력
         public float MaxHealth { get; set; } //캐릭터 최대 체력
+        public float Mana { get; set; } //캐릭터 현제 체력
+        public float MaxMana { get; set; } //캐릭터 최대 체력
         public float ItemHealth { get; set; } //아이템으로 오른 체력
         public int Attack { get; set; } //캐릭터 공격력
         public int ItemAttack { get; set; } //아이템으로 오른 공격력
@@ -42,38 +45,104 @@ namespace _14_TextRPG
             }
             if (ItemHealth != 0) //장비 체력이 있을 시
             {
-                DesignText.LeftDT($"  체력: {Health + ItemHealth} / {MaxHealth} + ({ItemHealth})", i + 3, ConsoleColor.DarkRed);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(0, i + 3);
+                Console.Write("┃");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(1, i + 3);
+                Console.Write($"  체력: {Health} / {MaxHealth + ItemHealth}");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write($"+({ItemHealth})");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write($"  마나 : {Mana} / {MaxMana}");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(41, i + 3);
+                Console.WriteLine("┃");
             }
             else
             {
-                DesignText.LeftDT($"  체력: {Health} / {MaxHealth}", i + 3, ConsoleColor.DarkRed);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(0, i + 3);
+                Console.Write("┃");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(1, i + 3);
+                Console.Write($"  체력: {Health} / {MaxHealth}");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write($"  마나 : {Mana} / {MaxMana}");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(41, i + 3);
+                Console.WriteLine("┃");
             }
             if (ItemAttack != 0) //무기 공격력이 있을 시
             {
-                DesignText.LeftDT($"  공격력: {Attack + ItemAttack} + ({ItemAttack})", i + 4, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(0, i + 4);
+                Console.Write("┃");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(1, i + 4);
+                Console.Write($"  공격력: {Attack + ItemAttack}");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write($"+({ItemAttack})");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"  약점 확률: {Critical}%");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(41, i + 4);
+                Console.WriteLine("┃");
             }
             else
             {
-                DesignText.LeftDT($"  공격력: {Attack}", i + 4, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(0, i + 4);
+                Console.Write("┃");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(1, i + 4);
+                Console.Write($"  공격력: {Attack}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"  약점 확률: {Critical}%");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(41, i + 4);
+                Console.WriteLine("┃");
             }
             if (ItemDefence != 0) //무기 방어력이 있을 시
             {
-                DesignText.LeftDT($"  방어력: {Defence + ItemDefence} + ({ItemDefence})", i + 5, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(0, i + 5);
+                Console.Write("┃");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.SetCursorPosition(1, i + 5);
+                Console.Write($"  방어력: {Defence + ItemDefence}");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.Write($"+({ItemDefence})");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"  회피 확률: {Avoid}%");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(41, i + 5);
+                Console.WriteLine("┃");
             }
             else
             {
-                DesignText.LeftDT($"  방어력: {Defence}", i + 5, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(0, i + 5);
+                Console.Write("┃");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.SetCursorPosition(1, i + 5);
+                Console.Write($"  방어력: {Defence}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"  회피 확률: {Avoid}%");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.SetCursorPosition(41, i + 5);
+                Console.WriteLine("┃");
             }
             if (Gold >= 0)
             {
                 DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.Yellow);
             }
         }
-        public int TakeDamage(Character character, int i) //피해를 받는다면
+        public int TakeDamage(Character character, int i , bool isskill) //피해를 받는다면
         {
             Random random = new Random();
 
-            if(Avoid < random.Next(1, 101)) //회피를 못할 시
+            if(Avoid < random.Next(1, 101) || isskill) //회피를 못할 시 또는 스킬일 시
             {
                 float damage = i;
                 if (character.Critical >= random.Next(1, 101)) //치명타 시
@@ -81,9 +150,9 @@ namespace _14_TextRPG
                     damage *= character.CriDamage;
                 }
 
-                if (damage > (Defence / 2)) //방어력보다 적을 시
+                if (damage > ((Defence+ItemDefence) / 2)) //방어력보다 적을 시
                 {
-                    damage = damage - (Defence / 2);
+                    damage = damage - ((Defence + ItemDefence) / 2);
                 }
                 else
                 {

@@ -26,7 +26,7 @@ namespace _14_TextRPG
             
             MaxEx = 0;
             Gold = -1;
-            Avoid = 0;
+            Avoid = 5;
             Critical = 10;
             CriDamage = 1.3f;
         }
