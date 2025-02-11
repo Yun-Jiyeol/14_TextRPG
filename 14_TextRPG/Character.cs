@@ -138,11 +138,11 @@ namespace _14_TextRPG
                 DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.Yellow);
             }
         }
-        public int TakeDamage(Character character, int i) //피해를 받는다면
+        public int TakeDamage(Character character, int i , bool isskill) //피해를 받는다면
         {
             Random random = new Random();
 
-            if(Avoid < random.Next(1, 101)) //회피를 못할 시
+            if(Avoid < random.Next(1, 101) || isskill) //회피를 못할 시 또는 스킬일 시
             {
                 float damage = i;
                 if (character.Critical >= random.Next(1, 101)) //치명타 시

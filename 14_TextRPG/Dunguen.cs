@@ -317,8 +317,9 @@ namespace _14_TextRPG
                         {
                             Console.SetCursorPosition(0, 22);
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("휴식을 통해 체력의 절반을 회복했습니다.");
+                            Console.WriteLine("휴식을 통해 체력과 마나의 절반을 회복했습니다.");
                             P.GetHeal((int)P.MaxHealth / 2);
+                            P.Mana += P.MaxMana / 2;
                             numobrest--;
                             Console.ResetColor();
                             DesignText.IsMove(10);

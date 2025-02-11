@@ -25,7 +25,7 @@ namespace _14_TextRPG
             MaxHealth = 100;
             Mana = 30;
             MaxMana = 30;
-            Attack = 10;
+            Attack = 100;
             Defence = 5;
             Gold = 1500;
             Critical = 15;
