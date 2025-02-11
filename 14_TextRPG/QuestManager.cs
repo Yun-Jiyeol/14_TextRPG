@@ -192,11 +192,47 @@ namespace _14_TextRPG
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine();
-                Console.WriteLine("수락한 퀘스트 목록(최대 2개) \n");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("┏━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┓");
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.LeftDT("  수락한 퀘스트 목록(최대 2개)", 2, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("┣━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┫");
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("┗━");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("━┛");
+                Console.ResetColor();
+
                 if (acceptQuest.Count == 0)
                 {
-                    Console.WriteLine("수락한 퀘스트가 없습니다.");
+                    DesignText.LeftDT("  수락한 퀘스트가 없습니다.", 4, ConsoleColor.Gray);
                 }
                 else
                 {
@@ -213,14 +249,14 @@ namespace _14_TextRPG
                         }
 
                         if (acceptQuest[i].isComplete)
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"{i + 1}. {acceptQuest[i].questName}");
-                        Console.ResetColor();
+                            DesignText.LeftDT($"  {i + 1}. {acceptQuest[i].questName}", 4 + i, ConsoleColor.Green);
+                        else
+                            DesignText.LeftDT($"  {i + 1}. {acceptQuest[i].questName}", 4 + i, ConsoleColor.Yellow);
                     }
                 }
-                Console.WriteLine("\n0. 뒤로가기");
-                Console.WriteLine();
+                DesignText.LeftDT("  0. 뒤로가기", 8, ConsoleColor.Blue);
 
+                Console.SetCursorPosition(0, 22);
                 int input = Input.input(0, acceptQuest.Count);
 
                 if (input == 0)
