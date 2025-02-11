@@ -22,7 +22,7 @@ namespace _14_TextRPG
         public ItemType Itemtype { get; } //아이템 종류
         public string Info { get; } //아이템 설명
         public int Value { get; } //아이템 스텟
-        public int Cost { get; } //아이템 가격
+        public int Cost { get; private set; } //아이템 가격
         public bool PlayerHave { get; set; } //플레이어가 소지 유무
         public bool PlayerUse { get; set; } //플레이어가 착용 유무
         public bool SaleItem { get; }   // 상점에서 판매하는 물품인지 아닌지
@@ -66,19 +66,19 @@ namespace _14_TextRPG
                     Console.WriteLine("구매를 완료했습니다.");
                     _player.Gold -= Cost;
                     _inven.GetItem(this);
-                    Console.ReadKey();
+                    Cost /= 10;
                 }
                 else
                 {
                     Console.WriteLine("Gold가 부족합니다.");
-                    Console.ReadKey();
                 }
             }
             else
             {
                 Console.WriteLine("이미 구매한 아이템입니다.");
-                Console.ReadKey();
             }
+
+            Thread.Sleep(500);
         }
 
         /// <summary>
@@ -133,6 +133,27 @@ namespace _14_TextRPG
                 }
             }
         }
+
+        public void SellItem(Player _player, Inven _inven)
+        {
+            _player.Gold += Cost;
+            _inven.listHoldItem.Remove(this);
+
+            if(this.PlayerUse)
+            {
+                ItemEquip(_player);
+            }
+
+            this.PlayerHave = false;
+            
+            if(this.SaleItem)
+            {
+                Cost *= 10;
+            }
+
+            Console.WriteLine("판매를 완료했습니다.");
+            Thread.Sleep(500);
+        }
     }
 
     public struct ItemList
@@ -160,9 +181,12 @@ namespace _14_TextRPG
         /// 전달받은 아이템 목록을 출력하는 함수
         /// </summary>
         /// <param name="_arr">출력해야 할 아이템 목록</param>
-        /// <param name="_inven">출력해야 할 목록이 인벤토리의 아이템인지 여부</param>
+        /// <param name="_outputMode">출력 방식(0 = 인벤토리 아이템 출력
+        /// 1 = 상점에서 구매할 수 있는 아이템 출력
+        /// 2 = 인벤토리의 아이템을 판매할 목적으로 출력</param>
         /// <param name="_num">번호가 필요한지 여부</param>
-        public void ItemCatalog(Item[] _arr, bool _inven, bool _num)
+        /// <param name="_choice">아이템 목록 다음으로 출력할 선택지</param>
+        public void ItemCatalog(Item[] _arr, int _outputMode, bool _num, string _choice)
         {
             string number = "";
             string equipOrCost;
@@ -189,7 +213,7 @@ namespace _14_TextRPG
                         break;
                 }
 
-                if (_inven)
+                if (_outputMode == 0 || _outputMode == 2)
                 {
                     if (_arr.Length == 0) break;
 
@@ -202,7 +226,14 @@ namespace _14_TextRPG
                         equipOrCost = "";
                     }
 
-                    Console.WriteLine($"- {number} {equipOrCost}{i.Name}  |  {itemType} {i.Value}  |  {i.Info}");
+                    string sellCost = "";
+
+                    if(_outputMode ==2)
+                    {
+                        sellCost = "|  " + i.Cost.ToString() + " G";
+                    }
+
+                    Console.WriteLine($"- {number} {equipOrCost}{i.Name}  |  {itemType} {i.Value}  |  {i.Info}  {sellCost}");
                 }
                 else
                 {
@@ -220,6 +251,8 @@ namespace _14_TextRPG
 
                 itemCount++;
             }
+
+            Console.WriteLine($"\n{_choice}\n");
         }
     }
 }
