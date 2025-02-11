@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace _14_TextRPG
 {
@@ -69,6 +70,20 @@ namespace _14_TextRPG
                 Thread.Sleep(100);
             }
             Console.ResetColor();
+        }
+
+        //text를 char로 1나씩 입력받아 콘솔에 입력될 크기가 2칸짜리면 2칸, 1칸짜리는 1칸을 더해줘서 반환해주는 메서드
+        static public int GetConsoleWidth(string text) 
+        {
+            int width = 0;
+            foreach (char c in text)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.OtherLetter)
+                    width += 2;
+                else
+                    width++;
+            }
+            return width;
         }
     }
 }

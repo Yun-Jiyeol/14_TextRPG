@@ -303,7 +303,7 @@ namespace _14_TextRPG
                 }
                 else if (quest.isItemReward)
                 {
-                    DesignText.LeftDT($" {quest.rewardItem.Name}", 14, ConsoleColor.Gray);
+                    DesignText.LeftDT($" {quest.rewardItem.Name}", 14, ConsoleColor.Cyan);
                 }
                 else if (quest.questTower > 0)
                 {

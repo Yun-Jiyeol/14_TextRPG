@@ -126,15 +126,35 @@ namespace _14_TextRPG
         public void Accept()
         {
             isAccept = true;
-            Console.WriteLine();
-            Console.WriteLine($"[{questName}] 을(를) 수락하셨습니다! ");
+            Console.SetCursorPosition(0, 12);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT($"[{questName}] 을(를)", 40 - DesignText.GetConsoleWidth($"[{questName}] 을(를)"), ConsoleColor.Gray);
+            DesignText.MiddleDT("수락하셨습니다!", 25, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            Console.SetCursorPosition(0, 24);
+            Console.WriteLine($"퀘스트를 수주하는중");
+            DesignText.IsMove(7);
         }
 
         public void Reject()
         {
-            isAccept = false; 
-            Console.WriteLine();
-            Console.WriteLine($"[{questName}] 을(를) 거절하셨습니다.");
+            isAccept = false;
+            Console.SetCursorPosition(0, 12);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT($"[{questName}] 을(를)", 40 - DesignText.GetConsoleWidth($"[{questName}] 을(를)"), ConsoleColor.Gray);
+            DesignText.MiddleDT("거절하셨습니다!", 25, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            Console.SetCursorPosition(0, 24);
+            Console.WriteLine($"퀘스트를 포기하러 가는중");
+            DesignText.IsMove(7);
             currentKills = 0;
         }
 
@@ -143,11 +163,20 @@ namespace _14_TextRPG
         {
             if (isComplete)
             {
-                Console.WriteLine($"{questName} 퀘스트 완료! ");
-                Console.WriteLine($"보상");
-                Console.WriteLine($"{rewardGold}");
-                Console.WriteLine($"{rewardExp}");
-                Thread.Sleep(500);
+                Console.SetCursorPosition(0, 12);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT($"{questName} 퀘스트 완료!", 40 - DesignText.GetConsoleWidth($"{questName} 퀘스트 완료!"), ConsoleColor.Gray);
+                DesignText.MiddleDT("★ 보상 ★", 40 - DesignText.GetConsoleWidth("★ 보상 ★"), ConsoleColor.Green);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.LeftDT($"골드 : {rewardGold}", 16 , ConsoleColor.Gray);
+                DesignText.LeftDT($"경험치 : {rewardExp}", 17, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                Console.SetCursorPosition(0, 24);
+                Console.WriteLine("퀘스트의 성공을 보고하는중");
+                DesignText.IsMove(10);
 
                 //보상 지급
                 player.Gold += rewardGold;
@@ -161,13 +190,21 @@ namespace _14_TextRPG
         {
             if (isComplete)
             {
-                Console.WriteLine();
-                Console.WriteLine($"{questName} 퀘스트 완료! ");
-                Console.WriteLine($"보상");
-                Console.WriteLine($"{rewardGold}");
-                Console.WriteLine($"{rewardExp}");
-                Console.WriteLine($"{rewardItem.Name}");
-                Thread.Sleep(500);
+                Console.SetCursorPosition(0, 12);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT($"{questName} 퀘스트 완료!", 40 - DesignText.GetConsoleWidth($"{questName} 퀘스트 완료!"), ConsoleColor.Gray);
+                DesignText.MiddleDT("★ 보상 ★", 40 - DesignText.GetConsoleWidth("★ 보상 ★"), ConsoleColor.Green);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.LeftDT($"골드 : {rewardGold}", 16, ConsoleColor.Gray);
+                DesignText.LeftDT($"경험치 : {rewardExp}", 17, ConsoleColor.Gray);
+                DesignText.LeftDT($"아이템 : {rewardItem.Name}", 18 , ConsoleColor.Cyan);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                Console.SetCursorPosition(0, 24);
+                Console.WriteLine("퀘스트의 성공을 보고하는중");
+                DesignText.IsMove(10);
 
                 //보상 지급
                 player.Gold += rewardGold;
