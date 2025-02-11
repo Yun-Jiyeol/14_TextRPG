@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,9 @@ namespace _14_TextRPG
 {
     public class Player : Character
     {
+        public PowerShot powerShot = new PowerShot();
+        public Bigswing bigswing = new Bigswing();
+
         public int[] repeat = {1,1,1 };
 
         public Player()
@@ -19,8 +23,8 @@ namespace _14_TextRPG
             Level = 01;
             Health = 100;
             MaxHealth = 100;
-            Mana = 30;
-            MaxMana = 30;
+            Mana = 50;
+            MaxMana = 50;
             Attack = 10;
             Defence = 5;
             Gold = 1500;
@@ -50,7 +54,7 @@ namespace _14_TextRPG
                 Level++; //래벨업
                 Ex -= MaxEx; //현제 경험치 감소
                 MaxEx += (MaxEx/10)*3;
-
+                
                 MaxHealth += 10; //스탯증가
                 Attack += 1;
                 Defence += 1;
