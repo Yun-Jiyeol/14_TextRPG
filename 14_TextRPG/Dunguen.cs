@@ -26,7 +26,7 @@ namespace _14_TextRPG
                 Console.WriteLine("━┓");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.MiddleDT("여기는 던전 입구입니다.", 17, ConsoleColor.Gray);
+                DesignText.MiddleDT("여기는 던전 입구입니다.", 17, ConsoleColor.Magenta);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("어느 던전에 입장 할 것인지", 14, ConsoleColor.Gray);
                 DesignText.MiddleDT("선택 하세요.", 28, ConsoleColor.Gray);
@@ -85,6 +85,7 @@ namespace _14_TextRPG
                         DesignText.IsMove(5);
                         break;
                     case 1:
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"{P.Name}은(는) EASY 던전에 입장합니다.");
                         isgoHome = true;
                         DesignText.IsMove(10);
@@ -93,6 +94,7 @@ namespace _14_TextRPG
                     case 2:
                         if (P.Level >= 3)
                         {
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
                             Console.WriteLine($"{P.Name}은(는) NORMAL 던전에 입장합니다.");
                             isgoHome = true;
                             DesignText.IsMove(10);
@@ -107,6 +109,7 @@ namespace _14_TextRPG
                     case 3:
                         if (P.Level >= 7)
                         {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine($"{P.Name}은(는) HARD 던전에 입장합니다.");
                             isgoHome = true;
                             DesignText.IsMove(10);
@@ -149,7 +152,7 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┓");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.MiddleDT("EASY 던전", 31, ConsoleColor.Gray);
+                DesignText.MiddleDT("EASY 던전", 31, ConsoleColor.Green);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("던전 클리어를 위한", 22, ConsoleColor.Gray);
@@ -163,8 +166,15 @@ namespace _14_TextRPG
                 Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┫");
-                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray); 
+                if (maxfloor == floor) //마지막일 시
+                {
+                    DesignText.LeftDT("  1. 다음 몬스터 처치 - 보스", 12, ConsoleColor.Gray);
+                }
+                else
+                {
+                    DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
+                }
                 DesignText.LeftDT("  2. 상태확인", 13, ConsoleColor.Gray);
                 if(floor == 1 || numobrest == 0)
                 {
@@ -227,7 +237,12 @@ namespace _14_TextRPG
                             if(floor == maxfloor)
                             {
                                 Console.SetCursorPosition(0,22);
-                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write($"{P.Name}은(는) ");
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                Console.Write($"{P.Gold - beforeGold}G");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine($"의 골드를 획득했습니다.");
                                 Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
@@ -239,7 +254,12 @@ namespace _14_TextRPG
                             else
                             {
                                 Console.SetCursorPosition(0, 22);
-                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write($"{P.Name}은(는) ");
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                Console.Write($"{P.Gold - beforeGold}G");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine($"의 골드를 획득했습니다.");
                                 Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 다음 전투를 준비합니다.");
@@ -353,7 +373,7 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┓");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.MiddleDT("NORMAL 던전", 29, ConsoleColor.Gray);
+                DesignText.MiddleDT("NORMAL 던전", 29, ConsoleColor.DarkBlue);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("던전 클리어를 위한", 22, ConsoleColor.Gray);
@@ -367,8 +387,15 @@ namespace _14_TextRPG
                 Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┫");
-                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
+                DesignText.MiddleDT("", 40, ConsoleColor.Gray); 
+                if (maxfloor == floor) //마지막일 시
+                {
+                    DesignText.LeftDT("  1. 다음 몬스터 처치 - 보스", 12, ConsoleColor.Gray);
+                }
+                else
+                {
+                    DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
+                }
                 DesignText.LeftDT("  2. 상태확인", 13, ConsoleColor.Gray);
                 if (floor == 1 || numobrest == 0)
                 {
@@ -431,7 +458,12 @@ namespace _14_TextRPG
                             if (floor == maxfloor)
                             {
                                 Console.SetCursorPosition(0, 22);
-                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write($"{P.Name}은(는) ");
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                Console.Write($"{P.Gold - beforeGold}G");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine($"의 골드를 획득했습니다.");
                                 Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
@@ -443,7 +475,12 @@ namespace _14_TextRPG
                             else
                             {
                                 Console.SetCursorPosition(0, 22);
-                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write($"{P.Name}은(는) ");
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                Console.Write($"{P.Gold - beforeGold}G");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine($"의 골드를 획득했습니다.");
                                 Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 다음 전투를 준비합니다.");
@@ -558,7 +595,7 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┓");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.MiddleDT("HARD 던전", 31, ConsoleColor.Gray);
+                DesignText.MiddleDT("HARD 던전", 31, ConsoleColor.DarkRed);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.MiddleDT("던전 클리어를 위한", 22, ConsoleColor.Gray);
@@ -573,7 +610,14 @@ namespace _14_TextRPG
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("━┫");
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-                DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
+                if(maxfloor == floor) //마지막일 시
+                {
+                    DesignText.LeftDT("  1. 다음 몬스터 처치 - 보스", 12, ConsoleColor.Gray);
+                }
+                else
+                {
+                    DesignText.LeftDT($"  1. 다음 몬스터 처치 - {maxfloor - floor + 1}남음", 12, ConsoleColor.Gray);
+                }
                 DesignText.LeftDT("  2. 상태확인", 13, ConsoleColor.Gray);
                 if (floor == 1 || numobrest == 0)
                 {
@@ -636,7 +680,12 @@ namespace _14_TextRPG
                             if (floor == maxfloor)
                             {
                                 Console.SetCursorPosition(0, 22);
-                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write($"{P.Name}은(는) ");
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                Console.Write($"{P.Gold - beforeGold}G");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine($"의 골드를 획득했습니다.");
                                 Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 마을로 귀환중입니다.");
@@ -648,7 +697,12 @@ namespace _14_TextRPG
                             else
                             {
                                 Console.SetCursorPosition(0, 22);
-                                Console.WriteLine($"{P.Name}은(는) {P.Gold - beforeGold}G의 골드를 획득했습니다.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write($"{P.Name}은(는) ");
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                Console.Write($"{P.Gold - beforeGold}G");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine($"의 골드를 획득했습니다.");
                                 Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine($"{P.Name}은(는) 다음 전투를 준비합니다.");

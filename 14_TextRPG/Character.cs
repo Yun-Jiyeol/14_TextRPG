@@ -37,11 +37,11 @@ namespace _14_TextRPG
             DesignText.LeftDT($"  LV.{Level} . {Class}", i+1, ConsoleColor.Gray);
             if (MaxEx > 0)
             {
-                DesignText.LeftDT($"  경험치 : {Ex} / {MaxEx}", i + 2, ConsoleColor.Gray);
+                DesignText.LeftDT($"  경험치 : {Ex} / {MaxEx}", i + 2, ConsoleColor.Yellow);
             }
             else
             {
-                DesignText.LeftDT($"  주는 경험치 : {Ex}", i + 2, ConsoleColor.Gray);
+                DesignText.LeftDT($"  주는 경험치 : {Ex}", i + 2, ConsoleColor.Yellow);
             }
             if (ItemHealth != 0) //장비 체력이 있을 시
             {
@@ -135,7 +135,7 @@ namespace _14_TextRPG
             }
             if (Gold >= 0)
             {
-                DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.Yellow);
+                DesignText.LeftDT($"  가진 돈: {Gold}G", i + 6, ConsoleColor.DarkYellow);
             }
         }
         public int TakeDamage(Character character, int i , bool isskill) //피해를 받는다면

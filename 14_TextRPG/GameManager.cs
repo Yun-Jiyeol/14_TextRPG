@@ -158,9 +158,10 @@ namespace _14_TextRPG
             Console.WriteLine();
             int input = Input.input(0, 0);
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine();
             Console.WriteLine($"{P.Name}은(는) 돌아갑니다.");
+            Console.ResetColor();
             DesignText.IsMove(5);
         }
     }
