@@ -25,7 +25,7 @@ namespace _14_TextRPG
             MaxHealth = 100;
             Mana = 50;
             MaxMana = 50;
-            Attack = 100;
+            Attack = 10;//체크용 100
             Defence = 5;
             Gold = 1500;
             Critical = 15;

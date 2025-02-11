@@ -1,4 +1,4 @@
-﻿using _14_TextRPG;
+﻿/*using _14_TextRPG;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -108,12 +108,11 @@ public List<Monster> SpawnMons(int min, int max)
         case 19:    //하드
             mons.Add(new Monster("(B) 벡스 Z 먼데시르타", "보스", 17, 5, 120, 120, 25, 10));
             break;
-
     }
     return mons;
 }
 
-/*case 0: //순서대로 이름,직업,레밸,주는경험치,체력,최대체력,공격력,방어력
+*//*case 0: //순서대로 이름,직업,레밸,주는경험치,체력,최대체력,공격력,방어력
     mons.Add(new Monster("(E) 레드 슬라임", "슬라임", 1, 3, 8, 8, 6, 1));
     mons.Add(new Monster("(E) 옐로 슬라임", "슬라임", 1, 3, 12, 12, 4, 3));
     mons.Add(new Monster("(E) 블루 슬라임", "슬라임", 1, 3, 12, 12, 4, 3));
