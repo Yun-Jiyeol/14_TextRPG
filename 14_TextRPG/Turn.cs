@@ -230,8 +230,8 @@ namespace _14_TextRPG
             {
                 DesignText.LeftDT("    - 마나가 부족합니다.", 15, ConsoleColor.DarkGray);
             }
-            DesignText.LeftDT("  0. 돌아간다.", 16, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.LeftDT("  0. 돌아간다.", 17, ConsoleColor.Gray);
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("┗━");
