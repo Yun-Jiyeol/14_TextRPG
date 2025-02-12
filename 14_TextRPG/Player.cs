@@ -47,22 +47,22 @@ namespace _14_TextRPG
             Random random = new Random();
             int getgold = random.Next(10*_ex,20*_ex); //랜덤 양의 골드 획득
             Gold += getgold;
+            bool islevelup = false;
 
-            Ex += _ex; 
-            if(MaxEx <= Ex)
+            Ex += _ex;
+            while (MaxEx <= Ex)
             {
                 Level++; //래벨업
                 Ex -= MaxEx; //현제 경험치 감소
-                MaxEx += (MaxEx/10)*3;
-                
+                MaxEx += (MaxEx / 10) * 3;
+
                 MaxHealth += 10; //스탯증가
                 Attack += 1;
                 Defence += 1;
                 int LevelupHeal = (int)MaxHealth / 3;
                 GetHeal(LevelupHeal); //랩업시 회복(최대 체력의 1/3)
-                return true;
             }
-            return false; //랩업 실패
+            return islevelup; //랩업 실패
         }
     }
 }
