@@ -106,7 +106,7 @@ namespace _14_TextRPG
                                         {
                                             DesignText.LeftDT($"  {damage}만큼 공격을 했습니다!", 12 + num * 2, ConsoleColor.White);
                                         }
-                                        DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Gray);
+                                        DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Red);
                                     }
                                     num++;
                                     Thread.Sleep(1000);
@@ -393,6 +393,7 @@ namespace _14_TextRPG
                             else //공격 진행
                             {
                                 P.Mana -= P.powerShot.UseMana;
+                                DesignText.LeftDT($"     MP: {P.Mana} / {P.MaxMana}", 9, ConsoleColor.Blue);
                                 //플레이어의 데미지의 90% ~ 110% 사이의 데미지(올림값)를 몬스터에게 준다
                                 int attackDamage = random.Next((P.Attack + P.ItemAttack) * 90, (P.Attack + P.ItemAttack) * 110);
                                 attackDamage = attackDamage / 100 * P.powerShot.Damage; //스킬 계수 적용
@@ -674,7 +675,7 @@ namespace _14_TextRPG
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
-                    DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}     ", 8, ConsoleColor.Gray);
+                    DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}     ", 8, ConsoleColor.Red);
                     Thread.Sleep(1500);
                     num++;
                     //P.isDead == true 면 겜 종료
@@ -702,7 +703,7 @@ namespace _14_TextRPG
             {
                 if (!M[i].isDead)
                 {
-                    DesignText.RightDT($"{M[i].Name} : {M[i].Health} / {M[i].MaxHealth}", 2 + i, ConsoleColor.Gray);
+                    DesignText.RightDT($"{M[i].Name} : {M[i].Health} / {M[i].MaxHealth}", 2 + i, ConsoleColor.White);
                 }
                 else
                 {
@@ -714,9 +715,9 @@ namespace _14_TextRPG
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
             }
             DesignText.MiddleDT("", 40, ConsoleColor.Gray);
-            DesignText.LeftDT($" - {P.Name}", 7, ConsoleColor.Gray);
-            DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Gray);
-            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.LeftDT($" - {P.Name}", 7, ConsoleColor.White);
+            DesignText.LeftDT($"     HP: {P.Health} / {P.MaxHealth + P.ItemHealth}", 8, ConsoleColor.Red);
+            DesignText.LeftDT($"     MP: {P.Mana} / {P.MaxMana}", 9, ConsoleColor.Blue);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("┣━");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
