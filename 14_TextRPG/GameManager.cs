@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace _14_TextRPG
@@ -15,10 +16,12 @@ namespace _14_TextRPG
         Player P = new Player();
         Inven inven = new Inven();
         Shop shop = new Shop();
+        QuestManager quest;
 
         public void SettingPlayerName() //맨처음 플레이할시만 생성
         {
             P = new Player();//플레이저 스탯 초기화
+            quest = new QuestManager(P, inven);
             basicform();
 
             DesignText.LeftDT("  플레이어의 이름을 입력해주세요.", 12, ConsoleColor.White);
@@ -159,23 +162,110 @@ namespace _14_TextRPG
         public void LoadPlayer()
         {
             //플레이어, 아이템, 퀘스트 정보 로드
+
+            string filePath = "SavePlayer.json"; //저장된 내용 가져오기
+            string lines = File.ReadAllText(filePath);
+            P = JsonSerializer.Deserialize<Player>(lines);
+
+            quest = new QuestManager(P, inven);
+            filePath = "SaveQuest.json"; //저장된 내용 가져오기
+            if (File.Exists(filePath)) //저장된 퀘스트 정보가 존재한다면
+            {
+                string[] Squest = File.ReadAllLines(filePath);
+                for (int i = 0; i < Squest.Length / 4; i++)
+                {
+                    quest.questList[i].currentKills = JsonSerializer.Deserialize<int>(Squest[4 * i]);
+                    quest.questList[i].isAccept = JsonSerializer.Deserialize<bool>(Squest[4 * i + 1]);
+                    quest.questList[i].isComplete = JsonSerializer.Deserialize<bool>(Squest[4 * i + 2]);
+                    quest.questList[i].isReward = JsonSerializer.Deserialize<bool>(Squest[4 * i + 3]);
+                }
+            }
+
+            filePath = "SaveInven.json"; //저장된 내용 가져오기
+            if (File.Exists(filePath)) //저장된 인벤토리 정보가 존재한다면
+            {
+                string[] SInven = File.ReadAllLines(filePath);
+                for (int i = 0; i < SInven.Length / 8; i++)
+                {
+                    Item item = new Item(JsonSerializer.Deserialize<string>(SInven[8 * i]),
+                        JsonSerializer.Deserialize<ItemType>(SInven[8 * i + 1]),
+                        JsonSerializer.Deserialize<string>(SInven[8 * i + 2]),
+                        JsonSerializer.Deserialize<int>(SInven[8 * i + 3]),
+                        JsonSerializer.Deserialize<int>(SInven[8 * i + 4]),
+                        JsonSerializer.Deserialize<bool>(SInven[8 * i + 7]));
+                    item.PlayerHave = JsonSerializer.Deserialize<bool>(SInven[8 * i + 5]);
+                    item.PlayerUse = JsonSerializer.Deserialize<bool>(SInven[8 * i + 6]);
+                    inven.listHoldItem.Add(item);
+                }
+            }
+
+            filePath = "SaveShop.json"; //저장된 내용 가져오기
+            if (File.Exists(filePath)) //저장된 인벤토리 정보가 존재한다면
+            {
+                string[] Sshop = File.ReadAllLines(filePath);
+                for (int i = 0; i < Sshop.Length / 3; i++)
+                {
+                    shop.arrShopItem[i].Cost = JsonSerializer.Deserialize<int>(Sshop[3 * i]);
+                    shop.arrShopItem[i].PlayerHave = JsonSerializer.Deserialize<bool>(Sshop[3 * i + 1]);
+                    shop.arrShopItem[i].PlayerUse = JsonSerializer.Deserialize<bool>(Sshop[3 * i + 2]);
+                }
+            }
+
             Start();
         }
-        public void SaveData()
+        public void SaveData(Player player, QuestManager quest, Inven inven, Shop shop)
         {
             //플레이어, 아이템, 퀘스트 정보 저장
+            string filePath = "SavePlayer.json";
+            string Splayer = JsonSerializer.Serialize(player);
+            File.WriteAllText(filePath, Splayer); //저장
+
+            filePath = "SaveQuest.json";
+            List<string> Squest = new List<string>();
+            for (int i = 0; i< quest.questList.Count; i++)
+            {
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].currentKills));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].isAccept));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].isComplete));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].isReward));
+            }
+            File.WriteAllLines(filePath, Squest); //저장
+
+            filePath = "SaveInven.json";
+            List<string> SInven = new List<string>();
+            for (int i = 0; i < inven.listHoldItem.Count; i++)
+            {
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].Name));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].Itemtype));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].Info));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].Value));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].Cost));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].PlayerHave));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].PlayerUse));
+                SInven.Add(JsonSerializer.Serialize(inven.listHoldItem[i].SaleItem));
+            }
+            File.WriteAllLines(filePath, SInven); //저장
+
+            filePath = "SaveShop.json";
+            List<string> Sshop = new List<string>();
+            for (int i = 0; i < shop.arrShopItem.Length; i++)
+            {
+                Sshop.Add(JsonSerializer.Serialize(shop.arrShopItem[i].Cost));
+                Sshop.Add(JsonSerializer.Serialize(shop.arrShopItem[i].PlayerHave));
+                Sshop.Add(JsonSerializer.Serialize(shop.arrShopItem[i].PlayerUse));
+            }
+            File.WriteAllLines(filePath, Sshop); //저장
         }
         public void DeleteSaveData()
         {
-            //플레이어, 아이템, 퀘스트 정보 전체 삭제 + 게임 종료
+            //플레이어, 아이템, 퀘스트 정보 전체 삭제
         }
 
         public void Start()
         {
-            QuestManager quest = new QuestManager(P, inven);
-
             while (true)
             {
+                SaveData(P, quest, inven, shop);
                 Console.Clear(); 
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("┏━");
