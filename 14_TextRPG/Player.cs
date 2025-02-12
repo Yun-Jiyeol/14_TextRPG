@@ -12,7 +12,7 @@ namespace _14_TextRPG
         public PowerShot powerShot = new PowerShot();
         public Bigswing bigswing = new Bigswing();
 
-        public int[] repeat = {1,1,1 };
+        public int[] repeat = { 1,1,1 };
 
         public Player()
         {

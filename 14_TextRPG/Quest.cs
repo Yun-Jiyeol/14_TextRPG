@@ -14,7 +14,7 @@ namespace _14_TextRPG
         Normar,
         Hard
     }
-
+    [Serializable]
     public class Quest
     {
         // 퀘스트... 목록 보여주기
