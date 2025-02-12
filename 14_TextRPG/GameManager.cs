@@ -164,20 +164,28 @@ namespace _14_TextRPG
             //플레이어, 아이템, 퀘스트 정보 로드
 
             string filePath = "SavePlayer.json"; //저장된 내용 가져오기
-            string lines = File.ReadAllText(filePath);
-            P = JsonSerializer.Deserialize<Player>(lines);
+            string[] lines = File.ReadAllLines(filePath);
+            P = JsonSerializer.Deserialize<Player>(lines[0]);
+            P.repeat[0] = JsonSerializer.Deserialize<int>(lines[1]);
+            P.repeat[1] = JsonSerializer.Deserialize<int>(lines[2]);
+            P.repeat[2] = JsonSerializer.Deserialize<int>(lines[3]);
+            P.isEquip = JsonSerializer.Deserialize<bool>(lines[4]);
 
             quest = new QuestManager(P, inven);
             filePath = "SaveQuest.json"; //저장된 내용 가져오기
             if (File.Exists(filePath)) //저장된 퀘스트 정보가 존재한다면
             {
                 string[] Squest = File.ReadAllLines(filePath);
-                for (int i = 0; i < Squest.Length / 4; i++)
+                for (int i = 0; i < Squest.Length / 8; i++)
                 {
-                    quest.questList[i].currentKills = JsonSerializer.Deserialize<int>(Squest[4 * i]);
-                    quest.questList[i].isAccept = JsonSerializer.Deserialize<bool>(Squest[4 * i + 1]);
-                    quest.questList[i].isComplete = JsonSerializer.Deserialize<bool>(Squest[4 * i + 2]);
-                    quest.questList[i].isReward = JsonSerializer.Deserialize<bool>(Squest[4 * i + 3]);
+                    quest.questList[i].currentKills = JsonSerializer.Deserialize<int>(Squest[8 * i]);
+                    quest.questList[i].isEquip = JsonSerializer.Deserialize<bool>(Squest[8 * i + 1]);
+                    quest.questList[i].isQuestEquip = JsonSerializer.Deserialize<bool>(Squest[8 * i + 2]);
+                    quest.questList[i].questTower = JsonSerializer.Deserialize<int>(Squest[8 * i + 3]);
+                    quest.questList[i].isAccept = JsonSerializer.Deserialize<bool>(Squest[8 * i + 4]);
+                    quest.questList[i].isComplete = JsonSerializer.Deserialize<bool>(Squest[8 * i + 5]);
+                    quest.questList[i].isReward = JsonSerializer.Deserialize<bool>(Squest[8 * i + 6]);
+                    quest.questList[i].TD = JsonSerializer.Deserialize<TowerDifficult>(Squest[8 * i + 7]);
                 }
             }
 
@@ -217,17 +225,26 @@ namespace _14_TextRPG
         {
             //플레이어, 아이템, 퀘스트 정보 저장
             string filePath = "SavePlayer.json";
-            string Splayer = JsonSerializer.Serialize(player);
-            File.WriteAllText(filePath, Splayer); //저장
+            string Splayerdata = JsonSerializer.Serialize(player);
+            string Easydun = JsonSerializer.Serialize(player.repeat[0]);
+            string Normaldun = JsonSerializer.Serialize(player.repeat[1]);
+            string Harddun = JsonSerializer.Serialize(player.repeat[2]);
+            string isEquip = JsonSerializer.Serialize(player.isEquip);
+            string[] Splayer = { Splayerdata, Easydun,Normaldun, Harddun, isEquip };
+            File.WriteAllLines(filePath, Splayer); //저장
 
             filePath = "SaveQuest.json";
             List<string> Squest = new List<string>();
             for (int i = 0; i< quest.questList.Count; i++)
             {
                 Squest.Add(JsonSerializer.Serialize(quest.questList[i].currentKills));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].isEquip));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].isQuestEquip));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].questTower));
                 Squest.Add(JsonSerializer.Serialize(quest.questList[i].isAccept));
                 Squest.Add(JsonSerializer.Serialize(quest.questList[i].isComplete));
                 Squest.Add(JsonSerializer.Serialize(quest.questList[i].isReward));
+                Squest.Add(JsonSerializer.Serialize(quest.questList[i].TD));
             }
             File.WriteAllLines(filePath, Squest); //저장
 
@@ -259,6 +276,26 @@ namespace _14_TextRPG
         public void DeleteSaveData()
         {
             //플레이어, 아이템, 퀘스트 정보 전체 삭제
+            string filePath = "SavePlayer.json";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            filePath = "SaveQuest.json";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            filePath = "SaveInven.json";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            filePath = "SaveShop.json";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
         }
 
         public void Start()
@@ -294,8 +331,8 @@ namespace _14_TextRPG
                 DesignText.LeftDT("  3. 상점", 14, ConsoleColor.Gray);
                 DesignText.LeftDT("  4. 전투 시작", 15, ConsoleColor.Gray);
                 DesignText.LeftDT("  5. 퀘스트", 16, ConsoleColor.Gray);
-                DesignText.LeftDT("  0. 게임 종료", 17, ConsoleColor.Red);
-                DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                DesignText.LeftDT("  6. 데이터 삭제", 17, ConsoleColor.DarkRed);
+                DesignText.LeftDT("  0. 게임 종료", 18, ConsoleColor.Red);
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("┗━");
@@ -306,7 +343,7 @@ namespace _14_TextRPG
                 Console.ResetColor();
 
                 Console.WriteLine();
-                int input = Input.input(0, 5);
+                int input = Input.input(0, 6);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine();
                 switch (input)
@@ -345,6 +382,21 @@ namespace _14_TextRPG
                         //threadsleep으로 렉걸리는 느낌이라 삭제 부탁드립니다. -> 나중에 꾸밀 때 뜯어 갔다는 느낌으로 사용해도 될거 같네요
                         //퀘스트 확인 창이 총 2개 있는데 퀘스트 수락하면 거절 버튼만 생성하도록 제작 부탁드립니다.
                         //그리고 받은 모든 퀘스트를 확인하는 쪽은 나중에 던전입장 전에 확인 하는 창을 만들껀데 거기서 사용하고 싶습니다.
+                        break;
+                    case 6:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(0,24);
+                        Console.WriteLine("지금까지 데이터가 다 사라집니다. 그래도 삭제하겠습니까?");
+                        Console.WriteLine("0. 삭제    1. 뒤로 가기");
+                        int dinput = Input.input(0, 1);
+                        if (dinput == 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("모든 데이터를 삭제합니다.");
+                            DeleteSaveData();
+                            DesignText.IsMove(15);
+                            Environment.Exit(0);
+                        }
                         break;
                 }
             }
