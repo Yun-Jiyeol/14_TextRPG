@@ -162,7 +162,7 @@ namespace _14_TextRPG
 
                     if (Pinput == 0)
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine();
                         Console.WriteLine("의뢰서 뭉치를 다 확인한 후 마을로 돌아갑니다.");
                         Console.ResetColor();
