@@ -59,10 +59,10 @@ namespace _14_TextRPG
                 "   내 팔이 보이나?\n" + "   Hard 던전 5층을 탐험하다가 사라졌지\n" + "   5층을 탐험에 성공해서\n" +
                 "   내 팔의 복수를 해주면 좋겠어", player, 5, 10000, 500, TowerDifficult.Hard));
             questList.Add(new Quest("Hard 던전을 올라가자2!", "  이봐 거기있는 자네\n" +
-                "   내 팔이 보이나?\n" + "   Hard 던전 10층을 탐험하다가 사라졌지\n" + "   5층을 탐험에 성공해서\n" +
+                "   내 팔이 보이나?\n" + "   Hard 던전 10층을 탐험하다가 사라졌지\n" + "   10층을 탐험에 성공해서\n" +
                 "   내 팔의 복수를 해주면 좋겠어", player, 10, 10000, 500, TowerDifficult.Hard));
             questList.Add(new Quest("Hard 던전을 올라가자3!", "  이봐 거기있는 자네\n" +
-                "   내 팔이 보이나?\n" + "   Hard 던전 15층을 탐험하다가 사라졌지\n" + "   5층을 탐험에 성공해서\n" +
+                "   내 팔이 보이나?\n" + "   Hard 던전 15층을 탐험하다가 사라졌지\n" + "   15층을 탐험에 성공해서\n" +
                 "   내 팔의 복수를 해주면 좋겠어", player, 15, 10000, 500, TowerDifficult.Hard));
 
         }
