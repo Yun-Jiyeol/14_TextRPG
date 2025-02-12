@@ -43,7 +43,7 @@ namespace _14_TextRPG
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "  이봐! 마을 근처에 몬스터들이\n" +
                 "   너무 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n"+ "   저것들 수를 좀 줄여야 한다고!\n" +
                 "   모험가인 자네가 좀 처리해주게나.", 5, 500, 3));
-            questList.Add(new Quest("마을을 위협하는 많은 몬스터 처치", "  이봐! 마을 근처에 몬스터들이\n" +
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치2", "  이봐! 마을 근처에 몬스터들이\n" +
                 "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
                 "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
             questList.Add(new Quest("장비를 장착해보자!", "  이봐! 어이 거기 당신! 당신 말이야\n" +
@@ -96,7 +96,6 @@ namespace _14_TextRPG
                         PlayerTower(player);
                     }
 
-                    questList[i - listNum].questNumber = i;
 
                     // 1 페이지만 0, 1, 2, 3, 4, 5 가 +1이됨 (1, 2, 3, 4, 5, 6)
                     // 2 페이즈는 6, 7, 8, 9, 10, 11 (+1 이 안됨)
@@ -110,6 +109,7 @@ namespace _14_TextRPG
                     {
                         questNum = i % PAGE_SIZE == 0 ? 1 : i % PAGE_SIZE + 1;
                     }
+                    questList[i - listNum].questNumber = questNum;
 
                     if (questList[i - listNum].isReward)
                         DesignText.LeftDT($" {questNum}. {questList[i - listNum].questName}", 2 + i - start, ConsoleColor.DarkGray);
@@ -180,7 +180,6 @@ namespace _14_TextRPG
                         break;
                     }
                     // 입력받은 값이 0보다 크고 PAGE_SIZE(6)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
-                    // 입력받은 값이 0 ~ 6 사이이고 6 + 1 - 0 = 7      6       4         0            8
                     else if (0 < Pinput && Pinput <= PAGE_SIZE && start + Pinput - listNum <= questList.Count)
                     {
                         if (currentPage == 1)
@@ -210,11 +209,14 @@ namespace _14_TextRPG
                                 break;
                             }
                         }
+                        Console.SetCursorPosition(0, 23);
+                        Console.WriteLine("                         ");
                     }
                     else
                     {
+                        Console.SetCursorPosition(0, 23);
                         failNum++;
-                        Console.WriteLine($"잘못 된 입력입니다.({failNum})");
+                        Console.WriteLine($"잘못 된 번호입니다({failNum})");
                     }
                 }
             }
