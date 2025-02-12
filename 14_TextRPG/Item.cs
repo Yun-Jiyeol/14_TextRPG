@@ -57,12 +57,14 @@ namespace _14_TextRPG
         /// <param name="_inven"></param>
         public void BuyItem(Player _player, Inven _inven)
         {
+            Console.WriteLine();
             if ((!PlayerHave))
             {
                 if (_player.Gold - Cost >= 0)
                 {
                     // 인벤토리에 아이템 추가
                     PlayerHave = true;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("구매를 완료했습니다.");
                     _player.Gold -= Cost;
                     _inven.GetItem(this);
@@ -70,15 +72,15 @@ namespace _14_TextRPG
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Gold가 부족합니다.");
                 }
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("이미 구매한 아이템입니다.");
             }
-
-            Thread.Sleep(500);
         }
 
         /// <summary>
@@ -151,8 +153,9 @@ namespace _14_TextRPG
                 Cost *= 10;
             }
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
             Console.WriteLine("판매를 완료했습니다.");
-            Thread.Sleep(500);
         }
     }
 
@@ -166,13 +169,13 @@ namespace _14_TextRPG
             {
             new Item("수련자의 갑옷", ItemType.Armor, "수련에 도움을 주는 갑옷입니다.", 20, 1000, true),
             new Item("무쇠갑옷", ItemType.Armor, "무쇠로 만들어져 튼튼한 갑옷입니다.", 30, 2000, true),
-            new Item("스파르타의 갑옷", ItemType.Armor,"전설의 스파르타 전사 르탄이 사용했다는 갑옷입니다.", 50, 3500, true),
+            new Item("스파르타의 갑옷", ItemType.Armor,"전설의 스파르타 전사\n" + "   르탄이 사용했다는 갑옷입니다.", 50, 3500, true),
             new Item("낡은 검", ItemType.Weapon, "사용감이 제법 있는 낡은 검입니다.", 2, 600, true),
             new Item("청동 도끼", ItemType.Weapon, "사용감이 조금 있는 도끼입니다.", 5, 1500, true),
-            new Item("스파르타의 창", ItemType.Weapon, "전설의 스파르타 전사 르탄이 사용했다는 소문이 있는 갑옷입니다.", 15, 2500, true),
+            new Item("스파르타의 창", ItemType.Weapon, "전설의 스파르타 전사 르탄이\n" + "   사용했다는 소문이 있는 갑옷입니다.", 15, 2500, true),
             new Item("작은 방패", ItemType.Shield, "작고 둥글어서 귀여운 방패입니다.", 4, 1000, true),
             new Item("단단한 방패", ItemType.Shield, "단단한 방패입니다.", 9, 2000, true),
-            new Item("스파르타의 방패", ItemType.Shield, "전설의 스파르타 전사 르탄이 사용했다는... 듯한? 그런 갑옷", 15, 3500, true),
+            new Item("스파르타의 방패", ItemType.Shield, "전설의 스파르타 전사 르탄이\n" + "   사용했다는... 듯한? 그런 갑옷", 15, 3500, true),
             new Item("해진 가죽갑옷", ItemType.Armor, "해진 가죽갑옷이다 .", 5, 200, false)
             };
         }
@@ -186,73 +189,61 @@ namespace _14_TextRPG
         /// 2 = 인벤토리의 아이템을 판매할 목적으로 출력</param>
         /// <param name="_num">번호가 필요한지 여부</param>
         /// <param name="_choice">아이템 목록 다음으로 출력할 선택지</param>
-        public void ItemCatalog(Item[] _arr, int _outputMode, bool _num, string _choice)
+        /// <param name="_ex">아이템 설명을 출력할 것인지</param>
+        public string ItemCatalog(Item _arr, int _outputMode, bool _num)
         {
             string number = "";
             string equipOrCost;
             string itemType = "";
             int itemCount = 1;
 
-            Console.WriteLine("\n[아이템 목록]");
-            foreach (Item i in _arr)
+            switch (_arr.Itemtype)
             {
-                if (_num) number = itemCount.ToString();
+                case ItemType.Weapon:
+                    itemType = "공격력 +";
+                    break;
 
-                switch (i.Itemtype)
+                case ItemType.Shield:
+                    itemType = "방어력 +";
+                    break;
+
+                case ItemType.Armor:
+                    itemType = "체력 +";
+                    break;
+            }
+
+            if (_outputMode == 0 || _outputMode == 2)
+            {
+                if (_arr.PlayerUse)
                 {
-                    case ItemType.Weapon:
-                        itemType = "공격력 +";
-                        break;
-
-                    case ItemType.Shield:
-                        itemType = "방어력 +";
-                        break;
-
-                    case ItemType.Armor:
-                        itemType = "체력 +";
-                        break;
-                }
-
-                if (_outputMode == 0 || _outputMode == 2)
-                {
-                    if (_arr.Length == 0) break;
-
-                    if (i.PlayerUse)
-                    {
-                        equipOrCost = "[E]";
-                    }
-                    else
-                    {
-                        equipOrCost = "";
-                    }
-
-                    string sellCost = "";
-
-                    if(_outputMode ==2)
-                    {
-                        sellCost = "|  " + i.Cost.ToString() + " G";
-                    }
-
-                    Console.WriteLine($"- {number} {equipOrCost}{i.Name}  |  {itemType} {i.Value}  |  {i.Info}  {sellCost}");
+                    equipOrCost = "[E]";
                 }
                 else
                 {
-                    if (i.PlayerHave)
-                    {
-                        equipOrCost = "구매 완료";
-                    }
-                    else
-                    {
-                        equipOrCost = $"{i.Cost} G";
-                    }
-
-                    Console.WriteLine($"- {number} {i.Name}  |  {itemType} {i.Value}  |  {i.Info}  |  {equipOrCost}");
+                    equipOrCost = "";
                 }
 
-                itemCount++;
-            }
+                string sellCost = "";
 
-            Console.WriteLine($"\n{_choice}\n");
+                if (_outputMode == 2)
+                {
+                    sellCost = _arr.Cost.ToString() + "G";
+                }
+
+                return $"{number} {equipOrCost}{_arr.Name} | {itemType}{_arr.Value} | {sellCost}";
+            }
+            else
+            {
+                if (_arr.PlayerHave)
+                {
+                    equipOrCost = "구매 완료";
+                }
+                else
+                {
+                    equipOrCost = $"{_arr.Cost}G";
+                }
+                return $"{number} {_arr.Name} | {itemType}{_arr.Value} | {equipOrCost}";
+            }
         }
     }
 }

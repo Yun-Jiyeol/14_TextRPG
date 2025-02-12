@@ -131,7 +131,7 @@ namespace _14_TextRPG
 
                 if (Pinput == 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine();
                     Console.WriteLine("의뢰서 뭉치를 다 확인한 후 마을로 돌아갑니다.");
                     Console.ResetColor();
@@ -324,8 +324,13 @@ namespace _14_TextRPG
                 DesignText.LeftDT("  0. 닫기", 18, ConsoleColor.Blue);
                 Console.WriteLine();
 
-                Console.SetCursorPosition(0,22);
-                Console.WriteLine("                           ");//지우기
+                Console.SetCursorPosition(0,22);//지우기
+                Console.WriteLine("                                      ");
+                Console.WriteLine("                                      ");
+                Console.WriteLine("                                      ");
+                Console.WriteLine("                                      ");
+                Console.WriteLine("                                      ");
+                Console.WriteLine("                                      ");
                 Console.SetCursorPosition(0, 22);
                 int input = Input.input(0, 2);
 
