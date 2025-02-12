@@ -171,11 +171,11 @@ namespace _14_TextRPG
             }
             if (File.Exists(lines[2]))
             {
-                inven = JsonSerializer.Deserialize<Inven>(lines[1]);
+                inven = JsonSerializer.Deserialize<Inven>(lines[2]);
             }
             if (File.Exists(lines[3]))
             {
-                shop = JsonSerializer.Deserialize<Shop>(lines[2]);
+                shop = JsonSerializer.Deserialize<Shop>(lines[3]);
             }
             Start();
         }
