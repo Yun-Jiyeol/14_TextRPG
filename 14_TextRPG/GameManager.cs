@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,27 +16,163 @@ namespace _14_TextRPG
         Inven inven = new Inven();
         Shop shop = new Shop();
 
+        public void SettingPlayerName() //맨처음 플레이할시만 생성
+        {
+            P = new Player();//플레이저 스탯 초기화
+            basicform();
+
+            DesignText.LeftDT("  플레이어의 이름을 입력해주세요.", 12, ConsoleColor.White);
+            Console.SetCursorPosition(0, 22);
+            // 게임 시작 시 플레이어 명 입력
+            while (true)
+            {
+                Console.Write("입력 : ");
+                P.Name = Console.ReadLine();
+
+                if (P.Name == null || P.Name == String.Empty) //이름을 정확히 입력할 때 까지
+                {
+                    Console.WriteLine("다시 입력해 주세요");
+                }
+                else
+                {
+                    break;
+                }
+            }
+            DesignText.LeftDT($"  플레이어의 이름은 {P.Name}입니다.", 14, ConsoleColor.White);
+            Console.SetCursorPosition(3, 15);
+            DesignText.IsMove(5);
+            SettingPlayerjob();
+        }
+        public void SettingPlayerjob()
+        {
+            basicform();
+            DesignText.LeftDT($"  [{P.Name}]", 2, ConsoleColor.White);
+            DesignText.LeftDT("  직업을 선택하여 주세요", 3, ConsoleColor.White);
+            DesignText.LeftDT("   각 직업에 따른 스탯이 적용됩니다.", 4, ConsoleColor.White);
+            DesignText.LeftDT("  1. 전사", 12, ConsoleColor.White);
+            DesignText.LeftDT("  2. 도적", 13, ConsoleColor.White);
+            DesignText.LeftDT("  3. 검투사", 14, ConsoleColor.White);
+            DesignText.LeftDT("  4. 광전사", 15, ConsoleColor.White);
+
+            Console.SetCursorPosition(0, 22);
+            int input = Input.input(1, 4);
+
+            basicform();
+            switch (input) //각 직업에 따른 스탯 조정은 여기서 하시면 됩니다.
+            {
+                case 1:
+                    DesignText.LeftDT("  체력 + 20, 공격력 + 2", 12, ConsoleColor.Green);
+                    P.Class = "전사";
+                    P.Health += 20;
+                    P.MaxHealth += 20;
+                    P.Attack += 2;
+                    break;
+                case 2:
+                    DesignText.LeftDT("  회피율 + 5%, 약점율 + 10%", 12, ConsoleColor.Green);
+                    DesignText.LeftDT("  체력 - 10", 13, ConsoleColor.Red);
+                    P.Class = "도적";
+                    P.Health -= 10;
+                    P.MaxHealth -= 10;
+                    P.Avoid = 15;
+                    P.Critical = 25;
+                    break;
+                case 3:
+                    DesignText.LeftDT("  체력 + 10, 방어력 + 4", 12, ConsoleColor.Green);
+                    P.Class = "검투사";
+                    P.Health += 10;
+                    P.MaxHealth += 10;
+                    P.Defence += 4;
+                    break;
+                case 4:
+                    DesignText.LeftDT("  공격력 + 6", 12, ConsoleColor.Green);
+                    DesignText.LeftDT("  체력 - 20", 13, ConsoleColor.Red);
+                    P.Class = "광전사";
+                    P.Health -= 20;
+                    P.MaxHealth -= 20;
+                    P.Attack += 6;
+                    break;
+            }
+
+            P.Status(2);
+
+            DesignText.LeftDT("  1. 확정", 15, ConsoleColor.White);
+            DesignText.LeftDT("  2. 재설정", 16, ConsoleColor.White);
+
+            Console.SetCursorPosition(0, 22);
+            input = Input.input(1, 2);
+
+            switch (input) //각 직업에 따른 스탯 조정은 여기서 하시면 됩니다.
+            {
+                case 1:
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{P.Name}은(는) 여행을 떠납니다.");
+                    DesignText.IsMove(10);
+                    Start();
+                    break;
+                case 2:
+                    SettingPlayerName();
+                    break;
+            }
+        }
+        void basicform() //기본 틀 생성
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┏━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┓");
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┣━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┫");
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("┗━");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("━┛");
+            Console.ResetColor();
+        }
+        public void LoadPlayer()
+        {
+            //플레이어, 아이템, 퀘스트 정보 로드
+            Start();
+        }
+        public void SaveData()
+        {
+            //플레이어, 아이템, 퀘스트 정보 저장
+        }
+        public void DeleteSaveData()
+        {
+            //플레이어, 아이템, 퀘스트 정보 전체 삭제 + 게임 종료
+        }
+
         public void Start()
         {
             QuestManager quest = new QuestManager(P, inven);
-            // 게임 시작 시 플레이어 명 입력
-            //while (true)
-            //{
-            //    Console.Write("플레이어의 이름을 입력해주세요 : ");
-            //    P.Name = Console.ReadLine();
-
-            //    if (P.Name == null || P.Name == String.Empty) //이름을 정확히 입력할 때 까지
-            //    {
-            //        Console.WriteLine("다시 입력해 주세요");
-            //    }
-            //    else
-            //    {
-            //        break;
-            //    }
-            //}
-            //Console.WriteLine("\n플레이어의 이름은 {0}입니다.\n", P.Name);
-            //Console.WriteLine("아무키나 입력하세요.....");
-            //Console.ReadKey();
 
             while (true)
             {
