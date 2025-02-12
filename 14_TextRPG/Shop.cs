@@ -108,6 +108,7 @@ namespace _14_TextRPG
                         DesignText.LeftDT($" {i + 1}." + itemList.ItemCatalog(arrShopItem[i + page * 5], 1, false), 3 + i, ConsoleColor.White);
                     }
                 }
+                DesignText.LeftDT($"  1 - {numobitem}. 아이템 확인", 16, ConsoleColor.Gray);
 
                 Console.SetCursorPosition(0,22);
                 int input = Input.input(0, 8);
@@ -123,6 +124,8 @@ namespace _14_TextRPG
                 }
                 else if (input <= numobitem) //1,2,3,4,5
                 {
+                    Console.SetCursorPosition(0, 16);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                     DesignText.LeftDT($" {input}." + itemList.ItemCatalog(arrShopItem[input + page * 5 - 1], 1, false), 2 + input, ConsoleColor.Yellow);
                     BuyShopItem(_player, _inven, input + page * 5 - 1); //마지막껀 아이템의 번호입니다.
                 }
@@ -134,6 +137,8 @@ namespace _14_TextRPG
                 }
                 else if (input == 6)
                 {
+                    Console.SetCursorPosition(0, 16);
+                    DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                     SellItem(_player, _inven);
                 }else if(input == 7)
                 {

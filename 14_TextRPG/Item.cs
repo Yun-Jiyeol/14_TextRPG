@@ -113,6 +113,8 @@ namespace _14_TextRPG
                         _player.Health -= Value;
                         break;
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("아이템을 해제합니다.");
             }
             else
             {
@@ -133,6 +135,8 @@ namespace _14_TextRPG
                         _player.Health += Value;
                         break;
                 }
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("아이템을 장착합니다.");
             }
         }
 
@@ -227,10 +231,10 @@ namespace _14_TextRPG
 
                 if (_outputMode == 2)
                 {
-                    sellCost = _arr.Cost.ToString() + "G";
+                    sellCost = " | " + _arr.Cost.ToString() + "G";
                 }
 
-                return $"{number} {equipOrCost}{_arr.Name} | {itemType}{_arr.Value} | {sellCost}";
+                return $"{number} {equipOrCost}{_arr.Name} | {itemType}{_arr.Value}{sellCost}";
             }
             else
             {
