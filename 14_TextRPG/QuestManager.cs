@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
+    [Serializable]
     public class QuestManager
     {
         // 한 페이지에 퀘스트가 몇개 들어갈지 설정
         const int PAGE_SIZE = 6;
         // 현재 퀘스트 창 페이지
-        int currentPage = 1;
+        public int currentPage = 1;
         // 퀘스트 리스트
-        List<Quest> questList = new List<Quest>();
+        public List<Quest> questList = new List<Quest>();
         // 수락한 퀘스트 리스트
-        List<Quest> acceptQuest = new List<Quest>();
+        public List<Quest> acceptQuest = new List<Quest>();
 
         // 퀘스트 보상을 주기 위함
         ItemList itemList = new ItemList();
@@ -43,7 +44,7 @@ namespace _14_TextRPG
             questList.Add(new Quest("마을을 위협하는 몬스터 처치", "  이봐! 마을 근처에 몬스터들이\n" +
                 "   너무 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n"+ "   저것들 수를 좀 줄여야 한다고!\n" +
                 "   모험가인 자네가 좀 처리해주게나.", 5, 500, 3));
-            questList.Add(new Quest("마을을 위협하는 많은 몬스터 처치", "  이봐! 마을 근처에 몬스터들이\n" +
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치2", "  이봐! 마을 근처에 몬스터들이\n" +
                 "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
                 "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
             questList.Add(new Quest("장비를 장착해보자!", "  이봐! 어이 거기 당신! 당신 말이야\n" +
@@ -64,6 +65,34 @@ namespace _14_TextRPG
             questList.Add(new Quest("Hard 던전을 올라가자3!", "  이봐 거기있는 자네\n" +
                 "   내 팔이 보이나?\n" + "   Hard 던전 15층을 탐험하다가 사라졌지\n" + "   15층을 탐험에 성공해서\n" +
                 "   내 팔의 복수를 해주면 좋겠어", player, 15, 10000, 500, TowerDifficult.Hard));
+
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치3", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치4", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치5", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치6", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치7", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치8", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치9", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치10", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
+            questList.Add(new Quest("마을을 위협하는 몬스터 처치11", "  이봐! 마을 근처에 몬스터들이\n" +
+                "   엄청 많아졌다고 생각하지 않나?\n" + "   마을 주민들의 안전을 위해서라도\n" + "   저것들 수를 많이 줄여야 한다고!\n" +
+                "   모험가인 자네가 많이 처리해주게나.", 10, 1000, 6));
 
         }
 
@@ -96,7 +125,6 @@ namespace _14_TextRPG
                         PlayerTower(player);
                     }
 
-                    questList[i - listNum].questNumber = i;
 
                     // 1 페이지만 0, 1, 2, 3, 4, 5 가 +1이됨 (1, 2, 3, 4, 5, 6)
                     // 2 페이즈는 6, 7, 8, 9, 10, 11 (+1 이 안됨)
@@ -110,6 +138,7 @@ namespace _14_TextRPG
                     {
                         questNum = i % PAGE_SIZE == 0 ? 1 : i % PAGE_SIZE + 1;
                     }
+                    questList[i - listNum].questNumber = questNum;
 
                     if (questList[i - listNum].isReward)
                         DesignText.LeftDT($" {questNum}. {questList[i - listNum].questName}", 2 + i - start, ConsoleColor.DarkGray);
@@ -162,7 +191,7 @@ namespace _14_TextRPG
 
                     if (Pinput == 0)
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine();
                         Console.WriteLine("의뢰서 뭉치를 다 확인한 후 마을로 돌아갑니다.");
                         Console.ResetColor();
@@ -180,7 +209,6 @@ namespace _14_TextRPG
                         break;
                     }
                     // 입력받은 값이 0보다 크고 PAGE_SIZE(6)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
-                    // 입력받은 값이 0 ~ 6 사이이고 6 + 1 - 0 = 7      6       4         0            8
                     else if (0 < Pinput && Pinput <= PAGE_SIZE && start + Pinput - listNum <= questList.Count)
                     {
                         if (currentPage == 1)
@@ -210,11 +238,14 @@ namespace _14_TextRPG
                                 break;
                             }
                         }
+                        Console.SetCursorPosition(0, 23);
+                        Console.WriteLine("                         ");
                     }
                     else
                     {
+                        Console.SetCursorPosition(0, 23);
                         failNum++;
-                        Console.WriteLine($"잘못 된 입력입니다.({failNum})");
+                        Console.WriteLine($"잘못 된 번호입니다({failNum})");
                     }
                 }
             }
@@ -237,7 +268,9 @@ namespace _14_TextRPG
         // 전 페이지가 있다면 전페이지를 보여주는 메서드
         public void BeforePage()
         {
-            if (currentPage * PAGE_SIZE > questList.Count)
+            //    1, 2, 3        6      <   17
+
+            if (currentPage > 1)
                 currentPage--;
             else
             {
