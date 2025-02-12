@@ -10,7 +10,7 @@ namespace _14_TextRPG
     public class QuestManager
     {
         // 한 페이지에 퀘스트가 몇개 들어갈지 설정
-        const int PAGE_SIZE = 7;
+        const int PAGE_SIZE = 6;
         // 현재 퀘스트 창 페이지
         int currentPage = 1;
         // 퀘스트 리스트
@@ -58,6 +58,12 @@ namespace _14_TextRPG
             questList.Add(new Quest("Hard 던전을 올라가자!", "  이봐 거기있는 자네\n" +
                 "   내 팔이 보이나?\n" + "   Hard 던전 5층을 탐험하다가 사라졌지\n" + "   5층을 탐험에 성공해서\n" +
                 "   내 팔의 복수를 해주면 좋겠어", player, 5, 10000, 500, TowerDifficult.Hard));
+            questList.Add(new Quest("Hard 던전을 올라가자2!", "  이봐 거기있는 자네\n" +
+                "   내 팔이 보이나?\n" + "   Hard 던전 10층을 탐험하다가 사라졌지\n" + "   5층을 탐험에 성공해서\n" +
+                "   내 팔의 복수를 해주면 좋겠어", player, 10, 10000, 500, TowerDifficult.Hard));
+            questList.Add(new Quest("Hard 던전을 올라가자3!", "  이봐 거기있는 자네\n" +
+                "   내 팔이 보이나?\n" + "   Hard 던전 15층을 탐험하다가 사라졌지\n" + "   5층을 탐험에 성공해서\n" +
+                "   내 팔의 복수를 해주면 좋겠어", player, 15, 10000, 500, TowerDifficult.Hard));
 
         }
 
@@ -75,31 +81,53 @@ namespace _14_TextRPG
                 Console.WriteLine("━┓");
                 DesignText.LeftDT($"  퀘스트 목록 (페이지 {currentPage})", 1, ConsoleColor.Green);
 
-                int start = (currentPage - 1) * PAGE_SIZE == 0 ? 1 : (currentPage - 1) * PAGE_SIZE;
-                int end = Math.Min(start + PAGE_SIZE, questList.Count);
-                for (int i = start; i < end + 1; i++)
+                int listNum = currentPage == 1 ? 1 : 0;
+                int start = (currentPage - 1) * PAGE_SIZE == 0 ? 1 : (currentPage - 1) * PAGE_SIZE; // 1 6
+                int end = Math.Min(start + PAGE_SIZE, questList.Count);                             // 7 8
+                for (int i = start; i < end ; i++) // (1, 2, 3, 4, 5)
                 {
                     // quest가 장착 관련 퀘스트라면 PlayerEquip을 실행
-                    if (questList[i - 1].isQuestEquip)
+                    if (questList[i - listNum].isQuestEquip)
                     {
                         PlayerEquip(player);
                     }
-                    else if (questList[i - 1].isQuestTower)
+                    else if (questList[i - listNum].isQuestTower)
                     {
                         PlayerTower(player);
                     }
 
-                    questList[i - 1].questNumber = i;
+                    questList[i - listNum].questNumber = i;
 
-                    if (questList[i - 1].isReward)
-                        DesignText.LeftDT($" {i % PAGE_SIZE}. {questList[i - 1].questName}", 1 + i, ConsoleColor.DarkGray);
-                    else if (questList[i - 1].isComplete && questList[i - 1].isAccept)
-                        DesignText.LeftDT($" {i % PAGE_SIZE}. {questList[i - 1].questName}", 1 + i, ConsoleColor.Green);
-                    else if(questList[i - 1].isAccept)
-                        DesignText.LeftDT($" {i % PAGE_SIZE}. {questList[i - 1].questName}", 1 + i, ConsoleColor.Yellow);
+                    // 1 페이지만 0, 1, 2, 3, 4, 5 가 +1이됨 (1, 2, 3, 4, 5, 6)
+                    // 2 페이즈는 6, 7, 8, 9, 10, 11 (+1 이 안됨)
+                    int questNum = 0;
+
+                    if (currentPage == 1)
+                    {
+                        questNum = i % PAGE_SIZE == 0 ? PAGE_SIZE : i % PAGE_SIZE;
+                    }
+                    else if (currentPage > 1)
+                    {
+                        questNum = i % PAGE_SIZE == 0 ? 1 : i % PAGE_SIZE + 1;
+                    }
+
+                    if (questList[i - listNum].isReward)
+                        DesignText.LeftDT($" {questNum}. {questList[i - listNum].questName}", 2 + i - start, ConsoleColor.DarkGray);
+                    else if (questList[i - listNum].isComplete && questList[i - listNum].isAccept)
+                        DesignText.LeftDT($" {questNum}. {questList[i - listNum].questName}", 2 + i - start, ConsoleColor.Green);
+                    else if(questList[i - listNum].isAccept)
+                        DesignText.LeftDT($" {questNum}. {questList[i - listNum].questName}", 2 + i - start, ConsoleColor.Yellow);
                     else
-                        DesignText.LeftDT($" {i % PAGE_SIZE}. {questList[i - 1].questName}", 1 + i, ConsoleColor.White);
+                        DesignText.LeftDT($" {questNum}. {questList[i - listNum].questName}", 2 + i - start, ConsoleColor.White);
                 }
+                if (start + PAGE_SIZE > questList.Count)
+                {
+                    for (int i = questList.Count; i < currentPage * PAGE_SIZE; i++)
+                    {
+                        DesignText.MiddleDT("", 40, ConsoleColor.Gray);
+                    }
+                }
+
                 DesignText.MiddleDT("", 40, ConsoleColor.Gray);
                 DesignText.LeftDT("   7. 이전      0.나가기      8.다음", 9, ConsoleColor.Cyan);
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -126,35 +154,69 @@ namespace _14_TextRPG
                 Console.WriteLine("━┛");
                 Console.ResetColor();
 
-                Console.SetCursorPosition(0, 22);
-                int Pinput = Input.input(0,8);
+                int failNum = 0;
+                while (true)
+                {
+                    Console.SetCursorPosition(0, 22);
+                    int Pinput = Input.input(0, 8);
 
-                if (Pinput == 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine();
-                    Console.WriteLine("의뢰서 뭉치를 다 확인한 후 마을로 돌아갑니다.");
-                    Console.ResetColor();
-                    DesignText.IsMove(5);
-                    return;
-                }
-                else if (Pinput == 8)
-                    NextPage();
-                else if (Pinput == 7)
-                    BeforePage();
-                // 입력받은 값이 0보다 크고 PAGE_SIZE(7)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
-                else if (0 < Pinput && Pinput <= PAGE_SIZE && start + Pinput - 1 <= questList.Count)
-                {
-                    if (questList[start + Pinput - 2].isReward)
+                    if (Pinput == 0)
                     {
-                        Console.WriteLine("이미 받은 보상입니다.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine();
+                        Console.WriteLine("의뢰서 뭉치를 다 확인한 후 마을로 돌아갑니다.");
+                        Console.ResetColor();
+                        DesignText.IsMove(5);
+                        return;
+                    }
+                    else if (Pinput == 8)
+                    {
+                        NextPage();
+                        break;
+                    }
+                    else if (Pinput == 7)
+                    {
+                        BeforePage();
+                        break;
+                    }
+                    // 입력받은 값이 0보다 크고 PAGE_SIZE(6)보다 작고 start + numinput - 1 의 값이 questList 갯수보다 작다면 실행
+                    // 입력받은 값이 0 ~ 6 사이이고 6 + 1 - 0 = 7      6       4         0            8
+                    else if (0 < Pinput && Pinput <= PAGE_SIZE && start + Pinput - listNum <= questList.Count)
+                    {
+                        if (currentPage == 1)
+                        {
+
+                            if (questList[start + Pinput - 2].isReward)
+                            {
+                                Console.WriteLine("이미 받은 보상입니다.");
+                                break;
+                            }
+                            else
+                            {
+                                QuestInfo(questList[start + Pinput - 2]);
+                                break;
+                            }
+                        }
+                        else if (currentPage > 1)
+                        {
+                            if (questList[start + Pinput - 1].isReward)
+                            {
+                                Console.WriteLine("이미 받은 보상입니다.");
+                                break;
+                            }
+                            else
+                            {
+                                QuestInfo(questList[start + Pinput - 1]);
+                                break;
+                            }
+                        }
                     }
                     else
-                        QuestInfo(questList[start + Pinput - 2]);
+                    {
+                        failNum++;
+                        Console.WriteLine($"잘못 된 입력입니다.({failNum})");
+                    }
                 }
-                else
-                    Console.WriteLine("잘못 된 입력입니다.");
-
             }
 
         }
@@ -175,7 +237,7 @@ namespace _14_TextRPG
         // 전 페이지가 있다면 전페이지를 보여주는 메서드
         public void BeforePage()
         {
-            if (currentPage * PAGE_SIZE < questList.Count)
+            if (currentPage * PAGE_SIZE > questList.Count)
                 currentPage--;
             else
             {
