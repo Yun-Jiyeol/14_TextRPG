@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace _14_TextRPG
@@ -15,6 +16,7 @@ namespace _14_TextRPG
         Player P = new Player();
         Inven inven = new Inven();
         Shop shop = new Shop();
+        QuestManager quest;
 
         public void SettingPlayerName() //맨처음 플레이할시만 생성
         {
@@ -159,23 +161,48 @@ namespace _14_TextRPG
         public void LoadPlayer()
         {
             //플레이어, 아이템, 퀘스트 정보 로드
+            string filePath = "SaveGame.json"; //저장된 내용 가져오기
+            string[] lines = File.ReadAllLines(filePath);
+
+            P = JsonSerializer.Deserialize<Player>(lines[0]);
+            if (File.Exists(lines[1]))
+            {
+                quest = JsonSerializer.Deserialize<QuestManager>(lines[1]);
+            }
+            if (File.Exists(lines[2]))
+            {
+                inven = JsonSerializer.Deserialize<Inven>(lines[2]);
+            }
+            if (File.Exists(lines[3]))
+            {
+                shop = JsonSerializer.Deserialize<Shop>(lines[3]);
+            }
             Start();
         }
-        public void SaveData()
+        public void SaveData(Player player, QuestManager quest, Inven inven, Shop shop)
         {
             //플레이어, 아이템, 퀘스트 정보 저장
+            string filePath = "SaveGame.json";
+            string Splayer = JsonSerializer.Serialize(player);
+            string Squest = JsonSerializer.Serialize(quest);
+            string Sinven = JsonSerializer.Serialize(inven);
+            string Sshop = JsonSerializer.Serialize(shop);
+
+            string[] json = {Splayer, Squest, Sinven, Sshop};
+            File.WriteAllLines(filePath, json); //저장
         }
         public void DeleteSaveData()
         {
-            //플레이어, 아이템, 퀘스트 정보 전체 삭제 + 게임 종료
+            //플레이어, 아이템, 퀘스트 정보 전체 삭제
         }
 
         public void Start()
         {
-            QuestManager quest = new QuestManager(P, inven);
+            quest = new QuestManager(P,inven);
 
             while (true)
             {
+                SaveData(P, quest, inven, shop);
                 Console.Clear(); 
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("┏━");
