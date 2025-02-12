@@ -15,7 +15,6 @@ namespace _14_TextRPG
             int top = Console.CursorTop;
             while (true)
             {
-                Console.SetCursorPosition(0, 22);
                 Console.Write("입력 : ");
                 string Pinput = Console.ReadLine();
                 int numinput;
@@ -24,13 +23,15 @@ namespace _14_TextRPG
                 {
                     if (numinput >= min && numinput <= max) //min <= x <= max 까지의 정수값 입력을 받는다
                     {
-                        Console.SetCursorPosition(0, 24);
+                        Console.SetCursorPosition(0, top + 1);
                         Console.WriteLine("                               ");
+                        Console.SetCursorPosition(left, top);
+                        Console.WriteLine("                          ");
                         Console.SetCursorPosition(left, top);
                         return numinput;
                     }
                 }
-                Console.SetCursorPosition(0, 23);
+                Console.SetCursorPosition(0, top + 1);
                 Console.WriteLine($"잘못 된 입력입니다({i})");
                 i++;
             }
