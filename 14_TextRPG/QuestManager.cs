@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace _14_TextRPG
 {
+    [Serializable]
     public class QuestManager
     {
         // 한 페이지에 퀘스트가 몇개 들어갈지 설정
         const int PAGE_SIZE = 6;
         // 현재 퀘스트 창 페이지
-        int currentPage = 1;
+        public int currentPage = 1;
         // 퀘스트 리스트
-        List<Quest> questList = new List<Quest>();
+        public List<Quest> questList = new List<Quest>();
         // 수락한 퀘스트 리스트
-        List<Quest> acceptQuest = new List<Quest>();
+        public List<Quest> acceptQuest = new List<Quest>();
 
         // 퀘스트 보상을 주기 위함
         ItemList itemList = new ItemList();
