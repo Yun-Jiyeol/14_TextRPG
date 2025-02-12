@@ -22,7 +22,7 @@ namespace _14_TextRPG
         public ItemType Itemtype { get; } //아이템 종류
         public string Info { get; } //아이템 설명
         public int Value { get; } //아이템 스텟
-        public int Cost { get; private set; } //아이템 가격
+        public int Cost { get; set; } //아이템 가격
         public bool PlayerHave { get; set; } //플레이어가 소지 유무
         public bool PlayerUse { get; set; } //플레이어가 착용 유무
         public bool SaleItem { get; }   // 상점에서 판매하는 물품인지 아닌지
