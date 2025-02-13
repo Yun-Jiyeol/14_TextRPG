@@ -66,7 +66,7 @@ namespace _14_TextRPG
                     PlayerHave = true;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("구매를 완료했습니다.");
-                    _player.Gold -= Cost;
+                    _player.SetGold(-Cost);
                     _inven.GetItem(this);
                     Cost /= 10;
                 }
@@ -142,7 +142,7 @@ namespace _14_TextRPG
 
         public void SellItem(Player _player, Inven _inven)
         {
-            _player.Gold += Cost;
+            _player.SetGold(Cost);
             _inven.listHoldItem.Remove(this);
 
             if(this.PlayerUse)

@@ -27,7 +27,7 @@ namespace _14_TextRPG
             MaxMana = 50;
             Attack = 10;
             Defence = 5;
-            Gold = 1500;
+            SetGold(1500);
             Critical = 15;
             Avoid = 10;
             CriDamage = 1.5f;
@@ -46,7 +46,7 @@ namespace _14_TextRPG
         {
             Random random = new Random();
             int getgold = random.Next(10*_ex,20*_ex); //랜덤 양의 골드 획득
-            Gold += getgold;
+            SetGold(getgold);
             bool islevelup = false;
 
             Ex += _ex;
@@ -64,5 +64,11 @@ namespace _14_TextRPG
             }
             return islevelup; //랩업 실패
         }
+
+        public void SetGold(int addGold)
+        {
+            Gold += addGold;
+        }
+
     }
 }

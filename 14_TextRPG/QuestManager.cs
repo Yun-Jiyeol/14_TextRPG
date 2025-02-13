@@ -25,7 +25,6 @@ namespace _14_TextRPG
         Inven itemIvn;
 
         
-
         Player player;
 
         // 퀘스트 생성

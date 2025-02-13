@@ -15,6 +15,9 @@ namespace _14_TextRPG
             int top = Console.CursorTop;
             while (true)
             {
+                Console.SetCursorPosition(left, top);
+                Console.Write("              ");
+                Console.SetCursorPosition(left, top);
                 Console.Write("입력 : ");
                 string Pinput = Console.ReadLine();
                 int numinput;
