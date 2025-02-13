@@ -179,8 +179,8 @@ namespace _14_TextRPG
                 DesignText.IsMove(10);
 
                 //보상 지급
-                player.Gold += rewardGold;
-                player.Ex += rewardExp;
+                player.SetGold(rewardGold);
+                player.GetEx(rewardExp);
 
                 //
                 isReward = true;
@@ -207,8 +207,8 @@ namespace _14_TextRPG
                 DesignText.IsMove(10);
 
                 //보상 지급
-                player.Gold += rewardGold;
-                player.Ex += rewardExp;
+                player.SetGold(rewardGold);
+                player.GetEx(rewardExp);
                 inv.GetItem(rewardItem);
 
                 //
